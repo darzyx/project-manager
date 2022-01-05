@@ -5,7 +5,8 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <p>Project Manager</p>
+        <h1>Project Manager</h1>
+        <p>A project manager tool that does exactly what I want.</p>
       </header>
     </div>
   );
