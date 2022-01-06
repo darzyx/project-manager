@@ -1,4 +1,4 @@
-import { List, Segment } from "semantic-ui-react";
+import { List, Label, Segment, Icon } from "semantic-ui-react";
 
 import stories from "api/stories";
 
@@ -9,12 +9,20 @@ const App = () => {
     <div className="App">
       <Segment inverted>
         <List divided inverted>
-          <List.Item>
-            <List.Content>
-              <List.Header>Snickernoodle</List.Header>
-              An excellent companion
-            </List.Content>
-          </List.Item>
+          {Object.values(stories).map((story, index) => (
+            <List.Item key={index}>
+              <Icon name="triangle right" size="small" />
+              <List.Content>
+                <List.Header>{story.name}</List.Header>
+                <List.Description>{story.description}</List.Description>
+                {story.labels.map((label, index) => (
+                  <Label key={index} basic color="blue" size="mini">
+                    {label}
+                  </Label>
+                ))}
+              </List.Content>
+            </List.Item>
+          ))}
         </List>
       </Segment>
     </div>
