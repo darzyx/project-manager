@@ -3,10 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-// The original semantic.min.css file in node_modules contains a bug
-// (double semicolons) so it does not work. We use this temporary vendor CSS
-// file with the bug removed as a bandaid:
-import "vendor/semantic-ui-css/semantic.min.css";
+import "semantic-ui-css/semantic.min.css";
 
 ReactDOM.render(
   <React.StrictMode>
