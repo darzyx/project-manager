@@ -5,7 +5,7 @@ import {
   Grid,
   Icon,
   Header,
-  Image,
+  Image,Divider
 } from "semantic-ui-react";
 
 import stories from "api/stories";
@@ -21,14 +21,17 @@ const ColumnContent = () => (
         {Object.values(stories).map((story, index) => (
           <List.Item key={index}>
             <List.Content>
+              <Header as="h6" textAlign="right" color="purple">
+                {story.epic_name.toUpperCase()}
+              </Header>
               <List.Header>{story.name}</List.Header>
               <div
                 style={{
                   display: "inline-block",
                   color: "#58A6FF",
                   backgroundColor: "rgba(88, 166, 255, 0.1)",
-                  margin: "5px 0",
-                  padding: "3px",
+                  margin: "5px 0 5px -5px",
+                  padding: "3px 5px",
                   borderRadius: "8px",
                   lineHeight: "1",
                 }}
@@ -49,14 +52,32 @@ const ColumnContent = () => (
               </div>
               <Grid>
                 <Grid.Row>
-                  <Grid.Column width={12} floated="left">
+                  <Grid.Column
+                    width={12}
+                    floated="left"
+                    textAlign="left"
+                    verticalAlign="middle"
+                  >
                     <Icon name="bug" color="teal" />
                     <Icon name="angle double up" color="red" />
-                    <Label circular basic color="purple">
+                    <Icon name="check" color="teal" />
+                    <span
+                      style={{
+                        fontWeight: "bold",
+                        fontSize: "14px",
+                        margin: "0 3px",
+                        color: "#00b5ad",
+                      }}
+                    >
                       {story.points}
-                    </Label>
+                    </span>
                   </Grid.Column>
-                  <Grid.Column width={4} floated="right" textAlign="right">
+                  <Grid.Column
+                    width={4}
+                    floated="right"
+                    textAlign="right"
+                    verticalAlign="middle"
+                  >
                     <Image src={exampleImg} avatar />
                   </Grid.Column>
                 </Grid.Row>
@@ -72,6 +93,13 @@ const ColumnContent = () => (
 const App = () => {
   return (
     <div className="App">
+    <Header as='h2' inverted>
+      HAE Sprint 1
+      <Header.Subheader>
+        January 1st, 2022 - March 6th, 2022
+      </Header.Subheader>
+    </Header>
+    <Divider hidden />
       <Grid columns={5} divided stackable>
         <Grid.Row>
           <Grid.Column>

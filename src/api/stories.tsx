@@ -6,7 +6,7 @@ const stories = {
     date_created: "January 1st, 2022",
     points: 1,
     state: "backlogged", // Can depend on epic (if epic is active, everything is at least "todo")
-    type: "feature", // One of feature, bug, chore
+    type: "bug", // One of feature, bug, task
     assignee: "Dario Sanchez",
     requester: "Example Requester",
     priority: "high",
@@ -22,7 +22,7 @@ const stories = {
     date_created: "January 8st, 2022",
     points: 2,
     state: "backlogged", // Can depend on epic (if epic is active, everything is at least "todo")
-    type: "feature", // One of feature, bug, chore
+    type: "feature", // One of feature, bug, task
     assignee: "Dario Sanchez",
     requester: "Example Requester",
     priority: "high",
@@ -38,7 +38,7 @@ const stories = {
     date_created: "January 8st, 2022",
     points: 3,
     state: "backlogged", // Can depend on epic (if epic is active, everything is at least "todo")
-    type: "feature", // One of feature, bug, chore
+    type: "task", // One of feature, bug, task
     assignee: "Dario Sanchez",
     requester: "Example Requester",
     priority: "high",
