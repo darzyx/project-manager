@@ -757,11 +757,10 @@
   border-color: #1b1c1d;
 }
 .ui.secondary.inverted.pointing.menu {
-  border-color: rgba(255, 255, 255, 0.1);
+  border-color: #161B22;
 }
 .ui.secondary.inverted.pointing.menu {
-  border-width: 2px;
-  border-color: rgba(34, 36, 38, 0.15);
+  border-color: #161B22;
 }
 .ui.secondary.inverted.pointing.menu .item {
   color: rgba(255, 255, 255, 0.9);

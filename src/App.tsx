@@ -5,9 +5,12 @@ import {
   Grid,
   Icon,
   Header,
-  Image,Divider
+  Image,
+  Divider,
 } from "semantic-ui-react";
 
+import AppMenu from "./AppMenu";
+import SprintMenu from "./SprintMenu";
 import stories from "api/stories";
 const exampleImg = require("./mrpenguin.png");
 
@@ -58,19 +61,19 @@ const ColumnContent = () => (
                     textAlign="left"
                     verticalAlign="middle"
                   >
-                    <Icon name="bug" color="teal" />
                     <Icon name="angle double up" color="red" />
-                    <Icon name="check" color="teal" />
+                    <Icon name="bug" color="teal" />
                     <span
                       style={{
                         fontWeight: "bold",
                         fontSize: "14px",
-                        margin: "0 3px",
+                        margin: "0 7px 0 5px",
                         color: "#00b5ad",
                       }}
                     >
                       {story.points}
                     </span>
+                    <Icon name="check" color="teal" />
                   </Grid.Column>
                   <Grid.Column
                     width={4}
@@ -92,33 +95,38 @@ const ColumnContent = () => (
 
 const App = () => {
   return (
-    <div className="App">
-    <Header as='h2' inverted>
-      HAE Sprint 1
-      <Header.Subheader>
-        January 1st, 2022 - March 6th, 2022
-      </Header.Subheader>
-    </Header>
-    <Divider hidden />
-      <Grid columns={5} divided stackable>
-        <Grid.Row>
-          <Grid.Column>
-            <ColumnContent />
-          </Grid.Column>
-          <Grid.Column>
-            <ColumnContent />
-          </Grid.Column>
-          <Grid.Column>
-            <ColumnContent />
-          </Grid.Column>
-          <Grid.Column>
-            <ColumnContent />
-          </Grid.Column>
-          <Grid.Column>
-            <ColumnContent />
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
+    <div>
+      <AppMenu />
+      <div className="App-content">
+        <Header as="h2" inverted>
+          HAE Sprint 1
+          <Header.Subheader>
+            January 1st, 2022 - March 6th, 2022
+          </Header.Subheader>
+        </Header>
+        <Divider hidden />
+        <SprintMenu />
+        <Divider hidden />
+        <Grid columns={5} divided stackable>
+          <Grid.Row>
+            <Grid.Column>
+              <ColumnContent />
+            </Grid.Column>
+            <Grid.Column>
+              <ColumnContent />
+            </Grid.Column>
+            <Grid.Column>
+              <ColumnContent />
+            </Grid.Column>
+            <Grid.Column>
+              <ColumnContent />
+            </Grid.Column>
+            <Grid.Column>
+              <ColumnContent />
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </div>
     </div>
   );
 };
