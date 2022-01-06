@@ -13,6 +13,11 @@ const SprintMenu = () => {
     <Menu inverted pointing secondary>
       <Menu.Item header>Sort By</Menu.Item>
       <Menu.Item
+        name="completion"
+        //   active={activeItem === 'mostPopular'}
+        //   onClick={this.handleItemClick}
+      />
+      <Menu.Item
         name="priority"
         active={true}
         //   onClick={this.handleItemClick}
@@ -23,8 +28,8 @@ const SprintMenu = () => {
         //   onClick={this.handleItemClick}
       />
       <Menu.Item
-        name="completion"
-        //   active={activeItem === 'mostPopular'}
+        name="epic"
+        //   active={activeItem === 'mostComments'}
         //   onClick={this.handleItemClick}
       />
     </Menu>

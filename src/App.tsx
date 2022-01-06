@@ -24,7 +24,7 @@ const ColumnContent = () => (
         {Object.values(stories).map((story, index) => (
           <List.Item key={index}>
             <List.Content>
-              <Header as="h6" textAlign="right" color="purple">
+              <Header as="h6" textAlign="right" color="teal">
                 {story.epic_name.toUpperCase()}
               </Header>
               <List.Header>{story.name}</List.Header>
@@ -33,7 +33,7 @@ const ColumnContent = () => (
                   display: "inline-block",
                   color: "#58A6FF",
                   backgroundColor: "rgba(88, 166, 255, 0.1)",
-                  margin: "5px 0 5px -5px",
+                  margin: "5px 0 3px -5px",
                   padding: "3px 5px",
                   borderRadius: "8px",
                   lineHeight: "1",
@@ -61,7 +61,7 @@ const ColumnContent = () => (
                     textAlign="left"
                     verticalAlign="middle"
                   >
-                    <Icon name="angle double up" color="red" />
+                    <Icon name="angle double up" color="teal" />
                     <Icon name="bug" color="teal" />
                     <span
                       style={{
