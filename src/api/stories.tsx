@@ -1,7 +1,7 @@
 const stories = {
-  zero: {
-    uuid: "zero",
-    name: "Example Story Name 0",
+  "HAE-2341": {
+    uuid: "HAE-2341",
+    name: "Story Name One",
     description: "This is an example story description.",
     date_created: "January 1st, 2022",
     points: 1,
@@ -15,12 +15,12 @@ const stories = {
     labels: ["example-story-tag", "another", "one-more"],
     attachments: [],
   },
-  one: {
-    uuid: "one",
-    name: "Example Story Name 1",
+  "HAE-5519": {
+    uuid: "HAE-5519",
+    name: "Story Name Two",
     description: "This is an example story description.",
     date_created: "January 8st, 2022",
-    points: 1,
+    points: 2,
     state: "backlogged", // Can depend on epic (if epic is active, everything is at least "todo")
     type: "feature", // One of feature, bug, chore
     assignee: "Dario Sanchez",
@@ -31,12 +31,12 @@ const stories = {
     labels: ["example-story-tag", "another", "one-more"],
     attachments: [],
   },
-  two: {
-    uuid: "two",
-    name: "Example Story Name 2",
+  "HAE-8148": {
+    uuid: "HAE-8148",
+    name: "Story Name Three",
     description: "This is an example story description.",
     date_created: "January 8st, 2022",
-    points: 1,
+    points: 3,
     state: "backlogged", // Can depend on epic (if epic is active, everything is at least "todo")
     type: "feature", // One of feature, bug, chore
     assignee: "Dario Sanchez",
