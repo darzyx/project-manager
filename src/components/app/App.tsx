@@ -6,10 +6,11 @@ import {
   Divider,
 } from "semantic-ui-react";
 
-import AppMenu from "./AppMenu";
-import SprintMenu from "./SprintMenu";
 import stories from "api/stories";
-import Story from "components/stories/Story"
+
+import AppMenu from "./AppMenu";
+import SprintMenu from "components/sprint/SprintMenu";
+import Story from "components/stories/Story";
 
 const StoriesList = () => (
   <>
