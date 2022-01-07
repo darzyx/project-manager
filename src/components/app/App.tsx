@@ -1,10 +1,4 @@
-import {
-  List,
-  Segment,
-  Grid,
-  Header,
-  Divider,
-} from "semantic-ui-react";
+import { List, Segment, Grid, Header, Divider } from "semantic-ui-react";
 
 import stories from "api/stories";
 

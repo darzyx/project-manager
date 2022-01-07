@@ -1,23 +1,15 @@
 import { List, Grid, Header, Icon, Label, Image } from "semantic-ui-react";
 
+import { StoryType } from "api/stories";
 const exampleImg = require("media/mrpenguin.png");
 
-type StoryProps = {
-  story: {
-    uuid: string;
-    epic_name: string;
-    name: string;
-    description: string;
-    labels: string[];
-    points: number;
-  };
-};
+type StoryProps = { story: StoryType };
 
 const Story = ({ story }: StoryProps) => (
   <List.Item>
     <List.Content>
       <Header as="h6" textAlign="right" color="teal">
-        {story.epic_name.toUpperCase()}
+        {story.epic_name?.toUpperCase()}
       </Header>
       <List.Header>{story.name}</List.Header>
       <div
