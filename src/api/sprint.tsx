@@ -11,12 +11,14 @@ type SprintSortsType = {
 };
 
 const sprintSorts: SprintSortsType = {
-    completions: [ "backlogged"
-    , "scheduled"
-    , "in_progress"
-    , "waiting_for_review"
-    , "deployed"
-    , "discussed_at_sprint"],
-    priorities: ["high", "medium", "low"],
-    assignees: Object.values(users).map(user => user.name),
+  completions: [
+    "backlogged",
+    "scheduled",
+    "in_progress",
+    "waiting_for_review",
+    "deployed",
+    "discussed_at_sprint",
+  ],
+  priorities: ["high", "medium", "low"],
+  assignees: Object.values(users).map((user) => user.name),
 };
