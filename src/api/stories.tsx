@@ -1,20 +1,26 @@
+import { UserNameType } from "api/users";
+
+export type CompletionType =
+  | "backlogged"
+  | "scheduled"
+  | "in_progress"
+  | "waiting_for_review"
+  | "deployed"
+  | "discussed_at_sprint";
+
+export type PriorityType = "high" | "medium" | "low";
+
 export type StoryType = {
   uuid: string;
   name: string;
   description?: string;
   date_created: string;
   points: 1 | 2 | 3 | 5 | 8; // Fibonacci sequence
-  state:
-    | "backlogged"
-    | "scheduled"
-    | "in_progress"
-    | "waiting_for_review"
-    | "deployed"
-    | "discussed_at_sprint";
+  completion: CompletionType;
   type: "feature" | "bug" | "task";
-  assignee?: "aaron" | "benny" | "carlos" | "daisy"; // Testing example names
-  requester?: "aaron" | "benny" | "carlos" | "daisy"; // Testing example names
-  priority?: "high" | "medium" | "low";
+  assignee?: UserNameType;
+  requester?: UserNameType;
+  priority?: PriorityType;
   epic_name?: string;
   labels?: string[];
 };
@@ -30,7 +36,7 @@ const stories: StoriesType = {
     description: "Send gold tier users quarterly website updates",
     date_created: "January 1st, 2022",
     points: 5,
-    state: "in_progress",
+    completion: "in_progress",
     type: "feature",
     assignee: "aaron",
     requester: "benny",
@@ -44,7 +50,7 @@ const stories: StoriesType = {
     description: undefined,
     date_created: "January 8th, 2022",
     points: 2,
-    state: "backlogged",
+    completion: "backlogged",
     type: "feature",
     assignee: "benny",
     requester: "aaron",
@@ -58,7 +64,7 @@ const stories: StoriesType = {
     description: "Come up with and implement a URL naming standard",
     date_created: "January 25th, 2022",
     points: 5,
-    state: "in_progress",
+    completion: "in_progress",
     type: "task",
     assignee: "carlos",
     requester: "daisy",
@@ -72,7 +78,7 @@ const stories: StoriesType = {
     description: undefined,
     date_created: "December 20th, 2021",
     points: 8,
-    state: "discussed_at_sprint",
+    completion: "discussed_at_sprint",
     type: "task",
     assignee: "daisy",
     requester: "daisy",
@@ -86,7 +92,7 @@ const stories: StoriesType = {
     description: "Give the landing page a new design",
     date_created: "October 30th, 2021",
     points: 3,
-    state: "discussed_at_sprint",
+    completion: "discussed_at_sprint",
     type: "task",
     assignee: "aaron",
     requester: "carlos",
@@ -100,7 +106,7 @@ const stories: StoriesType = {
     description: "The profile page has a CSS bug visible on Chrome desktop",
     date_created: "January 1st, 2022",
     points: 1,
-    state: "waiting_for_review",
+    completion: "waiting_for_review",
     type: "bug",
     assignee: "carlos",
     requester: "carlos",
@@ -114,7 +120,7 @@ const stories: StoriesType = {
     description: "We need to update to latest node version before March",
     date_created: "January 5th, 2022",
     points: 5,
-    state: "deployed",
+    completion: "deployed",
     type: "task",
     assignee: "carlos",
     requester: "carlos",
@@ -128,7 +134,7 @@ const stories: StoriesType = {
     description: "Add typescript support to the frontend",
     date_created: "February 5th, 2022",
     points: 5,
-    state: "backlogged",
+    completion: "backlogged",
     type: "task",
     assignee: "daisy",
     requester: "benny",

@@ -2,15 +2,15 @@ import { useState } from "react";
 import { Menu } from "semantic-ui-react";
 
 const SprintMenu = () => {
-    const [activeItem, setActiveItem] = useState("completion");
+  const [activeItem, setActiveItem] = useState("completion");
 
   return (
     <Menu inverted pointing secondary>
       <Menu.Item header>Sort By</Menu.Item>
       <Menu.Item
         name="completion"
-          active={activeItem === "completion"}
-          onClick={() => setActiveItem("completion")}
+        active={activeItem === "completion"}
+        onClick={() => setActiveItem("completion")}
       />
       <Menu.Item
         name="priority"

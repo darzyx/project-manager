@@ -67,8 +67,8 @@ const Story = ({ story }: StoryProps) => (
                     return "bars";
                   case "low":
                     return "angle double down";
-                    default:
-                      return "circle outline";
+                  default:
+                    return "circle outline";
                 }
               })()}
               color={story.priority ? "teal" : "grey"}
