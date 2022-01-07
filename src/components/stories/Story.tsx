@@ -3,7 +3,35 @@ import { List, Grid, Header, Icon, Label, Image } from "semantic-ui-react";
 import { StoryType } from "api/stories";
 const exampleImg = require("media/mrpenguin.png");
 
+type BranchNameLinkProps = { story: StoryType };
 type StoryProps = { story: StoryType };
+
+const BranchNameLink = ({ story }: BranchNameLinkProps) => {
+  const uuid = story.uuid.toUpperCase();
+  const name = story.name
+    .replaceAll(" ", "-")
+    .replaceAll("_", "-")
+    .toLowerCase();
+
+  return (
+    <div>
+      <div
+        style={{
+          display: "inline-block",
+          color: "#58A6FF",
+          backgroundColor: "rgba(88, 166, 255, 0.1)",
+          margin: "5px 0 8px -5px",
+          padding: "3px 5px",
+          borderRadius: "8px",
+          lineHeight: "1",
+        }}
+      >
+        {uuid + "-" + name}
+      </div>{" "}
+      <Icon name="copy outline" style={{ cursor: "pointer" }} />
+    </div>
+  );
+};
 
 const Story = ({ story }: StoryProps) => (
   <List.Item>
@@ -12,30 +40,16 @@ const Story = ({ story }: StoryProps) => (
         {story.epic_name?.toUpperCase()}
       </Header>
       <List.Header>{story.name}</List.Header>
-      <div
-        style={{
-          display: "inline-block",
-          color: "#58A6FF",
-          backgroundColor: "rgba(88, 166, 255, 0.1)",
-          margin: "5px 0 3px -5px",
-          padding: "3px 5px",
-          borderRadius: "8px",
-          lineHeight: "1",
-        }}
-      >
-        {story.uuid.toUpperCase() +
-          "-" +
-          story.name.replaceAll(" ", "-").replaceAll("_", "-")}
-      </div>{" "}
-      <Icon name="copy outline" style={{ cursor: "pointer" }} />
-      <List.Description>{story.description}</List.Description>
-      <div style={{ margin: "5px 0" }}>
-        {story.labels.map((label: string, index: number) => (
-          <Label key={index} basic color="blue" size="mini">
-            {label}
-          </Label>
-        ))}
-      </div>
+      <BranchNameLink story={story} />
+      {story.labels && (
+        <Label.Group size="mini" color="violet">
+          {story.labels?.map((label: string, index: number) => (
+            <Label key={index} basic>
+              {label}
+            </Label>
+          ))}
+        </Label.Group>
+      )}
       <Grid>
         <Grid.Row>
           <Grid.Column
