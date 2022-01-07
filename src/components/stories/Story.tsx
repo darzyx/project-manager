@@ -39,7 +39,7 @@ const Story = ({ story }: StoryProps) => (
       <Header as="h6" textAlign="right" color="teal">
         {story.epic_name?.toUpperCase()}
       </Header>
-      <List.Header>{story.name}</List.Header>
+      <List.Header as="h4">{story.name}</List.Header>
       <BranchNameLink story={story} />
       {story.labels && (
         <Label.Group size="mini" color="violet">
@@ -58,13 +58,27 @@ const Story = ({ story }: StoryProps) => (
             textAlign="left"
             verticalAlign="middle"
           >
-            <Icon name="angle double up" color="teal" />
+            <Icon
+              name={(() => {
+                switch (story.priority) {
+                  case "high":
+                    return "angle double up";
+                  case "medium":
+                    return "bars";
+                  case "low":
+                    return "angle double down";
+                    default:
+                      return "circle outline";
+                }
+              })()}
+              color={story.priority ? "teal" : "grey"}
+            />
             <Icon name="bug" color="teal" />
             <span
               style={{
                 fontWeight: "bold",
                 fontSize: "14px",
-                margin: "0 7px 0 5px",
+                margin: "0 5px 0 2px",
                 color: "#00b5ad",
               }}
             >

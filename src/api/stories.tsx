@@ -14,7 +14,7 @@ export type StoryType = {
   type: "feature" | "bug" | "task";
   assignee?: "aaron" | "benny" | "carlos" | "daisy"; // Testing example names
   requester?: "aaron" | "benny" | "carlos" | "daisy"; // Testing example names
-  priority: "high" | "medium" | "low";
+  priority?: "high" | "medium" | "low";
   epic_name?: string;
   labels?: string[];
 };
@@ -26,7 +26,7 @@ export type StoriesType = {
 const stories: StoriesType = {
   "HAE-0001": {
     uuid: "HAE-0001",
-    name: "Send quarterly emails",
+    name: "Send Quarterly Emails",
     description: "Send gold tier users quarterly website updates",
     date_created: "January 1st, 2022",
     points: 5,
@@ -54,7 +54,7 @@ const stories: StoriesType = {
   },
   "HAE-0003": {
     uuid: "HAE-0003",
-    name: "Standartize Website URLs",
+    name: "Standard Website URLs",
     description: "Come up with and implement a URL naming standard",
     date_created: "January 25th, 2022",
     points: 5,
@@ -68,7 +68,7 @@ const stories: StoriesType = {
   },
   "HAE-0004": {
     uuid: "HAE-0004",
-    name: "Fix Load Balancer Issues",
+    name: "Load Balancer Fix",
     description: undefined,
     date_created: "December 20th, 2021",
     points: 8,
@@ -118,7 +118,7 @@ const stories: StoriesType = {
     type: "task",
     assignee: "carlos",
     requester: "carlos",
-    priority: "high",
+    priority: undefined,
     epic_name: undefined,
     labels: ["node", "backend"],
   },
