@@ -28,9 +28,7 @@ const App = () => {
       <div className="App-content">
         <Header as="h2" inverted>
           Dashboard
-          <Header.Subheader>
-            March 6th, 2022
-          </Header.Subheader>
+          <Header.Subheader>March 6th, 2022</Header.Subheader>
         </Header>
         <Divider hidden />
         <DashboardMenu />
