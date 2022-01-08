@@ -1,12 +1,4 @@
-import {
-  List,
-  Grid,
-  Header,
-  Button,
-  Icon,
-  Label,
-  Image,
-} from "semantic-ui-react";
+import { List, Grid, Header, Button, Icon, Image } from "semantic-ui-react";
 
 import { StoryType } from "api/stories";
 const exampleUserImg = require("media/mrpenguin.png");
@@ -51,61 +43,43 @@ const Story = ({ story }: StoryProps) => (
         {story.name}
       </List.Header>
       <BranchNameLink story={story} />
-      {story.labels && (
-        <Label.Group size="mini" color="violet">
-          {story.labels?.map((label: string, index: number) => (
-            <Label key={index} basic>
-              {label}
-            </Label>
+      {Array.isArray(story.labels) && story.labels.length > 0 && (
+        <List inverted horizontal>
+          {story.labels?.map((label, index) => (
+            <List.Item>{label}</List.Item>
           ))}
-        </Label.Group>
+        </List>
       )}
-      <Grid>
-        <Grid.Row>
-          <Grid.Column
-            width={12}
-            floated="left"
-            textAlign="left"
-            verticalAlign="middle"
-          >
-            <Icon
-              name={(() => {
-                switch (story.priority) {
-                  case "high":
-                    return "angle double up";
-                  case "medium":
-                    return "bars";
-                  case "low":
-                    return "angle double down";
-                  default:
-                    return "circle outline";
-                }
-              })()}
-              color={story.priority ? "teal" : "grey"}
-            />
-            <Icon name="bug" color="teal" />
-            <span
-              style={{
-                fontWeight: "bold",
-                fontSize: "14px",
-                margin: "0 5px 0 2px",
-                color: "#00b5ad",
-              }}
-            >
-              {story.points}
-            </span>
-            <Icon name="check" color="teal" />
-          </Grid.Column>
-          <Grid.Column
-            width={4}
-            floated="right"
-            textAlign="right"
-            verticalAlign="middle"
-          >
-            <Image src={exampleUserImg} avatar />
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
+      <div>
+        <Icon
+          name={(() => {
+            switch (story.priority) {
+              case "high":
+                return "angle double up";
+              case "medium":
+                return "bars";
+              case "low":
+                return "angle double down";
+              default:
+                return "circle outline";
+            }
+          })()}
+          color={story.priority ? "teal" : "grey"}
+        />
+        <Icon name="bug" color="teal" />
+        <span
+          style={{
+            fontWeight: "bold",
+            fontSize: "14px",
+            margin: "0 4px 0 2px",
+            color: "#00b5ad",
+          }}
+        >
+          {story.points}
+        </span>
+        <Icon name="check" color="teal" />
+        <Image floated="right" src={exampleUserImg} avatar />
+      </div>
     </List.Content>
   </List.Item>
 );
