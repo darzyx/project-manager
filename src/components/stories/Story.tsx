@@ -1,7 +1,7 @@
 import { List, Grid, Header, Icon, Label, Image } from "semantic-ui-react";
 
 import { StoryType } from "api/stories";
-const exampleImg = require("media/mrpenguin.png");
+const exampleUserImg = require("media/mrpenguin.png");
 
 type BranchNameLinkProps = { story: StoryType };
 type StoryProps = { story: StoryType };
@@ -92,7 +92,7 @@ const Story = ({ story }: StoryProps) => (
             textAlign="right"
             verticalAlign="middle"
           >
-            <Image src={exampleImg} avatar />
+            <Image src={exampleUserImg} avatar />
           </Grid.Column>
         </Grid.Row>
       </Grid>

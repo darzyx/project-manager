@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { Menu } from "semantic-ui-react";
 
+const logoImg = require("media/logo.png");
+
 const AppMenu = () => {
   const [activeItem, setActiveItem] = useState("home");
 
   return (
     <Menu inverted style={{ borderRadius: "0" }}>
       <Menu.Item>
-        <img src="https://react.semantic-ui.com/logo.png" alt="main-logo" />
+        <img src={logoImg} alt="main-logo" />
       </Menu.Item>
       <Menu.Item
         name="home"
