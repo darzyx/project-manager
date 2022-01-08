@@ -3,10 +3,10 @@ import { UserNameType } from "api/users";
 export type CompletionType =
   | "backlogged"
   | "scheduled"
-  | "in_progress"
-  | "waiting_for_review"
+  | "started"
+  | "reviewing"
   | "deployed"
-  | "discussed_at_sprint";
+  | "archived";
 
 export type PriorityType = "high" | "medium" | "low";
 
@@ -36,7 +36,7 @@ const stories: StoriesType = {
     description: "Send gold tier users quarterly website updates",
     date_created: "January 1st, 2022",
     points: 5,
-    completion: "in_progress",
+    completion: "started",
     type: "feature",
     assignee: "aaron",
     requester: "benny",
@@ -64,7 +64,7 @@ const stories: StoriesType = {
     description: "Come up with and implement a URL naming standard",
     date_created: "January 25th, 2022",
     points: 5,
-    completion: "in_progress",
+    completion: "started",
     type: "task",
     assignee: "carlos",
     requester: "daisy",
@@ -78,7 +78,7 @@ const stories: StoriesType = {
     description: undefined,
     date_created: "December 20th, 2021",
     points: 8,
-    completion: "discussed_at_sprint",
+    completion: "archived",
     type: "task",
     assignee: "daisy",
     requester: "daisy",
@@ -92,7 +92,7 @@ const stories: StoriesType = {
     description: "Give the landing page a new design",
     date_created: "October 30th, 2021",
     points: 3,
-    completion: "discussed_at_sprint",
+    completion: "archived",
     type: "task",
     assignee: "aaron",
     requester: "carlos",
@@ -106,7 +106,7 @@ const stories: StoriesType = {
     description: "The profile page has a CSS bug visible on Chrome desktop",
     date_created: "January 1st, 2022",
     points: 1,
-    completion: "waiting_for_review",
+    completion: "reviewing",
     type: "bug",
     assignee: "carlos",
     requester: "carlos",

@@ -34,7 +34,14 @@ const AppMenu = () => (
       Archive
     </Menu.Item>
     <Menu.Item
-      name="archive"
+      name="stats"
+      //   active={activeItem === 'sign-in'}
+      //   onClick={this.handleItemClick}
+    >
+      Stats
+    </Menu.Item>
+    <Menu.Item
+      name="settings"
       //   active={activeItem === 'sign-in'}
       //   onClick={this.handleItemClick}
     >

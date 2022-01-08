@@ -3,7 +3,7 @@ import { List, Segment, Grid, Header, Divider } from "semantic-ui-react";
 import stories from "api/stories";
 
 import AppMenu from "./AppMenu";
-import SprintMenu from "components/sprint/SprintMenu";
+import DashboardMenu from "components/dashboard/DashboardMenu";
 import Story from "components/stories/Story";
 
 const StoriesList = () => (
@@ -33,7 +33,7 @@ const App = () => {
           </Header.Subheader>
         </Header>
         <Divider hidden />
-        <SprintMenu />
+        <DashboardMenu />
         <Divider hidden />
         <Grid columns={5} divided stackable>
           <Grid.Row>

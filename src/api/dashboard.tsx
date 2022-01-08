@@ -4,20 +4,20 @@ import { CompletionType } from "api/stories";
 
 import users from "api/users";
 
-type SprintSortsType = {
+type DashboardSortsType = {
   completions: CompletionType[];
   priorities: PriorityType[];
   assignees: UserNameType[];
 };
 
-const sprintSorts: SprintSortsType = {
+const dashboardSorts: DashboardSortsType = {
   completions: [
     "backlogged",
     "scheduled",
-    "in_progress",
-    "waiting_for_review",
+    "started",
+    "reviewing",
     "deployed",
-    "discussed_at_sprint",
+    "archived",
   ],
   priorities: ["high", "medium", "low"],
   assignees: Object.values(users).map((user) => user.name),
