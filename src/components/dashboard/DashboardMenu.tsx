@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Menu } from "semantic-ui-react";
+import { Menu, Input } from "semantic-ui-react";
 
 const DashboardMenu = () => {
   const [activeItem, setActiveItem] = useState("completion");
@@ -31,6 +31,11 @@ const DashboardMenu = () => {
         active={activeItem === "epic"}
         onClick={() => setActiveItem("epic")}
       />
+      <Menu.Menu position="right">
+        <Menu.Item>
+          <Input inverted icon="search" placeholder="Search..." />
+        </Menu.Item>
+      </Menu.Menu>
     </Menu>
   );
 };
