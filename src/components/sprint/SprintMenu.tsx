@@ -18,6 +18,11 @@ const SprintMenu = () => {
         onClick={() => setActiveItem("priority")}
       />
       <Menu.Item
+        name="duration"
+        active={activeItem === "duration"}
+        onClick={() => setActiveItem("duration")}
+      />
+      <Menu.Item
         name="assignee"
         active={activeItem === "assignee"}
         onClick={() => setActiveItem("assignee")}

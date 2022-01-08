@@ -27,9 +27,9 @@ const App = () => {
       <AppMenu />
       <div className="App-content">
         <Header as="h2" inverted>
-          HAE Sprint 1
+          Dashboard
           <Header.Subheader>
-            January 1st, 2022 - March 6th, 2022
+            March 6th, 2022
           </Header.Subheader>
         </Header>
         <Divider hidden />

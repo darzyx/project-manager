@@ -5,29 +5,40 @@ const AppMenu = () => (
     <Menu.Item>
       <img src="https://react.semantic-ui.com/logo.png" alt="main-logo" />
     </Menu.Item>
-
     <Menu.Item
-      name="features"
+      name="dashboard"
       //   active={activeItem === 'features'}
       //   onClick={this.handleItemClick}
     >
-      Features
+      Dashboard
     </Menu.Item>
-
     <Menu.Item
-      name="testimonials"
+      name="calendar"
+      //   active={activeItem === 'features'}
+      //   onClick={this.handleItemClick}
+    >
+      Calendar
+    </Menu.Item>
+    <Menu.Item
+      name="backlog"
       //   active={activeItem === 'testimonials'}
       //   onClick={this.handleItemClick}
     >
-      Testimonials
+      Backlog
     </Menu.Item>
-
     <Menu.Item
-      name="sign-in"
+      name="archive"
       //   active={activeItem === 'sign-in'}
       //   onClick={this.handleItemClick}
     >
-      Sign-in
+      Archive
+    </Menu.Item>
+    <Menu.Item
+      name="archive"
+      //   active={activeItem === 'sign-in'}
+      //   onClick={this.handleItemClick}
+    >
+      Settings
     </Menu.Item>
   </Menu>
 );
