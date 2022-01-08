@@ -6,6 +6,7 @@ export type CompletionType =
   | "started"
   | "reviewing"
   | "deployed"
+  | "confirmed"
   | "archived";
 
 export type PriorityType = "high" | "medium" | "low";
@@ -92,7 +93,7 @@ const stories: StoriesType = {
     description: "Give the landing page a new design",
     date_created: "October 30th, 2021",
     points: 3,
-    completion: "archived",
+    completion: "confirmed",
     type: "task",
     assignee: "aaron",
     requester: "carlos",

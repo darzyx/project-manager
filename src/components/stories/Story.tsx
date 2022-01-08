@@ -1,4 +1,12 @@
-import { List, Grid, Header, Icon, Label, Image } from "semantic-ui-react";
+import {
+  List,
+  Grid,
+  Header,
+  Button,
+  Icon,
+  Label,
+  Image,
+} from "semantic-ui-react";
 
 import { StoryType } from "api/stories";
 const exampleUserImg = require("media/mrpenguin.png");
@@ -33,10 +41,15 @@ const BranchNameLink = ({ story }: BranchNameLinkProps) => {
 const Story = ({ story }: StoryProps) => (
   <List.Item>
     <List.Content>
-      <Header as="h6" textAlign="right" color="teal">
+      <Button color="teal" basic floated="right" compact size="mini">
+        Confirm
+      </Button>
+      <Header as="h6" color="teal">
         {story.epic_name?.toUpperCase()}
       </Header>
-      <List.Header as="h4">{story.name}</List.Header>
+      <List.Header as="h4" style={{ marginTop: "3px" }}>
+        {story.name}
+      </List.Header>
       <BranchNameLink story={story} />
       {story.labels && (
         <Label.Group size="mini" color="violet">
