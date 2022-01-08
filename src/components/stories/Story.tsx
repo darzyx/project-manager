@@ -6,6 +6,15 @@ const exampleUserImg = require("media/mrpenguin.png");
 type BranchNameLinkProps = { story: StoryType };
 type StoryProps = { story: StoryType };
 
+const branchNameStyles = {
+  display: "inline-block",
+  color: "#58A6FF",
+  backgroundColor: "rgba(88, 166, 255, 0.1)",
+  margin: "5px 0 8px -5px",
+  padding: "3px 5px",
+  borderRadius: "8px",
+  lineHeight: "1",
+};
 const BranchNameLink = ({ story }: BranchNameLinkProps) => {
   const uuid = story.uuid.toUpperCase();
   const name = story.name
@@ -15,19 +24,7 @@ const BranchNameLink = ({ story }: BranchNameLinkProps) => {
 
   return (
     <div>
-      <div
-        style={{
-          display: "inline-block",
-          color: "#58A6FF",
-          backgroundColor: "rgba(88, 166, 255, 0.1)",
-          margin: "5px 0 8px -5px",
-          padding: "3px 5px",
-          borderRadius: "8px",
-          lineHeight: "1",
-        }}
-      >
-        {uuid + "-" + name}
-      </div>{" "}
+      <div style={branchNameStyles}>{uuid + "-" + name}</div>{" "}
       <Icon name="copy outline" style={{ cursor: "pointer" }} />
     </div>
   );
