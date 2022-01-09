@@ -23,7 +23,7 @@ export type StoryType = {
   requester?: UserNameType;
   priority?: PriorityType;
   epic_name?: string;
-  labels?: string[];
+  tags?: string[];
 };
 
 export type StoriesType = {
@@ -43,7 +43,7 @@ const stories: StoriesType = {
     requester: "benny",
     priority: "high",
     epic_name: undefined,
-    labels: ["css", "profile-page", "frontend"],
+    tags: ["css", "profile-page", "frontend"],
   },
   "HAE-0002": {
     uuid: "HAE-0002",
@@ -57,7 +57,7 @@ const stories: StoriesType = {
     requester: "aaron",
     priority: "low",
     epic_name: "Gold Tier Features",
-    labels: ["gold-tier", "backend", "frontend"],
+    tags: ["gold-tier", "backend", "frontend"],
   },
   "HAE-0003": {
     uuid: "HAE-0003",
@@ -71,7 +71,7 @@ const stories: StoriesType = {
     requester: "daisy",
     priority: "medium",
     epic_name: "Sitewide Upgrades",
-    labels: ["frontend", "large-change"],
+    tags: ["frontend", "large-change"],
   },
   "HAE-0004": {
     uuid: "HAE-0004",
@@ -85,7 +85,7 @@ const stories: StoriesType = {
     requester: "daisy",
     priority: "medium",
     epic_name: "Year End Fixes",
-    labels: undefined,
+    tags: undefined,
   },
   "HAE-0005": {
     uuid: "HAE-0005",
@@ -99,7 +99,7 @@ const stories: StoriesType = {
     requester: "carlos",
     priority: "medium",
     epic_name: undefined,
-    labels: ["design", "wireframes", "UX"],
+    tags: ["design", "wireframes", "UX"],
   },
   "HAE-0006": {
     uuid: "HAE-0006",
@@ -113,7 +113,7 @@ const stories: StoriesType = {
     requester: "carlos",
     priority: "low",
     epic_name: undefined,
-    labels: ["css", "profile-page", "frontend"],
+    tags: ["css", "profile-page", "frontend"],
   },
   "HAE-0007": {
     uuid: "HAE-0007",
@@ -127,7 +127,7 @@ const stories: StoriesType = {
     requester: "carlos",
     priority: undefined,
     epic_name: undefined,
-    labels: ["node", "backend"],
+    tags: ["node", "backend"],
   },
   "HAE-0008": {
     uuid: "HAE-0008",
@@ -141,7 +141,7 @@ const stories: StoriesType = {
     requester: "benny",
     priority: "low",
     epic_name: undefined,
-    labels: ["typescript", "frontend"],
+    tags: ["typescript", "frontend"],
   },
 };
 

@@ -6,7 +6,7 @@ const epics = {
     date_created: "January 1st, 2022",
     points: 1, // Depends on associated stories
     date_due: "February 1st, 2022",
-    labels: ["epic-example-tag", "another-example-tag"],
+    tags: ["epic-example-tag", "another-example-tag"],
     attachments: [],
     stories: ["zero"], // Depends on associated stories
   },
