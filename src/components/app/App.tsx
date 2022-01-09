@@ -46,33 +46,43 @@ export default class App extends Component {
                 <Grid.Row>
                   <Grid.Column>
                     <StickySegment name="Scheduled" context={this.contextRef} />
-                    {Object.values(stories).map((story, index) => (
-                      <Story key={index} story={story} />
-                    ))}
+                    {Object.values(stories)
+                      .sort(() => 0.5 - Math.random())
+                      .map((story, index) => (
+                        <Story key={index} story={story} />
+                      ))}
                   </Grid.Column>
                   <Grid.Column>
                     <StickySegment name="Started" context={this.contextRef} />
-                    {Object.values(stories).map((story, index) => (
-                      <Story key={index} story={story} />
-                    ))}
+                    {Object.values(stories)
+                      .sort(() => 0.5 - Math.random())
+                      .map((story, index) => (
+                        <Story key={index} story={story} />
+                      ))}
                   </Grid.Column>
                   <Grid.Column>
                     <StickySegment name="Reviewing" context={this.contextRef} />
-                    {Object.values(stories).map((story, index) => (
-                      <Story key={index} story={story} />
-                    ))}
+                    {Object.values(stories)
+                      .sort(() => 0.5 - Math.random())
+                      .map((story, index) => (
+                        <Story key={index} story={story} />
+                      ))}
                   </Grid.Column>
                   <Grid.Column>
                     <StickySegment name="Deployed" context={this.contextRef} />
-                    {Object.values(stories).map((story, index) => (
-                      <Story key={index} story={story} />
-                    ))}
+                    {Object.values(stories)
+                      .sort(() => 0.5 - Math.random())
+                      .map((story, index) => (
+                        <Story key={index} story={story} />
+                      ))}
                   </Grid.Column>
                   <Grid.Column>
                     <StickySegment name="Confirmed" context={this.contextRef} />
-                    {Object.values(stories).map((story, index) => (
-                      <Story key={index} story={story} />
-                    ))}
+                    {Object.values(stories)
+                      .sort(() => 0.5 - Math.random())
+                      .map((story, index) => (
+                        <Story key={index} story={story} />
+                      ))}
                   </Grid.Column>
                 </Grid.Row>
               </Grid>
