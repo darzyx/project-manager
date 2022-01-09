@@ -9,10 +9,10 @@ export type DashboardColumnSortType =
   | StoryCompletionsType
   | StoryPrioritiesType;
 export type DashboardColumnSortsType = {
-  completions: StoryCompletionsType;
-  priorities: StoryPrioritiesType;
+  completion: StoryCompletionsType;
+  priority: StoryPrioritiesType;
 };
 export const dashboardColumnSorts: DashboardColumnSortsType = {
-  completions,
-  priorities,
+  completion: completions,
+  priority: priorities,
 };

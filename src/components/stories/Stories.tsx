@@ -107,9 +107,9 @@ export default class Stories extends Component<StoriesPropsType> {
                     .sort(() => 0.5 - Math.random())
                     .filter((story) => {
                       switch (activeSortHeader) {
-                        case "priorities":
+                        case "priority":
                           return story.priority.name === activeSortItem.name;
-                        case "completions":
+                        case "completion":
                         default:
                           return story.completion.name === activeSortItem.name;
                       }
