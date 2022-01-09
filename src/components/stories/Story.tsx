@@ -133,14 +133,13 @@ const Story = ({ story }: StoryProps) => {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "22px 24px 18px 22px 1fr",
+          gridTemplateColumns: "26px 26px 22px 26px 1fr",
         }}
       >
         <Icon
           name={getPriorityIconName()}
           color={story.priority ? "teal" : "grey"}
           style={{ alignSelf: "end", cursor: "pointer" }}
-          className="animate__tada"
         />
         <Icon
           name={getKindIconName()}
@@ -150,11 +149,11 @@ const Story = ({ story }: StoryProps) => {
         <span
           style={{
             fontWeight: "bold",
-            fontSize: "15px",
+            fontSize: "14px",
             color: "#00b5ad",
             alignSelf: "end",
-            lineHeight: "12px",
             cursor: "pointer",
+            lineHeight: "10px",
           }}
         >
           {story.points}
