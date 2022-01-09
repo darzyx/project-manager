@@ -1,12 +1,12 @@
 import { UserNameType } from "api/users";
-import { PriorityType } from "api/stories";
-import { CompletionType } from "api/stories";
+import { StoryPrioritiesType, priorities } from "api/stories";
+import { StoryCompletionType } from "api/stories";
 
 import users from "api/users";
 
 type DashboardSortsType = {
-  completions: CompletionType[];
-  priorities: PriorityType[];
+  completions: StoryCompletionType[];
+  priorities: StoryPrioritiesType;
   assignees: UserNameType[];
 };
 
@@ -19,6 +19,6 @@ const dashboardSorts: DashboardSortsType = {
     "deployed",
     "archived",
   ],
-  priorities: ["high", "medium", "low"],
+  priorities,
   assignees: Object.values(users).map((user) => user.name),
 };

@@ -5,8 +5,8 @@ import styled from "styled-components";
 import { StoryType } from "api/stories";
 const exampleUserImg = require("media/mrpenguin.png");
 
-type BranchNameLinkProps = { story: StoryType };
-type StoryProps = { story: StoryType };
+type BranchNameLinkPropsType = { story: StoryType };
+type StoryPropsType = { story: StoryType };
 
 const BranchName = styled.code`
   display: inline-block;
@@ -21,7 +21,7 @@ const BranchName = styled.code`
   white-space: nowrap;
 `;
 
-const BranchNameLink = ({ story }: BranchNameLinkProps) => {
+const BranchNameLink = ({ story }: BranchNameLinkPropsType) => {
   const [iconClicked, setIconClicked] = useState(false);
 
   const uuid = story.uuid.toUpperCase();
@@ -59,33 +59,7 @@ const Tag = styled.span`
   }
 `;
 
-const Story = ({ story }: StoryProps) => {
-  const getPriorityColor = () => {
-    switch (story.priority) {
-      case "high":
-        return "red";
-      case "medium":
-        return "yellow";
-      case "low":
-        return "grey";
-      default:
-        return null;
-    }
-  };
-
-  const getPriorityIconName = () => {
-    switch (story.priority) {
-      case "high":
-        return "arrow up";
-      case "medium":
-        return "arrows alternate horizontal";
-      case "low":
-        return "arrow down";
-      default:
-        return "question";
-    }
-  };
-
+const Story = ({ story }: StoryPropsType) => {
   const getKindIconName = () => {
     switch (story.kind) {
       case "feature":
@@ -123,19 +97,17 @@ const Story = ({ story }: StoryProps) => {
   return (
     <Segment
       inverted
-      style={
-        getPriorityColor()
-          ? { borderLeft: `1px solid ${getPriorityColor()}` }
-          : null
-      }
+      style={{ borderLeft: `1px solid ${story.priority.color}` }}
     >
       <Button color="teal" basic floated="right" compact size="mini">
         Confirm
       </Button>
-      <Header as="h6" color="teal" style={{ margin: "0 0 3px 0" }}>
-        {story.epic_name?.toUpperCase()}
-      </Header>
-      <List.Header as="h4" style={{ margin: "0 0 3px 0" }}>
+      {story.epic_name && (
+        <Header as="h6" style={{ color: "violet", margin: "0 0 3px 0" }}>
+          {story.epic_name?.toUpperCase()}
+        </Header>
+      )}
+      <List.Header as="h4" style={{ color: "#C9D1D9", margin: "0 0 3px 0" }}>
         {story.name}
       </List.Header>
       <BranchNameLink story={story} />
@@ -154,27 +126,27 @@ const Story = ({ story }: StoryProps) => {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "26px 26px 22px 26px 1fr",
+          gridTemplateColumns: "24px 24px 20px 24px 1fr",
+          gridGap: "12px",
         }}
       >
         <Icon
-          name={getPriorityIconName()}
+          name={story.priority.icon}
           style={{
             alignSelf: "end",
             cursor: "pointer",
-            color: getPriorityColor() ? getPriorityColor() : "#00b5ad",
+            color: story.priority.color,
           }}
         />
         <Icon
           name={getKindIconName()}
-          color="teal"
-          style={{ alignSelf: "end", cursor: "pointer" }}
+          style={{ alignSelf: "end", cursor: "pointer", color: "#8B949E" }}
         />
         <span
           style={{
             fontWeight: "bold",
             fontSize: "14px",
-            color: "#00b5ad",
+            color: "#8B949E",
             alignSelf: "end",
             cursor: "pointer",
             lineHeight: "10px",
@@ -185,8 +157,7 @@ const Story = ({ story }: StoryProps) => {
         </span>
         <Icon
           name={getCompletionIconName()}
-          color="teal"
-          style={{ alignSelf: "end", cursor: "pointer" }}
+          style={{ alignSelf: "end", cursor: "pointer", color: "#8B949E" }}
         />
         <Image
           floated="right"

@@ -1,6 +1,10 @@
+import { type SemanticICONS } from "semantic-ui-react";
+
 import { UserNameType } from "api/users";
 
-export type CompletionType =
+type StoryPointsType = 1 | 2 | 3 | 5 | 8; // Fibonacci sequence
+
+export type StoryCompletionType =
   | "backlogged"
   | "scheduled"
   | "started"
@@ -9,24 +13,50 @@ export type CompletionType =
   | "confirmed"
   | "archived";
 
-export type PriorityType = "high" | "medium" | "low";
+type StoryKindType = "feature" | "bug" | "task";
+
+type StoryPriorityNameType =
+  | "critical"
+  | "high"
+  | "medium"
+  | "low"
+  | "unspecified";
+type StoryPriorityType = {
+  name: StoryPriorityNameType;
+  color: string;
+  icon: SemanticICONS;
+};
+export type StoryPrioritiesType = {
+  [key in StoryPriorityNameType]: StoryPriorityType;
+};
+export const priorities: StoryPrioritiesType = {
+  critical: { name: "critical", color: "red", icon: "exclamation triangle" },
+  high: { name: "high", color: "yellow", icon: "arrow alternate circle up" },
+  medium: { name: "medium", color: "green", icon: "dot circle" },
+  low: { name: "low", color: "blue", icon: "arrow alternate circle down" },
+  unspecified: {
+    name: "unspecified",
+    color: "blue",
+    icon: "arrow alternate circle down",
+  },
+};
 
 export type StoryType = {
   uuid: string;
   name: string;
   description?: string;
   date_created: string;
-  points: 1 | 2 | 3 | 5 | 8; // Fibonacci sequence
-  completion: CompletionType;
-  kind: "feature" | "bug" | "task";
+  points: StoryPointsType;
+  completion: StoryCompletionType;
+  kind: StoryKindType;
   assignee?: UserNameType;
   requester?: UserNameType;
-  priority?: PriorityType;
+  priority: StoryPriorityType;
   epic_name?: string;
   tags?: string[];
 };
 
-export type StoriesType = {
+type StoriesType = {
   [uuid: string]: StoryType;
 };
 
@@ -41,7 +71,7 @@ const stories: StoriesType = {
     kind: "feature",
     assignee: "aaron",
     requester: "benny",
-    priority: "high",
+    priority: priorities.critical,
     epic_name: undefined,
     tags: ["css", "profile-page", "frontend"],
   },
@@ -55,7 +85,7 @@ const stories: StoriesType = {
     kind: "feature",
     assignee: "benny",
     requester: "aaron",
-    priority: "low",
+    priority: priorities.high,
     epic_name: "Gold Tier Features",
     tags: ["gold-tier", "backend", "frontend"],
   },
@@ -69,7 +99,7 @@ const stories: StoriesType = {
     kind: "task",
     assignee: "carlos",
     requester: "daisy",
-    priority: "medium",
+    priority: priorities.medium,
     epic_name: "Sitewide Upgrades",
     tags: ["frontend", "large-change"],
   },
@@ -83,7 +113,7 @@ const stories: StoriesType = {
     kind: "task",
     assignee: "daisy",
     requester: "daisy",
-    priority: "medium",
+    priority: priorities.low,
     epic_name: "Year End Fixes",
     tags: undefined,
   },
@@ -97,7 +127,7 @@ const stories: StoriesType = {
     kind: "task",
     assignee: "aaron",
     requester: "carlos",
-    priority: "medium",
+    priority: priorities.unspecified,
     epic_name: undefined,
     tags: ["design", "wireframes", "UX"],
   },
@@ -111,7 +141,7 @@ const stories: StoriesType = {
     kind: "bug",
     assignee: "carlos",
     requester: "carlos",
-    priority: "low",
+    priority: priorities.low,
     epic_name: undefined,
     tags: ["css", "profile-page", "frontend"],
   },
@@ -125,7 +155,7 @@ const stories: StoriesType = {
     kind: "task",
     assignee: "carlos",
     requester: "carlos",
-    priority: undefined,
+    priority: priorities.medium,
     epic_name: undefined,
     tags: ["node", "backend"],
   },
@@ -139,9 +169,23 @@ const stories: StoriesType = {
     kind: "task",
     assignee: "daisy",
     requester: "benny",
-    priority: "low",
+    priority: priorities.high,
     epic_name: undefined,
     tags: ["typescript", "frontend"],
+  },
+  "HAE-0009": {
+    uuid: "HAE-0009",
+    name: "Urgent: Investigate If Data Breach Affected Our Site",
+    description: "There was a large data breach for one of our partners",
+    date_created: "January 15th, 2022",
+    points: 5,
+    completion: "started",
+    kind: "task",
+    assignee: "benny",
+    requester: "daisy",
+    priority: priorities.critical,
+    epic_name: "partnerships",
+    tags: ["devops", "ghost-llc"],
   },
 };
 

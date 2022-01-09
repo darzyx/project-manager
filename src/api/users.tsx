@@ -5,12 +5,7 @@ type UserType = {
   name: UserNameType;
   email: string;
 };
-
-export type UsersType = {
-  [uuid: string]: UserType;
-};
-
-const users: UsersType = {
+const users: { [uuid: string]: UserType } = {
   "USER-0001": {
     uuid: "USER-0001",
     name: "aaron",
