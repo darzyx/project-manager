@@ -1,4 +1,4 @@
-import { List, Segment, Grid, Header, Divider } from "semantic-ui-react";
+import { Grid, Header, Divider } from "semantic-ui-react";
 
 import stories from "api/stories";
 
@@ -11,13 +11,9 @@ const StoriesList = () => (
     <Header as="h3" inverted textAlign="center">
       Column Header
     </Header>
-    <Segment inverted>
-      <List divided relaxed inverted>
-        {Object.values(stories).map((story, index) => (
-          <Story key={index} story={story} />
-        ))}
-      </List>
-    </Segment>
+    {Object.values(stories).map((story, index) => (
+      <Story key={index} story={story} />
+    ))}
   </>
 );
 

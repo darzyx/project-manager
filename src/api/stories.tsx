@@ -103,7 +103,7 @@ const stories: StoriesType = {
   },
   "HAE-0006": {
     uuid: "HAE-0006",
-    name: "Profile Page CSS Bug",
+    name: "Profile Page CSS Bugfix",
     description: "The profile page has a CSS bug visible on Chrome desktop",
     date_created: "January 1st, 2022",
     points: 1,
@@ -117,7 +117,7 @@ const stories: StoriesType = {
   },
   "HAE-0007": {
     uuid: "HAE-0007",
-    name: "Update Node Version",
+    name: "Update Node Version for Backend",
     description: "We need to update to latest node version before March",
     date_created: "January 5th, 2022",
     points: 5,
