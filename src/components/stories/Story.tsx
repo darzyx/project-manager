@@ -1,12 +1,4 @@
-import {
-  List,
-  Header,
-  Menu,
-  Button,
-  Icon,
-  Image,
-  Segment,
-} from "semantic-ui-react";
+import { List, Header, Button, Icon, Image, Segment } from "semantic-ui-react";
 
 import { StoryType } from "api/stories";
 const exampleUserImg = require("media/mrpenguin.png");
