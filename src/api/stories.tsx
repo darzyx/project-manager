@@ -30,15 +30,15 @@ export type StoryPrioritiesType = {
   [key in StoryPriorityNameType]: StoryPriorityType;
 };
 export const priorities: StoryPrioritiesType = {
-  critical: { name: "critical", color: "red", icon: "exclamation triangle" },
-  high: { name: "high", color: "yellow", icon: "arrow alternate circle up" },
-  medium: { name: "medium", color: "green", icon: "dot circle" },
-  low: { name: "low", color: "blue", icon: "arrow alternate circle down" },
-  unspecified: {
-    name: "unspecified",
-    color: "blue",
-    icon: "arrow alternate circle down",
+  critical: {
+    name: "critical",
+    color: "darkred",
+    icon: "exclamation triangle",
   },
+  high: { name: "high", color: "olive", icon: "arrow alternate circle up" },
+  medium: { name: "medium", color: "darkgreen", icon: "dot circle" },
+  low: { name: "low", color: "darkblue", icon: "arrow alternate circle down" },
+  unspecified: { name: "unspecified", color: "grey", icon: "question circle" },
 };
 
 export type StoryType = {

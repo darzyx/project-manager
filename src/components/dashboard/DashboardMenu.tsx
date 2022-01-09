@@ -1,36 +1,22 @@
 import { useState } from "react";
 import { Menu, Input } from "semantic-ui-react";
 
+import { priorities } from "api/stories";
+
 const DashboardMenu = () => {
-  const [activeItem, setActiveItem] = useState("completion");
+  const [activeItem, setActiveItem] = useState(
+    Object.values(priorities)[0].name
+  );
 
   return (
     <Menu inverted pointing secondary>
-      <Menu.Item
-        name="completion"
-        active={activeItem === "completion"}
-        onClick={() => setActiveItem("completion")}
-      />
-      <Menu.Item
-        name="priority"
-        active={activeItem === "priority"}
-        onClick={() => setActiveItem("priority")}
-      />
-      <Menu.Item
-        name="duration"
-        active={activeItem === "duration"}
-        onClick={() => setActiveItem("duration")}
-      />
-      <Menu.Item
-        name="assignee"
-        active={activeItem === "assignee"}
-        onClick={() => setActiveItem("assignee")}
-      />
-      <Menu.Item
-        name="epic"
-        active={activeItem === "epic"}
-        onClick={() => setActiveItem("epic")}
-      />
+      {Object.values(priorities).map((priority, index) => (
+        <Menu.Item
+          name={priority.name}
+          active={activeItem === priority.name}
+          onClick={() => setActiveItem(priority.name)}
+        />
+      ))}
       <Menu.Menu position="right">
         <Menu.Item>
           <Input inverted icon="search" placeholder="Search..." />

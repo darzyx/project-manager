@@ -1,13 +1,21 @@
 import { Component, createRef, RefObject } from "react";
-import { Grid, Header, Divider, Ref, Sticky, Segment } from "semantic-ui-react";
+import {
+  Grid,
+  Header,
+  Divider,
+  Ref,
+  Sticky,
+  Segment,
+  SemanticWIDTHS,
+} from "semantic-ui-react";
 
-import stories from "api/stories";
+import stories, { priorities } from "api/stories";
 
 import AppMenu from "./AppMenu";
 import DashboardMenu from "components/dashboard/DashboardMenu";
 import Story from "components/stories/Story";
 
-const StickySegment = ({
+const ColumnHeader = ({
   name,
   context,
 }: {
@@ -28,6 +36,50 @@ const StickySegment = ({
 export default class App extends Component {
   contextRef = createRef<HTMLDivElement>();
 
+  getNumColumns = () => {
+    let numColumns: SemanticWIDTHS = 1;
+    const arrayLength: number = Object.keys(priorities).length;
+
+    // There's probably a better way to write this. We do this for now so that
+    // TypeScript is happy that we're definitely assinging numColumns a value
+    // that corresponds to the SemanticWIDTHS type
+    switch (arrayLength) {
+      case 1:
+        numColumns = 1;
+        break;
+      case 2:
+        numColumns = 2;
+        break;
+      case 3:
+        numColumns = 3;
+        break;
+      case 4:
+        numColumns = 4;
+        break;
+      case 5:
+        numColumns = 5;
+        break;
+      case 6:
+        numColumns = 6;
+        break;
+      case 7:
+        numColumns = 7;
+        break;
+      case 8:
+        numColumns = 8;
+        break;
+      case 9:
+        numColumns = 9;
+        break;
+      case 10:
+        numColumns = 10;
+        break;
+      default:
+        numColumns = 1;
+    }
+    return numColumns;
+  };
+
   render() {
     return (
       <div>
@@ -42,48 +94,24 @@ export default class App extends Component {
           <Divider hidden />
           <Ref innerRef={this.contextRef}>
             <div>
-              <Grid columns={5} divided stackable>
+              <Grid columns={this.getNumColumns()} divided stackable>
                 <Grid.Row>
-                  <Grid.Column>
-                    <StickySegment name="Scheduled" context={this.contextRef} />
-                    {Object.values(stories)
-                      .sort(() => 0.5 - Math.random())
-                      .map((story, index) => (
-                        <Story key={index} story={story} />
-                      ))}
-                  </Grid.Column>
-                  <Grid.Column>
-                    <StickySegment name="Started" context={this.contextRef} />
-                    {Object.values(stories)
-                      .sort(() => 0.5 - Math.random())
-                      .map((story, index) => (
-                        <Story key={index} story={story} />
-                      ))}
-                  </Grid.Column>
-                  <Grid.Column>
-                    <StickySegment name="Reviewing" context={this.contextRef} />
-                    {Object.values(stories)
-                      .sort(() => 0.5 - Math.random())
-                      .map((story, index) => (
-                        <Story key={index} story={story} />
-                      ))}
-                  </Grid.Column>
-                  <Grid.Column>
-                    <StickySegment name="Deployed" context={this.contextRef} />
-                    {Object.values(stories)
-                      .sort(() => 0.5 - Math.random())
-                      .map((story, index) => (
-                        <Story key={index} story={story} />
-                      ))}
-                  </Grid.Column>
-                  <Grid.Column>
-                    <StickySegment name="Confirmed" context={this.contextRef} />
-                    {Object.values(stories)
-                      .sort(() => 0.5 - Math.random())
-                      .map((story, index) => (
-                        <Story key={index} story={story} />
-                      ))}
-                  </Grid.Column>
+                  {Object.values(priorities).map((priority, index) => (
+                    <Grid.Column key={index}>
+                      <ColumnHeader
+                        name={priority.name}
+                        context={this.contextRef}
+                      />
+                      {Object.values(stories)
+                        .sort(() => 0.5 - Math.random())
+                        .filter(
+                          (story) => story.priority.name === priority.name
+                        )
+                        .map((story, index) => (
+                          <Story key={index} story={story} />
+                        ))}
+                    </Grid.Column>
+                  ))}
                 </Grid.Row>
               </Grid>
             </div>
