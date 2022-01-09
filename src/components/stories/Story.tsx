@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { List, Header, Button, Icon, Image, Segment } from "semantic-ui-react";
 import styled from "styled-components";
 
@@ -7,7 +8,7 @@ const exampleUserImg = require("media/mrpenguin.png");
 type BranchNameLinkProps = { story: StoryType };
 type StoryProps = { story: StoryType };
 
-const BranchName = styled.span`
+const BranchName = styled.code`
   display: inline-block;
   color: #58a6ff;
   background-color: rgba(88, 166, 255, 0.1);
@@ -21,6 +22,8 @@ const BranchName = styled.span`
 `;
 
 const BranchNameLink = ({ story }: BranchNameLinkProps) => {
+  const [iconClicked, setIconClicked] = useState(false);
+
   const uuid = story.uuid.toUpperCase();
   const name = story.name
     .replaceAll(" ", "-")
@@ -37,7 +40,12 @@ const BranchNameLink = ({ story }: BranchNameLinkProps) => {
     >
       <BranchName>{uuid + "-" + name}</BranchName>
       <div style={{ alignSelf: "center", paddingBottom: "3px" }}>
-        <Icon name="copy outline" style={{ cursor: "pointer" }} />
+        <Icon
+          onClick={() => setIconClicked(true)}
+          name={iconClicked ? "check" : "copy outline"}
+          color={iconClicked ? "green" : undefined}
+          style={{ cursor: "pointer" }}
+        />
       </div>
     </div>
   );
@@ -52,16 +60,29 @@ const Tag = styled.span`
 `;
 
 const Story = ({ story }: StoryProps) => {
+  const getPriorityColor = () => {
+    switch (story.priority) {
+      case "high":
+        return "red";
+      case "medium":
+        return "yellow";
+      case "low":
+        return "grey";
+      default:
+        return null;
+    }
+  };
+
   const getPriorityIconName = () => {
     switch (story.priority) {
       case "high":
-        return "angle double up";
+        return "arrow up";
       case "medium":
-        return "bars";
+        return "arrows alternate horizontal";
       case "low":
-        return "angle double down";
+        return "arrow down";
       default:
-        return "circle outline";
+        return "question";
     }
   };
 
@@ -74,7 +95,7 @@ const Story = ({ story }: StoryProps) => {
       case "task":
         return "cog";
       default:
-        return "circle outline";
+        return "question";
     }
   };
 
@@ -95,12 +116,19 @@ const Story = ({ story }: StoryProps) => {
       case "archived":
         return "archive";
       default:
-        return "circle outline";
+        return "question";
     }
   };
 
   return (
-    <Segment inverted>
+    <Segment
+      inverted
+      style={
+        getPriorityColor()
+          ? { borderLeft: `1px solid ${getPriorityColor()}` }
+          : null
+      }
+    >
       <Button color="teal" basic floated="right" compact size="mini">
         Confirm
       </Button>
@@ -138,8 +166,11 @@ const Story = ({ story }: StoryProps) => {
       >
         <Icon
           name={getPriorityIconName()}
-          color={story.priority ? "teal" : "grey"}
-          style={{ alignSelf: "end", cursor: "pointer" }}
+          style={{
+            alignSelf: "end",
+            cursor: "pointer",
+            color: getPriorityColor() ? getPriorityColor() : "#00b5ad",
+          }}
         />
         <Icon
           name={getKindIconName()}
@@ -154,6 +185,7 @@ const Story = ({ story }: StoryProps) => {
             alignSelf: "end",
             cursor: "pointer",
             lineHeight: "10px",
+            userSelect: "none",
           }}
         >
           {story.points}
@@ -167,7 +199,12 @@ const Story = ({ story }: StoryProps) => {
           floated="right"
           src={exampleUserImg}
           avatar
-          style={{ alignSelf: "end", justifySelf: "end", cursor: "pointer" }}
+          style={{
+            alignSelf: "end",
+            justifySelf: "end",
+            cursor: "pointer",
+            userSelect: "none",
+          }}
         />
       </div>
     </Segment>
