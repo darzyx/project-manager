@@ -4,7 +4,7 @@ import { UserNameType } from "api/users";
 
 type StoryPointsType = 1 | 2 | 3 | 5 | 8; // Fibonacci sequence
 
-export type StoryCompletionType =
+type StoryCompletionNameType =
   | "backlogged"
   | "scheduled"
   | "started"
@@ -12,6 +12,22 @@ export type StoryCompletionType =
   | "deployed"
   | "confirmed"
   | "archived";
+type StoryCompletionType = {
+  name: StoryCompletionNameType;
+  icon: SemanticICONS;
+};
+export type StoryCompletionsType = {
+  [key in StoryCompletionNameType]: StoryCompletionType;
+};
+export const completions: StoryCompletionsType = {
+  backlogged: { name: "backlogged", icon: "moon" },
+  scheduled: { name: "scheduled", icon: "calendar check" },
+  started: { name: "started", icon: "pencil alternate" },
+  reviewing: { name: "reviewing", icon: "magnify" },
+  deployed: { name: "deployed", icon: "fork" },
+  confirmed: { name: "confirmed", icon: "users" },
+  archived: { name: "archived", icon: "archive" },
+};
 
 type StoryKindType = "feature" | "bug" | "task";
 
@@ -67,7 +83,7 @@ const stories: StoriesType = {
     description: "Send gold tier users quarterly website updates",
     date_created: "January 1st, 2022",
     points: 5,
-    completion: "started",
+    completion: completions.confirmed,
     kind: "feature",
     assignee: "aaron",
     requester: "benny",
@@ -81,7 +97,7 @@ const stories: StoriesType = {
     description: undefined,
     date_created: "January 8th, 2022",
     points: 2,
-    completion: "backlogged",
+    completion: completions.deployed,
     kind: "feature",
     assignee: "benny",
     requester: "aaron",
@@ -95,7 +111,7 @@ const stories: StoriesType = {
     description: "Come up with and implement a URL naming standard",
     date_created: "January 25th, 2022",
     points: 5,
-    completion: "started",
+    completion: completions.reviewing,
     kind: "task",
     assignee: "carlos",
     requester: "daisy",
@@ -109,7 +125,7 @@ const stories: StoriesType = {
     description: undefined,
     date_created: "December 20th, 2021",
     points: 8,
-    completion: "archived",
+    completion: completions.started,
     kind: "task",
     assignee: "daisy",
     requester: "daisy",
@@ -123,7 +139,7 @@ const stories: StoriesType = {
     description: "Give the landing page a new design",
     date_created: "October 30th, 2021",
     points: 3,
-    completion: "confirmed",
+    completion: completions.scheduled,
     kind: "task",
     assignee: "aaron",
     requester: "carlos",
@@ -137,7 +153,7 @@ const stories: StoriesType = {
     description: "The profile page has a CSS bug visible on Chrome desktop",
     date_created: "January 1st, 2022",
     points: 1,
-    completion: "scheduled",
+    completion: completions.backlogged,
     kind: "bug",
     assignee: "carlos",
     requester: "carlos",
@@ -151,7 +167,7 @@ const stories: StoriesType = {
     description: "We need to update to latest node version before March",
     date_created: "January 5th, 2022",
     points: 5,
-    completion: "deployed",
+    completion: completions.confirmed,
     kind: "task",
     assignee: "carlos",
     requester: "carlos",
@@ -165,7 +181,7 @@ const stories: StoriesType = {
     description: "Add typescript support to the frontend",
     date_created: "February 5th, 2022",
     points: 5,
-    completion: "backlogged",
+    completion: completions.deployed,
     kind: "task",
     assignee: "daisy",
     requester: "benny",
@@ -179,7 +195,7 @@ const stories: StoriesType = {
     description: "There was a large data breach for one of our partners",
     date_created: "January 15th, 2022",
     points: 5,
-    completion: "started",
+    completion: completions.started,
     kind: "task",
     assignee: "benny",
     requester: "daisy",

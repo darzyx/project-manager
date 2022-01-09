@@ -73,27 +73,6 @@ const Story = ({ story }: StoryPropsType) => {
     }
   };
 
-  const getCompletionIconName = () => {
-    switch (story.completion) {
-      case "backlogged":
-        return "moon";
-      case "scheduled":
-        return "calendar check";
-      case "started":
-        return "pencil alternate";
-      case "reviewing":
-        return "magnify";
-      case "deployed":
-        return "fork";
-      case "confirmed":
-        return "users";
-      case "archived":
-        return "archive";
-      default:
-        return "question";
-    }
-  };
-
   return (
     <Segment
       inverted
@@ -156,7 +135,7 @@ const Story = ({ story }: StoryPropsType) => {
           {story.points}
         </span>
         <Icon
-          name={getCompletionIconName()}
+          name={story.completion.icon}
           style={{ alignSelf: "end", cursor: "pointer", color: "#8B949E" }}
         />
         <Image

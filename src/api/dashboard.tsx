@@ -1,24 +1,16 @@
-import { UserNameType } from "api/users";
-import { StoryPrioritiesType, priorities } from "api/stories";
-import { StoryCompletionType } from "api/stories";
-
-import users from "api/users";
+import {
+  StoryPrioritiesType,
+  priorities,
+  StoryCompletionsType,
+  completions,
+} from "api/stories";
 
 type DashboardSortsType = {
-  completions: StoryCompletionType[];
+  completions: StoryCompletionsType;
   priorities: StoryPrioritiesType;
-  assignees: UserNameType[];
 };
 
-const dashboardSorts: DashboardSortsType = {
-  completions: [
-    "backlogged",
-    "scheduled",
-    "started",
-    "reviewing",
-    "deployed",
-    "archived",
-  ],
+export const dashboardColumnSorts: DashboardSortsType = {
+  completions,
   priorities,
-  assignees: Object.values(users).map((user) => user.name),
 };
