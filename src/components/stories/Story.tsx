@@ -53,7 +53,9 @@ const Story = ({ story }: StoryProps) => (
       <Header
         as="h6"
         color="teal"
-        style={story.epic_name ? null : { visibility: "hidden" }}
+        style={
+          story.epic_name ? { marginTop: "8px" } : { visibility: "hidden" }
+        }
       >
         {story.epic_name?.toUpperCase() || "."}
       </Header>
@@ -65,7 +67,9 @@ const Story = ({ story }: StoryProps) => (
         <div style={{ margin: "0 0 8px 0" }}>
           {story.labels?.map((label, index) => (
             <>
-              <span style={{ color: "grey", cursor: "pointer" }}>{label}</span>
+              <span style={{ color: "#8B949E", cursor: "pointer" }}>
+                {label}
+              </span>
               {Array.isArray(story.labels) &&
                 index !== story.labels.length - 1 &&
                 ", "}
@@ -108,7 +112,7 @@ const Story = ({ story }: StoryProps) => (
             color="teal"
           />
         </Menu.Item>
-        <Menu.Item name="points" style={{ width: "15px" }} fitted>
+        <Menu.Item name="points" style={{ width: "18px" }} fitted>
           <span
             style={{
               fontWeight: "bold",

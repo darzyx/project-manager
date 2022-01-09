@@ -33,11 +33,8 @@ const App = () => {
         <Divider hidden />
         <DashboardMenu />
         <Divider hidden />
-        <Grid columns={5} divided stackable>
+        <Grid columns={4} divided stackable>
           <Grid.Row>
-            <Grid.Column>
-              <StoriesList />
-            </Grid.Column>
             <Grid.Column>
               <StoriesList />
             </Grid.Column>
