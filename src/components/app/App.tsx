@@ -1,12 +1,14 @@
 import { Component, createRef, RefObject } from "react";
 import {
   Grid,
+  Icon,
   Header,
   Divider,
   Ref,
   Sticky,
   Segment,
   SemanticWIDTHS,
+  SemanticICONS,
 } from "semantic-ui-react";
 
 import stories, { priorities } from "api/stories";
@@ -17,9 +19,11 @@ import Story from "components/stories/Story";
 
 const ColumnHeader = ({
   name,
+  icon,
   context,
 }: {
   name: string;
+  icon: SemanticICONS;
   context: RefObject<HTMLDivElement>;
 }) => (
   <Sticky context={context}>
@@ -28,6 +32,8 @@ const ColumnHeader = ({
       textAlign="center"
       style={{ borderRadius: "0", borderBottom: "1px solid black" }}
     >
+      <Icon name={icon} />
+      <br />
       {name}
     </Segment>
   </Sticky>
@@ -100,6 +106,7 @@ export default class App extends Component {
                     <Grid.Column key={index}>
                       <ColumnHeader
                         name={priority.name}
+                        icon={priority.icon}
                         context={this.contextRef}
                       />
                       {Object.values(stories)
