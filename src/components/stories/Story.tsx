@@ -106,7 +106,7 @@ const Story = ({ story }: StoryPropsType) => {
         style={{
           display: "grid",
           gridTemplateColumns: "24px 24px 20px 24px 1fr",
-          gridGap: "12px",
+          gridGap: "10px",
         }}
       >
         <Icon
