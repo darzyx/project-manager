@@ -132,17 +132,10 @@ const Story = ({ story }: StoryProps) => {
       <Button color="teal" basic floated="right" compact size="mini">
         Confirm
       </Button>
-      <Header
-        as="h6"
-        color="teal"
-        style={{
-          margin: "0",
-          ...(!story.epic_name && { visibility: "hidden" }),
-        }}
-      >
-        {story.epic_name?.toUpperCase() || "."}
+      <Header as="h6" color="teal" style={{ margin: "0 0 3px 0" }}>
+        {story.epic_name?.toUpperCase()}
       </Header>
-      <List.Header as="h4" style={{ margin: "3px 0 3px" }}>
+      <List.Header as="h4" style={{ margin: "0 0 3px 0" }}>
         {story.name}
       </List.Header>
       <BranchNameLink story={story} />

@@ -117,7 +117,7 @@ const stories: StoriesType = {
   },
   "HAE-0007": {
     uuid: "HAE-0007",
-    name: "Update Node Version for Backend",
+    name: "Update Node Version",
     description: "We need to update to latest node version before March",
     date_created: "January 5th, 2022",
     points: 5,
