@@ -18,7 +18,7 @@ export type StoryType = {
   date_created: string;
   points: 1 | 2 | 3 | 5 | 8; // Fibonacci sequence
   completion: CompletionType;
-  type: "feature" | "bug" | "task";
+  kind: "feature" | "bug" | "task";
   assignee?: UserNameType;
   requester?: UserNameType;
   priority?: PriorityType;
@@ -38,7 +38,7 @@ const stories: StoriesType = {
     date_created: "January 1st, 2022",
     points: 5,
     completion: "started",
-    type: "feature",
+    kind: "feature",
     assignee: "aaron",
     requester: "benny",
     priority: "high",
@@ -52,7 +52,7 @@ const stories: StoriesType = {
     date_created: "January 8th, 2022",
     points: 2,
     completion: "backlogged",
-    type: "feature",
+    kind: "feature",
     assignee: "benny",
     requester: "aaron",
     priority: "low",
@@ -66,7 +66,7 @@ const stories: StoriesType = {
     date_created: "January 25th, 2022",
     points: 5,
     completion: "started",
-    type: "task",
+    kind: "task",
     assignee: "carlos",
     requester: "daisy",
     priority: "medium",
@@ -80,7 +80,7 @@ const stories: StoriesType = {
     date_created: "December 20th, 2021",
     points: 8,
     completion: "archived",
-    type: "task",
+    kind: "task",
     assignee: "daisy",
     requester: "daisy",
     priority: "medium",
@@ -94,7 +94,7 @@ const stories: StoriesType = {
     date_created: "October 30th, 2021",
     points: 3,
     completion: "confirmed",
-    type: "task",
+    kind: "task",
     assignee: "aaron",
     requester: "carlos",
     priority: "medium",
@@ -107,8 +107,8 @@ const stories: StoriesType = {
     description: "The profile page has a CSS bug visible on Chrome desktop",
     date_created: "January 1st, 2022",
     points: 1,
-    completion: "reviewing",
-    type: "bug",
+    completion: "scheduled",
+    kind: "bug",
     assignee: "carlos",
     requester: "carlos",
     priority: "low",
@@ -122,7 +122,7 @@ const stories: StoriesType = {
     date_created: "January 5th, 2022",
     points: 5,
     completion: "deployed",
-    type: "task",
+    kind: "task",
     assignee: "carlos",
     requester: "carlos",
     priority: undefined,
@@ -136,7 +136,7 @@ const stories: StoriesType = {
     date_created: "February 5th, 2022",
     points: 5,
     completion: "backlogged",
-    type: "task",
+    kind: "task",
     assignee: "daisy",
     requester: "benny",
     priority: "low",

@@ -92,7 +92,21 @@ const Story = ({ story }: StoryProps) => (
           />
         </Menu.Item>
         <Menu.Item name="kind" style={{ width: "20px" }} fitted>
-          <Icon name="bug" color="teal" />
+          <Icon
+            name={(() => {
+              switch (story.kind) {
+                case "feature":
+                  return "star";
+                case "bug":
+                  return "bug";
+                case "task":
+                  return "cog";
+                default:
+                  return "circle outline";
+              }
+            })()}
+            color="teal"
+          />
         </Menu.Item>
         <Menu.Item name="points" style={{ width: "15px" }} fitted>
           <span
@@ -106,7 +120,30 @@ const Story = ({ story }: StoryProps) => (
           </span>
         </Menu.Item>
         <Menu.Item name="completion" style={{ width: "20px" }} fitted>
-          <Icon name="check" color="teal" />
+          <Icon
+            flipped={story.completion === "deployed" ? "vertically" : undefined}
+            name={(() => {
+              switch (story.completion) {
+                case "backlogged":
+                  return "moon";
+                case "scheduled":
+                  return "calendar check";
+                case "started":
+                  return "pencil alternate";
+                case "reviewing":
+                  return "magnify";
+                case "deployed":
+                  return "fork";
+                case "confirmed":
+                  return "users";
+                case "archived":
+                  return "archive";
+                default:
+                  return "circle outline";
+              }
+            })()}
+            color="teal"
+          />
         </Menu.Item>
         <Menu.Menu position="right">
           <Menu.Item fitted>
