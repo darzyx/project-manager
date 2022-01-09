@@ -10,7 +10,8 @@ import {
   SemanticICONS,
 } from "semantic-ui-react";
 
-import stories, { priorities } from "api/stories";
+import { DashboardColumnSortType } from "api/dashboard";
+import stories from "api/stories";
 
 import Story from "components/stories/Story";
 
@@ -37,13 +38,15 @@ const ColumnHeader = ({
   </Sticky>
 );
 
+type StoriesPropsType = { activeSort: [string, DashboardColumnSortType] };
 // This is a class just so we can make use of createRef
-export default class Stories extends Component {
+export default class Stories extends Component<StoriesPropsType> {
   contextRef = createRef<HTMLDivElement>();
 
   getNumColumns = () => {
+    const activeSortItems = this.props.activeSort[1];
     let numColumns: SemanticWIDTHS = 1;
-    const arrayLength: number = Object.keys(priorities).length;
+    const arrayLength: number = Object.keys(activeSortItems).length;
 
     // There's probably a better way to write this. We do this for now so that
     // TypeScript is happy that we're definitely assinging numColumns a value
@@ -86,21 +89,31 @@ export default class Stories extends Component {
   };
 
   render() {
+    const [activeSortHeader, activeSortItems] = this.props.activeSort;
+
     return (
       <Ref innerRef={this.contextRef}>
         <div>
           <Grid columns={this.getNumColumns()} divided stackable>
             <Grid.Row>
-              {Object.values(priorities).map((priority, index) => (
+              {Object.values(activeSortItems).map((activeSortItem, index) => (
                 <Grid.Column key={index}>
                   <ColumnHeader
-                    name={priority.name}
-                    icon={priority.icon}
+                    name={activeSortItem.name}
+                    icon={activeSortItem.icon}
                     context={this.contextRef}
                   />
                   {Object.values(stories)
                     .sort(() => 0.5 - Math.random())
-                    .filter((story) => story.priority.name === priority.name)
+                    .filter((story) => {
+                      switch (activeSortHeader) {
+                        case "priorities":
+                          return story.priority.name === activeSortItem.name;
+                        case "completions":
+                        default:
+                          return story.completion.name === activeSortItem.name;
+                      }
+                    })
                     .map((story, index) => (
                       <Story key={index} story={story} />
                     ))}

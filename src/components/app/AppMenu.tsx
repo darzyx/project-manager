@@ -43,6 +43,7 @@ const AppMenu = () => {
       </Menu.Item>
       {menuItemNames.map((menuItemName, index) => (
         <MenuItem
+          key={index}
           menuItemName={menuItemName}
           activeMenuItem={activeMenuItem}
           setActiveMenuItem={setActiveMenuItem}

@@ -93,12 +93,12 @@ const Story = ({ story }: StoryPropsType) => {
       {Array.isArray(story.tags) && story.tags.length > 0 && (
         <div style={{ margin: "0 0 8px 0" }}>
           {story.tags?.map((tag, index) => (
-            <>
+            <span key={index}>
               <Tag>{tag}</Tag>
               {Array.isArray(story.tags) &&
                 index !== story.tags.length - 1 &&
                 ", "}
-            </>
+            </span>
           ))}
         </div>
       )}
