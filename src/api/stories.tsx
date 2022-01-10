@@ -12,18 +12,28 @@ export type StoryCompletionNameType =
   | "deployed"
   | "confirmed"
   | "archived";
-type StoryCompletionType = {
-  name: StoryCompletionNameType;
-  icon: SemanticICONS;
+
+type StoryPriorityNameType =
+  | "critical"
+  | "high"
+  | "medium"
+  | "low"
+  | "unspecified";
+
+type StorySortableValueType = {
+  name: StoryCompletionNameType | StoryPriorityNameType;
+  color?: string;
+  icon?: SemanticICONS;
 };
+
 export interface StoryCompletionsType {
-  backlogged: StoryCompletionType;
-  scheduled: StoryCompletionType;
-  started: StoryCompletionType;
-  reviewing: StoryCompletionType;
-  deployed: StoryCompletionType;
-  confirmed: StoryCompletionType;
-  archived: StoryCompletionType;
+  backlogged: StorySortableValueType;
+  scheduled: StorySortableValueType;
+  started: StorySortableValueType;
+  reviewing: StorySortableValueType;
+  deployed: StorySortableValueType;
+  confirmed: StorySortableValueType;
+  archived: StorySortableValueType;
 }
 export const completions: StoryCompletionsType = {
   backlogged: { name: "backlogged", icon: "moon" },
@@ -37,19 +47,12 @@ export const completions: StoryCompletionsType = {
 
 type StoryKindType = "feature" | "bug" | "task";
 
-type StoryPriorityNameType =
-  | "critical"
-  | "high"
-  | "medium"
-  | "low"
-  | "unspecified";
-type StoryPriorityType = {
-  name: StoryPriorityNameType;
-  color: string;
-  icon: SemanticICONS;
-};
 export type StoryPrioritiesType = {
-  [key in StoryPriorityNameType]: StoryPriorityType;
+  critical: StorySortableValueType;
+  high: StorySortableValueType;
+  medium: StorySortableValueType;
+  low: StorySortableValueType;
+  unspecified: StorySortableValueType;
 };
 export const priorities: StoryPrioritiesType = {
   critical: {
@@ -85,11 +88,11 @@ export type StoryType = {
   description?: string;
   date_created: string;
   points: StoryPointsType;
-  completion: StoryCompletionType;
+  completion: StorySortableValueType;
   kind: StoryKindType;
   assignee?: UserNameType;
   requester?: UserNameType;
-  priority: StoryPriorityType;
+  priority: StorySortableValueType;
   epic_name?: string;
   tags?: string[];
 };
