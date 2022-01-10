@@ -4,7 +4,7 @@ import { UserNameType } from "api/users";
 
 type StoryPointsType = 1 | 2 | 3 | 5 | 8; // Fibonacci sequence
 
-type StoryCompletionNameType =
+export type StoryCompletionNameType =
   | "backlogged"
   | "scheduled"
   | "started"
@@ -16,9 +16,15 @@ type StoryCompletionType = {
   name: StoryCompletionNameType;
   icon: SemanticICONS;
 };
-export type StoryCompletionsType = {
-  [key in StoryCompletionNameType]: StoryCompletionType;
-};
+export interface StoryCompletionsType {
+  backlogged: StoryCompletionType;
+  scheduled: StoryCompletionType;
+  started: StoryCompletionType;
+  reviewing: StoryCompletionType;
+  deployed: StoryCompletionType;
+  confirmed: StoryCompletionType;
+  archived: StoryCompletionType;
+}
 export const completions: StoryCompletionsType = {
   backlogged: { name: "backlogged", icon: "moon" },
   scheduled: { name: "scheduled", icon: "calendar check" },

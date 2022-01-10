@@ -1,17 +1,21 @@
 import {
   priorities,
+  StoryPrioritiesType,
   completions,
   StoryCompletionsType,
-  StoryPrioritiesType,
 } from "api/stories";
 
-export type DashboardColumnSortType =
+export type DashboardColumnSortsKeyType = "completion" | "priority";
+
+export type DashboardColumnSortsValueType =
   | StoryCompletionsType
   | StoryPrioritiesType;
-export type DashboardColumnSortsType = {
-  completion: StoryCompletionsType;
-  priority: StoryPrioritiesType;
-};
+
+export type DashboardColumnSortsType = Record<
+  DashboardColumnSortsKeyType,
+  DashboardColumnSortsValueType
+>;
+
 export const dashboardColumnSorts: DashboardColumnSortsType = {
   completion: completions,
   priority: priorities,

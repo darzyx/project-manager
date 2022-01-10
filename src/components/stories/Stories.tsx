@@ -8,9 +8,13 @@ import {
   Segment,
   SemanticWIDTHS,
   SemanticICONS,
+  SemanticWIDTHSNUMBER,
 } from "semantic-ui-react";
 
-import { DashboardColumnSortType } from "api/dashboard";
+import {
+  DashboardColumnSortsKeyType,
+  DashboardColumnSortsValueType,
+} from "api/dashboard";
 import stories from "api/stories";
 
 import Story from "components/stories/Story";
@@ -38,87 +42,64 @@ const ColumnHeader = ({
   </Sticky>
 );
 
-type StoriesPropsType = { activeSort: [string, DashboardColumnSortType] };
+type StoriesPropsType = {
+  activeSort: {
+    key: DashboardColumnSortsKeyType;
+    value: DashboardColumnSortsValueType;
+  };
+};
 // This is a class just so we can make use of createRef
 export default class Stories extends Component<StoriesPropsType> {
   contextRef = createRef<HTMLDivElement>();
 
-  getNumColumns = () => {
-    const activeSortItems = this.props.activeSort[1];
-    let numColumns: SemanticWIDTHS = 1;
-    const arrayLength: number = Object.keys(activeSortItems).length;
+  isOfTypeSemanticWIDTHSNUMBER = (
+    arrayLen: number
+  ): arrayLen is SemanticWIDTHSNUMBER => {
+    return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16].includes(
+      arrayLen
+    );
+  };
 
-    // There's probably a better way to write this. We do this for now so that
-    // TypeScript is happy that we're definitely assinging numColumns a value
-    // that corresponds to the SemanticWIDTHS type
-    switch (arrayLength) {
-      case 1:
-        numColumns = 1;
-        break;
-      case 2:
-        numColumns = 2;
-        break;
-      case 3:
-        numColumns = 3;
-        break;
-      case 4:
-        numColumns = 4;
-        break;
-      case 5:
-        numColumns = 5;
-        break;
-      case 6:
-        numColumns = 6;
-        break;
-      case 7:
-        numColumns = 7;
-        break;
-      case 8:
-        numColumns = 8;
-        break;
-      case 9:
-        numColumns = 9;
-        break;
-      case 10:
-        numColumns = 10;
-        break;
-      default:
-        numColumns = 1;
+  getNumColumns = () => {
+    const { value: activeSortValue } = this.props.activeSort;
+    let numColumns: SemanticWIDTHS = 1;
+    const arrayLength: number = Object.keys(activeSortValue).length;
+    if (this.isOfTypeSemanticWIDTHSNUMBER(arrayLength)) {
+      console.log("Hooray!");
+      numColumns = arrayLength;
     }
     return numColumns;
   };
 
   render() {
-    const [activeSortHeader, activeSortItems] = this.props.activeSort;
+    const { key: activeSortKey, value: activeSortValue } =
+      this.props.activeSort;
 
     return (
       <Ref innerRef={this.contextRef}>
         <div>
           <Grid columns={this.getNumColumns()} divided stackable>
             <Grid.Row>
-              {Object.values(activeSortItems).map((activeSortItem, index) => (
-                <Grid.Column key={index}>
-                  <ColumnHeader
-                    name={activeSortItem.name}
-                    icon={activeSortItem.icon}
-                    context={this.contextRef}
-                  />
-                  {Object.values(stories)
-                    .sort(() => 0.5 - Math.random())
-                    .filter((story) => {
-                      switch (activeSortHeader) {
-                        case "priority":
-                          return story.priority.name === activeSortItem.name;
-                        case "completion":
-                        default:
-                          return story.completion.name === activeSortItem.name;
-                      }
-                    })
-                    .map((story, index) => (
-                      <Story key={index} story={story} />
-                    ))}
-                </Grid.Column>
-              ))}
+              {Object.values(activeSortValue).map(
+                (activeSortValueItem, index) => (
+                  <Grid.Column key={index}>
+                    <ColumnHeader
+                      name={activeSortValueItem.name}
+                      icon={activeSortValueItem.icon}
+                      context={this.contextRef}
+                    />
+                    {Object.values(stories)
+                      .sort(() => 0.5 - Math.random())
+                      .filter(
+                        (story) =>
+                          story[activeSortKey].name === activeSortValueItem.name
+                      )
+                      .map((story, index) => (
+                        <Story key={index} story={story} />
+                      ))}
+                  </Grid.Column>
+                )
+              )}
             </Grid.Row>
           </Grid>
         </div>

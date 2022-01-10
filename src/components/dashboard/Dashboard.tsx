@@ -6,10 +6,13 @@ import { dashboardColumnSorts } from "api/dashboard";
 import DashboardColumnSortsMenu from "components/dashboard/DashboardColumnSortsMenu";
 import Stories from "components/stories/Stories";
 
+const getKeys = Object.keys as <T extends object>(obj: T) => Array<keyof T>;
+
 const Dashboard = () => {
-  const [activeSort, setActiveSort] = useState(
-    Object.entries(dashboardColumnSorts)[0]
-  );
+  const [activeSort, setActiveSort] = useState({
+    key: getKeys(dashboardColumnSorts)[0],
+    value: Object.values(dashboardColumnSorts)[0],
+  });
 
   return (
     <div>

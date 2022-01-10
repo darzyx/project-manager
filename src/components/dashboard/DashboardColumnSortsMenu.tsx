@@ -1,38 +1,52 @@
 import { Menu, Input } from "semantic-ui-react";
 
 import {
-  DashboardColumnSortType,
+  DashboardColumnSortsKeyType,
   DashboardColumnSortsType,
+  DashboardColumnSortsValueType,
 } from "api/dashboard";
 
+const getKeys = Object.keys as <T extends object>(obj: T) => Array<keyof T>;
+
 type DashboardColumnSortsMenuPropsType = {
-  activeSort: [string, DashboardColumnSortType];
-  setActiveSort: (arg: [string, DashboardColumnSortType]) => void;
+  activeSort: {
+    key: DashboardColumnSortsKeyType;
+    value: DashboardColumnSortsValueType;
+  };
+  setActiveSort: (arg: {
+    key: DashboardColumnSortsKeyType;
+    value: DashboardColumnSortsValueType;
+  }) => void;
   dashboardColumnSorts: DashboardColumnSortsType;
 };
 
 const DashboardColumnSortsMenu = ({
-  activeSort: [activeSortHeader, activeSortItems],
+  activeSort: { key: activeSortKey, value: activeSortValue },
   setActiveSort,
   dashboardColumnSorts,
-}: DashboardColumnSortsMenuPropsType) => (
-  <Menu inverted pointing secondary>
-    {Object.entries(dashboardColumnSorts).map(
-      ([sortHeader, sortItems], index) => (
+}: DashboardColumnSortsMenuPropsType) => {
+  return (
+    <Menu inverted pointing secondary>
+      {Object.keys(dashboardColumnSorts).map((sortName, index) => (
         <Menu.Item
           key={index}
-          name={sortHeader}
-          active={activeSortHeader === sortHeader}
-          onClick={() => setActiveSort([sortHeader, sortItems])}
+          name={sortName}
+          active={activeSortKey === sortName}
+          onClick={() =>
+            setActiveSort({
+              key: getKeys(dashboardColumnSorts)[index],
+              value: Object.values(dashboardColumnSorts)[index],
+            })
+          }
         />
-      )
-    )}
-    <Menu.Menu position="right">
-      <Menu.Item>
-        <Input inverted icon="search" placeholder="Search..." />
-      </Menu.Item>
-    </Menu.Menu>
-  </Menu>
-);
+      ))}
+      <Menu.Menu position="right">
+        <Menu.Item>
+          <Input inverted icon="search" placeholder="Search..." />
+        </Menu.Item>
+      </Menu.Menu>
+    </Menu>
+  );
+};
 
 export default DashboardColumnSortsMenu;
