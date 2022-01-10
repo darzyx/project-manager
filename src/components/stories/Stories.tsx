@@ -31,12 +31,15 @@ const ColumnHeader = ({
   <Sticky context={context}>
     <Segment
       inverted
-      textAlign="center"
-      style={{ borderRadius: "0", borderBottom: "1px solid black" }}
+      style={{ borderRadius: "0", borderBottom: "1px solid #30363d" }}
     >
-      <Icon name={icon} />
-      <Header as="h4" style={{ marginTop: "8px" }}>
-        {name}
+      <Icon name={icon} />{" "}
+      <Header
+        as="h4"
+        style={{ margin: "0", display: "inline-block" }}
+        textAlign="left"
+      >
+        {name.charAt(0).toUpperCase() + name.slice(1).toLowerCase()}
       </Header>
     </Segment>
   </Sticky>

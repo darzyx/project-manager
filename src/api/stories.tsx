@@ -54,13 +54,29 @@ export type StoryPrioritiesType = {
 export const priorities: StoryPrioritiesType = {
   critical: {
     name: "critical",
-    color: "darkred",
+    color: "#F85149",
     icon: "exclamation triangle",
   },
-  high: { name: "high", color: "olive", icon: "arrow alternate circle up" },
-  medium: { name: "medium", color: "darkgreen", icon: "dot circle" },
-  low: { name: "low", color: "darkblue", icon: "arrow alternate circle down" },
-  unspecified: { name: "unspecified", color: "grey", icon: "question circle" },
+  high: {
+    name: "high",
+    color: "#E3B341",
+    icon: "arrow alternate circle up",
+  },
+  medium: {
+    name: "medium",
+    color: "#238636",
+    icon: "dot circle",
+  },
+  low: {
+    name: "low",
+    color: "#1f6feb",
+    icon: "arrow alternate circle down",
+  },
+  unspecified: {
+    name: "unspecified",
+    color: "#8b949e",
+    icon: "question circle",
+  },
 };
 
 export type StoryType = {

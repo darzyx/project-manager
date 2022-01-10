@@ -76,13 +76,13 @@ const Story = ({ story }: StoryPropsType) => {
   return (
     <Segment
       inverted
-      style={{ borderLeft: `1px solid ${story.priority.color}` }}
+      style={{ borderLeft: `2px solid ${story.priority.color}` }}
     >
       <Button color="teal" basic floated="right" compact size="mini">
         Confirm
       </Button>
       {story.epic_name && (
-        <Header as="h6" style={{ color: "#b850b8", margin: "0 0 3px 0" }}>
+        <Header as="h6" style={{ color: "#F374ed", margin: "0 0 3px 0" }}>
           {story.epic_name?.toUpperCase()}
         </Header>
       )}
