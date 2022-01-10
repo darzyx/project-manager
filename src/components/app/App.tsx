@@ -5,7 +5,9 @@ const App = () => {
   return (
     <div>
       <AppMenu />
-      <Dashboard />
+      <div style={{ padding: "20px" }}>
+        <Dashboard />
+      </div>
     </div>
   );
 };
