@@ -55,9 +55,7 @@ export default class Stories extends Component<StoriesPropsType> {
   isOfTypeSemanticWIDTHSNUMBER = (
     arrayLen: number
   ): arrayLen is SemanticWIDTHSNUMBER => {
-    return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16].includes(
-      arrayLen
-    );
+    return Array.from({ length: 16 }, (_, i) => i + 1).includes(arrayLen);
   };
 
   getNumColumns = () => {
