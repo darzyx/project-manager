@@ -78,17 +78,26 @@ const Story = ({ story }: StoryPropsType) => {
       inverted
       style={{ borderLeft: `2px solid ${story.priority.color}` }}
     >
-      <Button color="teal" basic floated="right" compact size="mini">
-        Confirm
-      </Button>
-      {story.epic_name && (
-        <Header as="h6" style={{ color: "#F374ed", margin: "0 0 3px 0" }}>
-          {story.epic_name?.toUpperCase()}
-        </Header>
-      )}
-      <List.Header as="h4" style={{ color: "#C9D1D9", margin: "0 0 3px 0" }}>
-        {story.name}
-      </List.Header>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr auto" }}>
+        <div>
+          {story.epic_name && (
+            <Header as="h6" style={{ color: "#F374ed", margin: "0 0 3px 0" }}>
+              {story.epic_name?.toUpperCase()}
+            </Header>
+          )}
+          <List.Header
+            as="h4"
+            style={{ color: "#C9D1D9", margin: "0 10px 3px 0" }}
+          >
+            {story.name}
+          </List.Header>
+        </div>
+        <div>
+          <Button color="teal" basic floated="right" compact size="mini">
+            Confirm
+          </Button>
+        </div>
+      </div>
       <BranchNameLink story={story} />
       {Array.isArray(story.tags) && story.tags.length > 0 && (
         <div style={{ margin: "0 0 8px 0" }}>
