@@ -20,10 +20,21 @@ type StoryPriorityNameType =
   | "low"
   | "unspecified";
 
-type StoryKindNameType = "feature" | "bug" | "task";
+type StoryKindNameType = "feature" | "bug" | "task" | "unspecified";
+
+type StoryAssigneeNameType =
+  | "aaron"
+  | "benny"
+  | "carlos"
+  | "daisy"
+  | "unspecified";
 
 type StorySortableValueType = {
-  name: StoryCompletionNameType | StoryPriorityNameType | StoryKindNameType;
+  name:
+    | StoryCompletionNameType
+    | StoryPriorityNameType
+    | StoryKindNameType
+    | StoryAssigneeNameType;
   color?: string;
   icon?: SemanticICONS;
 };
@@ -95,6 +106,21 @@ export const kinds: StoryKindsType = {
   unspecified: { name: "unspecified", icon: "question" },
 };
 
+export interface StoryAssigneesType {
+  aaron: StorySortableValueType;
+  benny: StorySortableValueType;
+  carlos: StorySortableValueType;
+  daisy: StorySortableValueType;
+  unspecified: StorySortableValueType;
+}
+export const assignees: StoryAssigneesType = {
+  aaron: { name: "aaron", icon: "user" },
+  benny: { name: "benny", icon: "user" },
+  carlos: { name: "carlos", icon: "user" },
+  daisy: { name: "daisy", icon: "user" },
+  unspecified: { name: "unspecified", icon: "question" },
+};
+
 export type StoryType = {
   uuid: string;
   name: string;
@@ -103,7 +129,7 @@ export type StoryType = {
   points: StoryPointsType;
   completion: StorySortableValueType;
   kind: StorySortableValueType;
-  assignee?: UserNameType;
+  assignee: StorySortableValueType;
   requester?: UserNameType;
   priority: StorySortableValueType;
   epic_name?: string;
@@ -123,7 +149,7 @@ const stories: StoriesType = {
     points: 5,
     completion: completions.confirmed,
     kind: kinds.feature,
-    assignee: "aaron",
+    assignee: assignees.aaron,
     requester: "benny",
     priority: priorities.critical,
     epic_name: undefined,
@@ -137,7 +163,7 @@ const stories: StoriesType = {
     points: 2,
     completion: completions.deployed,
     kind: kinds.bug,
-    assignee: "benny",
+    assignee: assignees.benny,
     requester: "aaron",
     priority: priorities.high,
     epic_name: "Gold Tier Features",
@@ -151,7 +177,7 @@ const stories: StoriesType = {
     points: 5,
     completion: completions.reviewing,
     kind: kinds.task,
-    assignee: "carlos",
+    assignee: assignees.carlos,
     requester: "daisy",
     priority: priorities.medium,
     epic_name: "Sitewide Upgrades",
@@ -165,7 +191,7 @@ const stories: StoriesType = {
     points: 8,
     completion: completions.started,
     kind: kinds.feature,
-    assignee: "daisy",
+    assignee: assignees.daisy,
     requester: "daisy",
     priority: priorities.low,
     epic_name: "Year End Fixes",
@@ -179,7 +205,7 @@ const stories: StoriesType = {
     points: 3,
     completion: completions.scheduled,
     kind: kinds.bug,
-    assignee: "aaron",
+    assignee: assignees.unspecified,
     requester: "carlos",
     priority: priorities.unspecified,
     epic_name: undefined,
@@ -193,7 +219,7 @@ const stories: StoriesType = {
     points: 1,
     completion: completions.backlogged,
     kind: kinds.task,
-    assignee: "carlos",
+    assignee: assignees.aaron,
     requester: "carlos",
     priority: priorities.low,
     epic_name: undefined,
@@ -207,7 +233,7 @@ const stories: StoriesType = {
     points: 5,
     completion: completions.confirmed,
     kind: kinds.feature,
-    assignee: "carlos",
+    assignee: assignees.benny,
     requester: "carlos",
     priority: priorities.medium,
     epic_name: undefined,
@@ -221,7 +247,7 @@ const stories: StoriesType = {
     points: 5,
     completion: completions.deployed,
     kind: kinds.bug,
-    assignee: "daisy",
+    assignee: assignees.carlos,
     requester: "benny",
     priority: priorities.high,
     epic_name: undefined,
@@ -235,7 +261,7 @@ const stories: StoriesType = {
     points: 1,
     completion: completions.started,
     kind: kinds.task,
-    assignee: "benny",
+    assignee: assignees.daisy,
     requester: "daisy",
     priority: priorities.critical,
     epic_name: "partnerships",
@@ -249,7 +275,7 @@ const stories: StoriesType = {
     points: 3,
     completion: completions.archived,
     kind: kinds.feature,
-    assignee: "benny",
+    assignee: assignees.unspecified,
     requester: "carlos",
     priority: priorities.unspecified,
     epic_name: "January Bugfixes",
@@ -263,7 +289,7 @@ const stories: StoriesType = {
     points: 5,
     completion: completions.archived,
     kind: kinds.bug,
-    assignee: "carlos",
+    assignee: assignees.aaron,
     requester: "aaron",
     priority: priorities.medium,
     epic_name: "Sitewide Upgrades",
@@ -277,7 +303,7 @@ const stories: StoriesType = {
     points: 2,
     completion: completions.reviewing,
     kind: kinds.task,
-    assignee: "daisy",
+    assignee: assignees.benny,
     requester: "daisy",
     priority: priorities.low,
     epic_name: undefined,
@@ -292,7 +318,7 @@ const stories: StoriesType = {
     points: 2,
     completion: completions.reviewing,
     kind: kinds.unspecified,
-    assignee: "benny",
+    assignee: assignees.carlos,
     requester: "daisy",
     priority: priorities.unspecified,
     epic_name: undefined,
