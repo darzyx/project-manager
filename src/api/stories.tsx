@@ -88,7 +88,7 @@ export const priorities: StoryPrioritiesType = {
   medium: {
     name: "medium",
     color: "#238636",
-    icon: "dot circle",
+    icon: "minus circle",
   },
   low: {
     name: "low",
