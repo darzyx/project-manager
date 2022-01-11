@@ -5,8 +5,7 @@ import {
   DashboardColumnSortsType,
   DashboardColumnSortsValueType,
 } from "api/dashboard";
-
-const getKeys = Object.keys as <T extends object>(obj: T) => Array<keyof T>;
+import { getKeys } from "frontend/utils";
 
 type DashboardColumnSortsMenuPropsType = {
   activeSort: {

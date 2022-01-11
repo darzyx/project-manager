@@ -3,6 +3,7 @@ import { List, Header, Button, Icon, Image, Segment } from "semantic-ui-react";
 import styled from "styled-components";
 
 import { StoryType } from "api/stories";
+import { hexToRGB } from "frontend/utils";
 const exampleUserImg = require("frontend/media/mrpenguin.png");
 
 type BranchNameLinkPropsType = { story: StoryType };
@@ -58,17 +59,6 @@ const Tag = styled.span`
     color: #58a6ff;
   }
 `;
-
-const hexToRGB = (hex: string, alpha: number) => {
-  const r = parseInt(hex.slice(1, 3), 16);
-  const g = parseInt(hex.slice(3, 5), 16);
-  const b = parseInt(hex.slice(5, 7), 16);
-  if (alpha) {
-    return "rgba(" + r + ", " + g + ", " + b + ", " + alpha + ")";
-  } else {
-    return "rgb(" + r + ", " + g + ", " + b + ")";
-  }
-};
 
 const StyledStorySegment = styled(Segment).attrs({ inverted: true })`
   &&& {

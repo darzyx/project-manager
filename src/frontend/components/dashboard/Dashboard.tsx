@@ -5,8 +5,7 @@ import { dashboardColumnSorts } from "api/dashboard";
 
 import DashboardColumnSortsMenu from "frontend/components/dashboard/DashboardColumnSortsMenu";
 import Stories from "frontend/components/stories/Stories";
-
-const getKeys = Object.keys as <T extends object>(obj: T) => Array<keyof T>;
+import { getKeys } from "frontend/utils";
 
 const Dashboard = () => {
   const [activeSort, setActiveSort] = useState({
