@@ -9,6 +9,8 @@ import {
   StoryAssigneesType,
   requesters,
   StoryRequestersType,
+  epics,
+  StoryEpicsType,
 } from "api/stories";
 
 export type DashboardColumnSortsKeyType =
@@ -16,24 +18,28 @@ export type DashboardColumnSortsKeyType =
   | "priority"
   | "kind"
   | "assignee"
-  | "requester";
+  | "requester"
+  | "epic";
 
 export type DashboardColumnSortsValueType =
   | StoryCompletionsType
   | StoryPrioritiesType
   | StoryKindsType
   | StoryAssigneesType
-  | StoryRequestersType;
+  | StoryRequestersType
+  | StoryEpicsType;
 
 export type DashboardColumnSortsType = Record<
   DashboardColumnSortsKeyType,
   DashboardColumnSortsValueType
 >;
 
+// Order determines the order these are displayed on dashboard
 export const dashboardColumnSorts: DashboardColumnSortsType = {
   completion: completions,
   priority: priorities,
   kind: kinds,
   assignee: assignees,
   requester: requesters,
+  epic: epics,
 };

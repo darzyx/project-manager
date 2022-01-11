@@ -29,12 +29,20 @@ type StoryAssigneeNameType =
   | "daisy"
   | "unspecified";
 
-type StorySortableValueType = {
+type StoryEpicNameType =
+  | "Gold Tier Features"
+  | "Year End Fixes"
+  | "New Year Tasks"
+  | "Fun Ideas"
+  | "unspecified";
+
+export type StorySortableValueType = {
   name:
     | StoryCompletionNameType
     | StoryPriorityNameType
     | StoryKindNameType
-    | StoryAssigneeNameType;
+    | StoryAssigneeNameType
+    | StoryEpicNameType;
   color?: string;
   icon?: SemanticICONS;
 };
@@ -102,7 +110,7 @@ export interface StoryKindsType {
 export const kinds: StoryKindsType = {
   feature: { name: "feature", icon: "star" },
   bug: { name: "bug", icon: "bug" },
-  task: { name: "task", icon: "cog" },
+  task: { name: "task", icon: "cogs" },
   unspecified: { name: "unspecified", icon: "question" },
 };
 
@@ -136,6 +144,41 @@ export const requesters: StoryRequestersType = {
   unspecified: { name: "unspecified", icon: "question" },
 };
 
+export interface StoryEpicsType {
+  gold_tier_features: StorySortableValueType;
+  year_end_fixes: StorySortableValueType;
+  new_year_tasks: StorySortableValueType;
+  fun_ideas: StorySortableValueType;
+  unspecified: StorySortableValueType;
+}
+export const epics: StoryEpicsType = {
+  gold_tier_features: {
+    name: "Gold Tier Features",
+    color: "#F374ed",
+    icon: "sitemap",
+  },
+  year_end_fixes: {
+    name: "Year End Fixes",
+    color: "#F374ed",
+    icon: "sitemap",
+  },
+  new_year_tasks: {
+    name: "New Year Tasks",
+    color: "#F374ed",
+    icon: "sitemap",
+  },
+  fun_ideas: {
+    name: "Fun Ideas",
+    color: "#F374ed",
+    icon: "sitemap",
+  },
+  unspecified: {
+    name: "unspecified",
+    color: "#F374ed",
+    icon: "question",
+  },
+};
+
 export type StoryType = {
   uuid: string;
   name: string;
@@ -147,7 +190,7 @@ export type StoryType = {
   assignee: StorySortableValueType;
   requester: StorySortableValueType;
   priority: StorySortableValueType;
-  epic_name?: string;
+  epic: StorySortableValueType;
   tags?: string[];
 };
 
@@ -167,7 +210,7 @@ const stories: StoriesType = {
     assignee: assignees.aaron,
     requester: requesters.benny,
     priority: priorities.critical,
-    epic_name: undefined,
+    epic: epics.fun_ideas,
     tags: ["css", "profile-page", "frontend"],
   },
   "HAE-0002": {
@@ -181,7 +224,7 @@ const stories: StoriesType = {
     assignee: assignees.benny,
     requester: requesters.carlos,
     priority: priorities.high,
-    epic_name: "Gold Tier Features",
+    epic: epics.gold_tier_features,
     tags: ["gold-tier", "backend", "frontend"],
   },
   "HAE-0003": {
@@ -195,7 +238,7 @@ const stories: StoriesType = {
     assignee: assignees.carlos,
     requester: requesters.daisy,
     priority: priorities.medium,
-    epic_name: "Sitewide Upgrades",
+    epic: epics.new_year_tasks,
     tags: ["frontend", "large-change"],
   },
   "HAE-0004": {
@@ -209,7 +252,7 @@ const stories: StoriesType = {
     assignee: assignees.daisy,
     requester: requesters.unspecified,
     priority: priorities.low,
-    epic_name: "Year End Fixes",
+    epic: epics.unspecified,
     tags: undefined,
   },
   "HAE-0005": {
@@ -223,7 +266,7 @@ const stories: StoriesType = {
     assignee: assignees.unspecified,
     requester: requesters.aaron,
     priority: priorities.unspecified,
-    epic_name: undefined,
+    epic: epics.year_end_fixes,
     tags: ["design", "wireframes", "UX"],
   },
   "HAE-0006": {
@@ -237,7 +280,7 @@ const stories: StoriesType = {
     assignee: assignees.aaron,
     requester: requesters.benny,
     priority: priorities.low,
-    epic_name: undefined,
+    epic: epics.fun_ideas,
     tags: ["css", "profile-page", "frontend"],
   },
   "HAE-0007": {
@@ -251,7 +294,7 @@ const stories: StoriesType = {
     assignee: assignees.benny,
     requester: requesters.carlos,
     priority: priorities.medium,
-    epic_name: undefined,
+    epic: epics.gold_tier_features,
     tags: ["node", "backend"],
   },
   "HAE-0008": {
@@ -265,7 +308,7 @@ const stories: StoriesType = {
     assignee: assignees.carlos,
     requester: requesters.daisy,
     priority: priorities.high,
-    epic_name: undefined,
+    epic: epics.new_year_tasks,
     tags: ["typescript", "frontend"],
   },
   "HAE-0009": {
@@ -279,7 +322,7 @@ const stories: StoriesType = {
     assignee: assignees.daisy,
     requester: requesters.unspecified,
     priority: priorities.critical,
-    epic_name: "partnerships",
+    epic: epics.unspecified,
     tags: ["devops", "ghost-llc"],
   },
   "HAE-0010": {
@@ -293,7 +336,7 @@ const stories: StoriesType = {
     assignee: assignees.unspecified,
     requester: requesters.daisy,
     priority: priorities.unspecified,
-    epic_name: "January Bugfixes",
+    epic: epics.year_end_fixes,
     tags: ["login"],
   },
   "HAE-0011": {
@@ -307,7 +350,7 @@ const stories: StoriesType = {
     assignee: assignees.aaron,
     requester: requesters.carlos,
     priority: priorities.medium,
-    epic_name: "Sitewide Upgrades",
+    epic: epics.fun_ideas,
     tags: undefined,
   },
   "HAE-0012": {
@@ -321,7 +364,7 @@ const stories: StoriesType = {
     assignee: assignees.benny,
     requester: requesters.benny,
     priority: priorities.low,
-    epic_name: undefined,
+    epic: epics.gold_tier_features,
     tags: undefined,
   },
   "HAE-0013": {
@@ -336,7 +379,7 @@ const stories: StoriesType = {
     assignee: assignees.carlos,
     requester: requesters.aaron,
     priority: priorities.unspecified,
-    epic_name: undefined,
+    epic: epics.new_year_tasks,
     tags: undefined,
   },
   "HAE-0014": {
@@ -350,7 +393,7 @@ const stories: StoriesType = {
     assignee: assignees.carlos,
     requester: requesters.aaron,
     priority: priorities.unspecified,
-    epic_name: undefined,
+    epic: epics.unspecified,
     tags: ["backend", "django", "python"],
   },
   "HAE-0015": {
@@ -364,7 +407,7 @@ const stories: StoriesType = {
     assignee: assignees.aaron,
     requester: requesters.carlos,
     priority: priorities.low,
-    epic_name: "year end fixes",
+    epic: epics.year_end_fixes,
     tags: ["frontend", "styles"],
   },
 };

@@ -7,7 +7,6 @@ import {
   Sticky,
   Segment,
   SemanticWIDTHS,
-  SemanticICONS,
   SemanticWIDTHSNUMBER,
 } from "semantic-ui-react";
 
@@ -15,17 +14,14 @@ import {
   DashboardColumnSortsKeyType,
   DashboardColumnSortsValueType,
 } from "api/dashboard";
-import stories from "api/stories";
-
+import stories, { StorySortableValueType } from "api/stories";
 import Story from "components/stories/Story";
 
 const ColumnHeader = ({
-  name,
-  icon,
+  activeSortValueItem,
   context,
 }: {
-  name: string;
-  icon: SemanticICONS;
+  activeSortValueItem: StorySortableValueType;
   context: RefObject<HTMLDivElement>;
 }) => (
   <Sticky context={context}>
@@ -33,13 +29,22 @@ const ColumnHeader = ({
       inverted
       style={{ borderRadius: "0", borderBottom: "1px solid #30363d" }}
     >
-      <Icon name={icon} />{" "}
+      {activeSortValueItem.icon && (
+        <>
+          <Icon name={activeSortValueItem.icon} />{" "}
+        </>
+      )}
       <Header
         as="h4"
         style={{ margin: "0", display: "inline-block" }}
         textAlign="left"
       >
-        {name.charAt(0).toUpperCase() + name.slice(1).toLowerCase()}
+        {activeSortValueItem.name
+          .split(" ")
+          .map(
+            (word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+          )
+          .join(" ")}
       </Header>
     </Segment>
   </Sticky>
@@ -87,8 +92,7 @@ export default class Stories extends Component<StoriesPropsType> {
                 (activeSortValueItem, index) => (
                   <Grid.Column key={index}>
                     <ColumnHeader
-                      name={activeSortValueItem.name}
-                      icon={activeSortValueItem.icon}
+                      activeSortValueItem={activeSortValueItem}
                       context={this.contextRef}
                     />
                     {Object.values(stories)

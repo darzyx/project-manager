@@ -63,9 +63,9 @@ const Story = ({ story }: StoryPropsType) => (
   <Segment inverted style={{ borderLeft: `2px solid ${story.priority.color}` }}>
     <div style={{ display: "grid", gridTemplateColumns: "1fr auto" }}>
       <div>
-        {story.epic_name && (
+        {story.epic.name !== "unspecified" && (
           <Header as="h6" style={{ color: "#F374ed", margin: "0 0 3px 0" }}>
-            {story.epic_name?.toUpperCase()}
+            {story.epic.name.toUpperCase()}
           </Header>
         )}
         <List.Header
