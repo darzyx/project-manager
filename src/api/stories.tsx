@@ -121,6 +121,21 @@ export const assignees: StoryAssigneesType = {
   unspecified: { name: "unspecified", icon: "question" },
 };
 
+export interface StoryRequestersType {
+  aaron: StorySortableValueType;
+  benny: StorySortableValueType;
+  carlos: StorySortableValueType;
+  daisy: StorySortableValueType;
+  unspecified: StorySortableValueType;
+}
+export const requesters: StoryRequestersType = {
+  aaron: { name: "aaron", icon: "user" },
+  benny: { name: "benny", icon: "user" },
+  carlos: { name: "carlos", icon: "user" },
+  daisy: { name: "daisy", icon: "user" },
+  unspecified: { name: "unspecified", icon: "question" },
+};
+
 export type StoryType = {
   uuid: string;
   name: string;
@@ -130,7 +145,7 @@ export type StoryType = {
   completion: StorySortableValueType;
   kind: StorySortableValueType;
   assignee: StorySortableValueType;
-  requester?: UserNameType;
+  requester: StorySortableValueType;
   priority: StorySortableValueType;
   epic_name?: string;
   tags?: string[];
@@ -150,7 +165,7 @@ const stories: StoriesType = {
     completion: completions.confirmed,
     kind: kinds.feature,
     assignee: assignees.aaron,
-    requester: "benny",
+    requester: requesters.benny,
     priority: priorities.critical,
     epic_name: undefined,
     tags: ["css", "profile-page", "frontend"],
@@ -164,7 +179,7 @@ const stories: StoriesType = {
     completion: completions.deployed,
     kind: kinds.bug,
     assignee: assignees.benny,
-    requester: "aaron",
+    requester: requesters.carlos,
     priority: priorities.high,
     epic_name: "Gold Tier Features",
     tags: ["gold-tier", "backend", "frontend"],
@@ -178,7 +193,7 @@ const stories: StoriesType = {
     completion: completions.reviewing,
     kind: kinds.task,
     assignee: assignees.carlos,
-    requester: "daisy",
+    requester: requesters.daisy,
     priority: priorities.medium,
     epic_name: "Sitewide Upgrades",
     tags: ["frontend", "large-change"],
@@ -192,7 +207,7 @@ const stories: StoriesType = {
     completion: completions.started,
     kind: kinds.feature,
     assignee: assignees.daisy,
-    requester: "daisy",
+    requester: requesters.unspecified,
     priority: priorities.low,
     epic_name: "Year End Fixes",
     tags: undefined,
@@ -206,7 +221,7 @@ const stories: StoriesType = {
     completion: completions.scheduled,
     kind: kinds.bug,
     assignee: assignees.unspecified,
-    requester: "carlos",
+    requester: requesters.aaron,
     priority: priorities.unspecified,
     epic_name: undefined,
     tags: ["design", "wireframes", "UX"],
@@ -220,7 +235,7 @@ const stories: StoriesType = {
     completion: completions.backlogged,
     kind: kinds.task,
     assignee: assignees.aaron,
-    requester: "carlos",
+    requester: requesters.benny,
     priority: priorities.low,
     epic_name: undefined,
     tags: ["css", "profile-page", "frontend"],
@@ -234,7 +249,7 @@ const stories: StoriesType = {
     completion: completions.confirmed,
     kind: kinds.feature,
     assignee: assignees.benny,
-    requester: "carlos",
+    requester: requesters.carlos,
     priority: priorities.medium,
     epic_name: undefined,
     tags: ["node", "backend"],
@@ -248,7 +263,7 @@ const stories: StoriesType = {
     completion: completions.deployed,
     kind: kinds.bug,
     assignee: assignees.carlos,
-    requester: "benny",
+    requester: requesters.daisy,
     priority: priorities.high,
     epic_name: undefined,
     tags: ["typescript", "frontend"],
@@ -262,7 +277,7 @@ const stories: StoriesType = {
     completion: completions.started,
     kind: kinds.task,
     assignee: assignees.daisy,
-    requester: "daisy",
+    requester: requesters.unspecified,
     priority: priorities.critical,
     epic_name: "partnerships",
     tags: ["devops", "ghost-llc"],
@@ -276,7 +291,7 @@ const stories: StoriesType = {
     completion: completions.archived,
     kind: kinds.feature,
     assignee: assignees.unspecified,
-    requester: "carlos",
+    requester: requesters.daisy,
     priority: priorities.unspecified,
     epic_name: "January Bugfixes",
     tags: ["login"],
@@ -290,7 +305,7 @@ const stories: StoriesType = {
     completion: completions.archived,
     kind: kinds.bug,
     assignee: assignees.aaron,
-    requester: "aaron",
+    requester: requesters.carlos,
     priority: priorities.medium,
     epic_name: "Sitewide Upgrades",
     tags: undefined,
@@ -304,7 +319,7 @@ const stories: StoriesType = {
     completion: completions.reviewing,
     kind: kinds.task,
     assignee: assignees.benny,
-    requester: "daisy",
+    requester: requesters.benny,
     priority: priorities.low,
     epic_name: undefined,
     tags: undefined,
@@ -319,10 +334,38 @@ const stories: StoriesType = {
     completion: completions.reviewing,
     kind: kinds.unspecified,
     assignee: assignees.carlos,
-    requester: "daisy",
+    requester: requesters.aaron,
     priority: priorities.unspecified,
     epic_name: undefined,
     tags: undefined,
+  },
+  "HAE-0014": {
+    uuid: "HAE-0014",
+    name: "Implement Django Channels",
+    description: "We should implement Django Channels",
+    date_created: "November 3rd, 2021",
+    points: 8,
+    completion: completions.reviewing,
+    kind: kinds.feature,
+    assignee: assignees.carlos,
+    requester: requesters.aaron,
+    priority: priorities.unspecified,
+    epic_name: undefined,
+    tags: ["backend", "django", "python"],
+  },
+  "HAE-0015": {
+    uuid: "HAE-0015",
+    name: "Get rid of JQuery",
+    description: "We should get rid of Jquery since we don't use it anymore",
+    date_created: "October 13rd, 2021",
+    points: 8,
+    completion: completions.reviewing,
+    kind: kinds.feature,
+    assignee: assignees.aaron,
+    requester: requesters.carlos,
+    priority: priorities.low,
+    epic_name: "year end fixes",
+    tags: ["frontend", "styles"],
   },
 };
 

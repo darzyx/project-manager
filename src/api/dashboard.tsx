@@ -7,19 +7,23 @@ import {
   StoryKindsType,
   assignees,
   StoryAssigneesType,
+  requesters,
+  StoryRequestersType,
 } from "api/stories";
 
 export type DashboardColumnSortsKeyType =
   | "completion"
   | "priority"
   | "kind"
-  | "assignee";
+  | "assignee"
+  | "requester";
 
 export type DashboardColumnSortsValueType =
   | StoryCompletionsType
   | StoryPrioritiesType
   | StoryKindsType
-  | StoryAssigneesType;
+  | StoryAssigneesType
+  | StoryRequestersType;
 
 export type DashboardColumnSortsType = Record<
   DashboardColumnSortsKeyType,
@@ -31,4 +35,5 @@ export const dashboardColumnSorts: DashboardColumnSortsType = {
   priority: priorities,
   kind: kinds,
   assignee: assignees,
+  requester: requesters,
 };
