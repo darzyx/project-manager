@@ -1,6 +1,6 @@
 import { type SemanticICONS } from "semantic-ui-react";
 
-type StoryPointsType = 1 | 2 | 3 | 5 | 8; // Fibonacci sequence
+type StoryPointsNameType = "one" | "two" | "three" | "five" | "eight"; // Fibonacci sequence
 
 export type StoryCompletionNameType =
   | "backlogged"
@@ -41,9 +41,11 @@ export type StorySortableValueType = {
     | StoryPriorityNameType
     | StoryKindNameType
     | StoryAssigneeNameType
-    | StoryEpicNameType;
+    | StoryEpicNameType
+    | StoryPointsNameType;
   color?: string;
   icon?: SemanticICONS;
+  value?: number;
 };
 
 export interface StoryCompletionsType {
@@ -184,12 +186,27 @@ export const epics: StoryEpicsType = {
   },
 };
 
+export interface StoryPointsType {
+  one: StorySortableValueType;
+  two: StorySortableValueType;
+  three: StorySortableValueType;
+  five: StorySortableValueType;
+  eight: StorySortableValueType;
+}
+export const points: StoryPointsType = {
+  one: { name: "one", value: 1 },
+  two: { name: "two", value: 2 },
+  three: { name: "three", value: 3 },
+  five: { name: "five", value: 5 },
+  eight: { name: "eight", value: 8 },
+};
+
 export type StoryType = {
   uuid: string;
   name: string;
   description?: string;
   date_created: string;
-  points: StoryPointsType;
+  points: StorySortableValueType;
   completion: StorySortableValueType;
   kind: StorySortableValueType;
   assignee: StorySortableValueType;
@@ -199,17 +216,13 @@ export type StoryType = {
   tags?: string[];
 };
 
-type StoriesType = {
-  [uuid: string]: StoryType;
-};
-
-const stories: StoriesType = {
+const stories: { [uuid: string]: StoryType } = {
   "HAE-0001": {
     uuid: "HAE-0001",
     name: "Send Quarterly Emails",
     description: "Send gold tier users quarterly website updates",
     date_created: "January 1st, 2022",
-    points: 5,
+    points: points.one,
     completion: completions.confirmed,
     kind: kinds.feature,
     assignee: assignees.aaron,
@@ -223,7 +236,7 @@ const stories: StoriesType = {
     name: "Allow Multiple Emails",
     description: undefined,
     date_created: "January 8th, 2022",
-    points: 2,
+    points: points.two,
     completion: completions.deployed,
     kind: kinds.bug,
     assignee: assignees.benny,
@@ -237,7 +250,7 @@ const stories: StoriesType = {
     name: "Standard Website URLs",
     description: "Come up with and implement a URL naming standard",
     date_created: "January 25th, 2022",
-    points: 5,
+    points: points.three,
     completion: completions.reviewing,
     kind: kinds.task,
     assignee: assignees.carlos,
@@ -251,7 +264,7 @@ const stories: StoriesType = {
     name: "Load Balancer Fix",
     description: undefined,
     date_created: "December 20th, 2021",
-    points: 8,
+    points: points.five,
     completion: completions.started,
     kind: kinds.feature,
     assignee: assignees.daisy,
@@ -265,7 +278,7 @@ const stories: StoriesType = {
     name: "Landing Page Design",
     description: "Give the landing page a new design",
     date_created: "October 30th, 2021",
-    points: 3,
+    points: points.eight,
     completion: completions.scheduled,
     kind: kinds.bug,
     assignee: assignees.unspecified,
@@ -279,7 +292,7 @@ const stories: StoriesType = {
     name: "Profile Page CSS Bugfix",
     description: "The profile page has a CSS bug visible on Chrome desktop",
     date_created: "January 1st, 2022",
-    points: 1,
+    points: points.one,
     completion: completions.backlogged,
     kind: kinds.task,
     assignee: assignees.aaron,
@@ -293,7 +306,7 @@ const stories: StoriesType = {
     name: "Update Node Version",
     description: "We need to update to latest node version before March",
     date_created: "January 5th, 2022",
-    points: 5,
+    points: points.two,
     completion: completions.confirmed,
     kind: kinds.feature,
     assignee: assignees.benny,
@@ -307,7 +320,7 @@ const stories: StoriesType = {
     name: "Implement TypeScript",
     description: "Add typescript support to the frontend",
     date_created: "February 5th, 2022",
-    points: 5,
+    points: points.three,
     completion: completions.deployed,
     kind: kinds.bug,
     assignee: assignees.carlos,
@@ -321,7 +334,7 @@ const stories: StoriesType = {
     name: "Urgent: Investigate If Data Breach Affected Our Site",
     description: "There was a large data breach for one of our partners",
     date_created: "January 15th, 2022",
-    points: 1,
+    points: points.five,
     completion: completions.started,
     kind: kinds.task,
     assignee: assignees.daisy,
@@ -335,7 +348,7 @@ const stories: StoriesType = {
     name: "Clean up login bug",
     description: "There is a bug that crashes the site on login attempt",
     date_created: "January 18th, 2022",
-    points: 3,
+    points: points.eight,
     completion: completions.archived,
     kind: kinds.feature,
     assignee: assignees.unspecified,
@@ -349,7 +362,7 @@ const stories: StoriesType = {
     name: "Create Homepage Wireframes",
     description: "We need to design a new homepage",
     date_created: "January 20th, 2022",
-    points: 5,
+    points: points.five,
     completion: completions.archived,
     kind: kinds.bug,
     assignee: assignees.aaron,
@@ -363,7 +376,7 @@ const stories: StoriesType = {
     name: "Upgrade to latest Vue version",
     description: undefined,
     date_created: "December 5th, 2021",
-    points: 2,
+    points: points.five,
     completion: completions.reviewing,
     kind: kinds.task,
     assignee: assignees.benny,
@@ -378,7 +391,7 @@ const stories: StoriesType = {
     description:
       "Do some pair programming to teach a new employee how to use Angular",
     date_created: "December 3rd, 2021",
-    points: 2,
+    points: points.five,
     completion: completions.reviewing,
     kind: kinds.unspecified,
     assignee: assignees.carlos,
@@ -392,7 +405,7 @@ const stories: StoriesType = {
     name: "Implement Django Channels",
     description: "We should implement Django Channels",
     date_created: "November 3rd, 2021",
-    points: 8,
+    points: points.three,
     completion: completions.backlogged,
     kind: kinds.feature,
     assignee: assignees.carlos,
@@ -406,7 +419,7 @@ const stories: StoriesType = {
     name: "Get rid of JQuery",
     description: "We should get rid of Jquery since we don't use it anymore",
     date_created: "October 13rd, 2021",
-    points: 8,
+    points: points.three,
     completion: completions.reviewing,
     kind: kinds.feature,
     assignee: assignees.aaron,
@@ -420,7 +433,7 @@ const stories: StoriesType = {
     name: "Standardize Website Font",
     description: "Make the website font the same everywhere",
     date_created: "December 14th, 2021",
-    points: 3,
+    points: points.three,
     completion: completions.scheduled,
     kind: kinds.bug,
     assignee: assignees.unspecified,
@@ -434,7 +447,7 @@ const stories: StoriesType = {
     name: "Integrate with Discord deployments channel",
     description: "Integrate with Discord deployments channel",
     date_created: "February 6th, 2022",
-    points: 5,
+    points: points.three,
     completion: completions.scheduled,
     kind: kinds.task,
     assignee: assignees.carlos,

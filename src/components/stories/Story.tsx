@@ -124,7 +124,7 @@ const Story = ({ story }: StoryPropsType) => (
           userSelect: "none",
         }}
       >
-        {story.points}
+        {story.points.value}
       </span>
       <Icon
         name={story.completion.icon}
