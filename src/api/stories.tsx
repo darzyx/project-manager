@@ -34,6 +34,7 @@ type StoryEpicNameType =
   | "Year End Fixes"
   | "New Year Tasks"
   | "Fun Ideas"
+  | "Sitewide Improvements"
   | "unspecified";
 
 export type StorySortableValueType = {
@@ -149,6 +150,7 @@ export interface StoryEpicsType {
   year_end_fixes: StorySortableValueType;
   new_year_tasks: StorySortableValueType;
   fun_ideas: StorySortableValueType;
+  sitewide_improvements: StorySortableValueType;
   unspecified: StorySortableValueType;
 }
 export const epics: StoryEpicsType = {
@@ -169,6 +171,11 @@ export const epics: StoryEpicsType = {
   },
   fun_ideas: {
     name: "Fun Ideas",
+    color: "#F374ed",
+    icon: "sitemap",
+  },
+  sitewide_improvements: {
+    name: "Sitewide Improvements",
     color: "#F374ed",
     icon: "sitemap",
   },
@@ -388,7 +395,7 @@ const stories: StoriesType = {
     description: "We should implement Django Channels",
     date_created: "November 3rd, 2021",
     points: 8,
-    completion: completions.reviewing,
+    completion: completions.backlogged,
     kind: kinds.feature,
     assignee: assignees.carlos,
     requester: requesters.aaron,
@@ -409,6 +416,20 @@ const stories: StoriesType = {
     priority: priorities.low,
     epic: epics.year_end_fixes,
     tags: ["frontend", "styles"],
+  },
+  "HAE-0016": {
+    uuid: "HAE-0016",
+    name: "Standardize Website Font",
+    description: "Make the website font the same everywhere",
+    date_created: "December 14th, 2021",
+    points: 3,
+    completion: completions.scheduled,
+    kind: kinds.bug,
+    assignee: assignees.unspecified,
+    requester: requesters.aaron,
+    priority: priorities.low,
+    epic: epics.sitewide_improvements,
+    tags: ["design", "frontend", "UX"],
   },
 };
 
