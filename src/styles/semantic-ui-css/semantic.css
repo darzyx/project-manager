@@ -14204,9 +14204,9 @@ img.ui.bordered.image {
   line-height: 1.21428571em;
   font-family: "Lato", "Helvetica Neue", Arial, Helvetica, sans-serif;
   padding: 0.67857143em 1em;
-  background: #ffffff;
-  border: 1px solid rgba(34, 36, 38, 0.15);
-  color: rgba(0, 0, 0, 0.87);
+  background: #010409;
+  border: 1px solid #30363d;
+  color: #c9d1d9;
   border-radius: 0.28571429rem;
   -webkit-transition: border-color 0.1s ease, -webkit-box-shadow 0.1s ease;
   transition: border-color 0.1s ease, -webkit-box-shadow 0.1s ease;
@@ -14224,15 +14224,15 @@ img.ui.bordered.image {
 /* browsers require these rules separate */
 
 .ui.input > input::-webkit-input-placeholder {
-  color: rgba(191, 191, 191, 0.87);
+  color: #30363d;
 }
 
 .ui.input > input::-moz-placeholder {
-  color: rgba(191, 191, 191, 0.87);
+  color: #30363d;
 }
 
 .ui.input > input:-ms-input-placeholder {
-  color: rgba(191, 191, 191, 0.87);
+  color: #30363d;
 }
 
 /*******************************
@@ -14260,7 +14260,7 @@ img.ui.bordered.image {
 .ui.input > input:active,
 .ui.input.down input {
   border-color: rgba(0, 0, 0, 0.3);
-  background: #fafafa;
+  background: #0d1117;
   color: rgba(0, 0, 0, 0.87);
   -webkit-box-shadow: none;
   box-shadow: none;
@@ -14309,7 +14309,7 @@ img.ui.bordered.image {
 .ui.input.focus > input,
 .ui.input > input:focus {
   border-color: #85b7d9;
-  background: #ffffff;
+  background: #0d1117;
   color: rgba(0, 0, 0, 0.8);
   -webkit-box-shadow: none;
   box-shadow: none;
@@ -14335,7 +14335,7 @@ img.ui.bordered.image {
 ---------------------*/
 
 .ui.input.error > input {
-  background-color: #fff6f6;
+  background-color: #0d1117;
   border-color: #e0b4b4;
   color: #9f3a38;
   -webkit-box-shadow: none;
