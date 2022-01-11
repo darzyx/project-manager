@@ -3,8 +3,8 @@ import { Header, Divider } from "semantic-ui-react";
 
 import { dashboardColumnSorts } from "api/dashboard";
 
-import DashboardColumnSortsMenu from "components/dashboard/DashboardColumnSortsMenu";
-import Stories from "components/stories/Stories";
+import DashboardColumnSortsMenu from "frontend/components/dashboard/DashboardColumnSortsMenu";
+import Stories from "frontend/components/stories/Stories";
 
 const getKeys = Object.keys as <T extends object>(obj: T) => Array<keyof T>;
 

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Menu } from "semantic-ui-react";
 
-const logoImg = require("media/logo.png");
+const logoImg = require("frontend/media/logo.png");
 
 const menuItemNames = [
   "home",

@@ -1,5 +1,5 @@
 import AppMenu from "./AppMenu";
-import Dashboard from "components/dashboard/Dashboard";
+import Dashboard from "frontend/components/dashboard/Dashboard";
 
 const App = () => {
   return (

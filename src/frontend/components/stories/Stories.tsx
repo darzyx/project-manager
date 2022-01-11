@@ -15,7 +15,7 @@ import {
   DashboardColumnSortsValueType,
 } from "api/dashboard";
 import stories, { StorySortableValueType } from "api/stories";
-import Story from "components/stories/Story";
+import Story from "frontend/components/stories/Story";
 
 const ColumnHeader = ({
   activeSortValueItem,
