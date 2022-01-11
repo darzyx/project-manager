@@ -59,8 +59,29 @@ const Tag = styled.span`
   }
 `;
 
+const hexToRGB = (hex: string, alpha: number) => {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  if (alpha) {
+    return "rgba(" + r + ", " + g + ", " + b + ", " + alpha + ")";
+  } else {
+    return "rgb(" + r + ", " + g + ", " + b + ")";
+  }
+};
+
+const StyledStorySegment = styled(Segment).attrs({ inverted: true })`
+  &&& {
+    border-left: 2px solid ${(props) => props.priorityColor};
+    &:hover {
+      cursor: grab;
+      background-color: ${(props) => hexToRGB(props.priorityColor, 0.25)};
+    }
+  }
+`;
+
 const Story = ({ story }: StoryPropsType) => (
-  <Segment inverted style={{ borderLeft: `2px solid ${story.priority.color}` }}>
+  <StyledStorySegment priorityColor={story.priority.color}>
     <div style={{ display: "grid", gridTemplateColumns: "1fr auto" }}>
       <div>
         {story.epic.name !== "unspecified" && (
@@ -142,7 +163,7 @@ const Story = ({ story }: StoryPropsType) => (
         }}
       />
     </div>
-  </Segment>
+  </StyledStorySegment>
 );
 
 export default Story;
