@@ -8,7 +8,6 @@ export type StoryCompletionNameType =
   | "started"
   | "reviewing"
   | "deployed"
-  | "confirmed"
   | "archived";
 
 type StoryPriorityNameType =
@@ -54,7 +53,6 @@ export interface StoryCompletionsType {
   started: StorySortableValueType;
   reviewing: StorySortableValueType;
   deployed: StorySortableValueType;
-  confirmed: StorySortableValueType;
   archived: StorySortableValueType;
 }
 export const completions: StoryCompletionsType = {
@@ -63,7 +61,6 @@ export const completions: StoryCompletionsType = {
   started: { name: "started", icon: "pencil alternate" },
   reviewing: { name: "reviewing", icon: "magnify" },
   deployed: { name: "deployed", icon: "fork" },
-  confirmed: { name: "confirmed", icon: "users" },
   archived: { name: "archived", icon: "archive" },
 };
 
@@ -223,7 +220,7 @@ const stories: { [uuid: string]: StoryType } = {
     description: "Send gold tier users quarterly website updates",
     date_created: "January 1st, 2022",
     points: points.one,
-    completion: completions.confirmed,
+    completion: completions.backlogged,
     kind: kinds.feature,
     assignee: assignees.aaron,
     requester: requesters.benny,
@@ -307,7 +304,7 @@ const stories: { [uuid: string]: StoryType } = {
     description: "We need to update to latest node version before March",
     date_created: "January 5th, 2022",
     points: points.two,
-    completion: completions.confirmed,
+    completion: completions.archived,
     kind: kinds.feature,
     assignee: assignees.benny,
     requester: requesters.carlos,

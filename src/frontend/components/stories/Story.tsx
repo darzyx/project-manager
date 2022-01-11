@@ -100,7 +100,7 @@ const Story = ({ story }: StoryPropsType) => (
           compact
           size="mini"
         >
-          Confirm
+          Start
         </Button>
       </div>
     </div>
