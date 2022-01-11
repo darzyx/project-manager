@@ -20,8 +20,10 @@ type StoryPriorityNameType =
   | "low"
   | "unspecified";
 
+type StoryKindNameType = "feature" | "bug" | "task";
+
 type StorySortableValueType = {
-  name: StoryCompletionNameType | StoryPriorityNameType;
+  name: StoryCompletionNameType | StoryPriorityNameType | StoryKindNameType;
   color?: string;
   icon?: SemanticICONS;
 };
@@ -45,15 +47,13 @@ export const completions: StoryCompletionsType = {
   archived: { name: "archived", icon: "archive" },
 };
 
-type StoryKindType = "feature" | "bug" | "task";
-
-export type StoryPrioritiesType = {
+export interface StoryPrioritiesType {
   critical: StorySortableValueType;
   high: StorySortableValueType;
   medium: StorySortableValueType;
   low: StorySortableValueType;
   unspecified: StorySortableValueType;
-};
+}
 export const priorities: StoryPrioritiesType = {
   critical: {
     name: "critical",
@@ -82,6 +82,19 @@ export const priorities: StoryPrioritiesType = {
   },
 };
 
+export interface StoryKindsType {
+  feature: StorySortableValueType;
+  bug: StorySortableValueType;
+  task: StorySortableValueType;
+  unspecified: StorySortableValueType;
+}
+export const kinds: StoryKindsType = {
+  feature: { name: "feature", icon: "star" },
+  bug: { name: "bug", icon: "bug" },
+  task: { name: "task", icon: "cog" },
+  unspecified: { name: "unspecified", icon: "question" },
+};
+
 export type StoryType = {
   uuid: string;
   name: string;
@@ -89,7 +102,7 @@ export type StoryType = {
   date_created: string;
   points: StoryPointsType;
   completion: StorySortableValueType;
-  kind: StoryKindType;
+  kind: StorySortableValueType;
   assignee?: UserNameType;
   requester?: UserNameType;
   priority: StorySortableValueType;
@@ -109,7 +122,7 @@ const stories: StoriesType = {
     date_created: "January 1st, 2022",
     points: 5,
     completion: completions.confirmed,
-    kind: "feature",
+    kind: kinds.feature,
     assignee: "aaron",
     requester: "benny",
     priority: priorities.critical,
@@ -123,7 +136,7 @@ const stories: StoriesType = {
     date_created: "January 8th, 2022",
     points: 2,
     completion: completions.deployed,
-    kind: "feature",
+    kind: kinds.bug,
     assignee: "benny",
     requester: "aaron",
     priority: priorities.high,
@@ -137,7 +150,7 @@ const stories: StoriesType = {
     date_created: "January 25th, 2022",
     points: 5,
     completion: completions.reviewing,
-    kind: "task",
+    kind: kinds.task,
     assignee: "carlos",
     requester: "daisy",
     priority: priorities.medium,
@@ -151,7 +164,7 @@ const stories: StoriesType = {
     date_created: "December 20th, 2021",
     points: 8,
     completion: completions.started,
-    kind: "task",
+    kind: kinds.feature,
     assignee: "daisy",
     requester: "daisy",
     priority: priorities.low,
@@ -165,7 +178,7 @@ const stories: StoriesType = {
     date_created: "October 30th, 2021",
     points: 3,
     completion: completions.scheduled,
-    kind: "task",
+    kind: kinds.bug,
     assignee: "aaron",
     requester: "carlos",
     priority: priorities.unspecified,
@@ -179,7 +192,7 @@ const stories: StoriesType = {
     date_created: "January 1st, 2022",
     points: 1,
     completion: completions.backlogged,
-    kind: "bug",
+    kind: kinds.task,
     assignee: "carlos",
     requester: "carlos",
     priority: priorities.low,
@@ -193,7 +206,7 @@ const stories: StoriesType = {
     date_created: "January 5th, 2022",
     points: 5,
     completion: completions.confirmed,
-    kind: "task",
+    kind: kinds.feature,
     assignee: "carlos",
     requester: "carlos",
     priority: priorities.medium,
@@ -207,7 +220,7 @@ const stories: StoriesType = {
     date_created: "February 5th, 2022",
     points: 5,
     completion: completions.deployed,
-    kind: "task",
+    kind: kinds.bug,
     assignee: "daisy",
     requester: "benny",
     priority: priorities.high,
@@ -221,7 +234,7 @@ const stories: StoriesType = {
     date_created: "January 15th, 2022",
     points: 1,
     completion: completions.started,
-    kind: "task",
+    kind: kinds.task,
     assignee: "benny",
     requester: "daisy",
     priority: priorities.critical,
@@ -235,7 +248,7 @@ const stories: StoriesType = {
     date_created: "January 18th, 2022",
     points: 3,
     completion: completions.archived,
-    kind: "bug",
+    kind: kinds.feature,
     assignee: "benny",
     requester: "carlos",
     priority: priorities.unspecified,
@@ -249,7 +262,7 @@ const stories: StoriesType = {
     date_created: "January 20th, 2022",
     points: 5,
     completion: completions.archived,
-    kind: "task",
+    kind: kinds.bug,
     assignee: "carlos",
     requester: "aaron",
     priority: priorities.medium,
@@ -263,10 +276,25 @@ const stories: StoriesType = {
     date_created: "December 5th, 2021",
     points: 2,
     completion: completions.reviewing,
-    kind: "task",
+    kind: kinds.task,
     assignee: "daisy",
     requester: "daisy",
     priority: priorities.low,
+    epic_name: undefined,
+    tags: undefined,
+  },
+  "HAE-0013": {
+    uuid: "HAE-0013",
+    name: "Angular Pair Programming",
+    description:
+      "Do some pair programming to teach a new employee how to use Angular",
+    date_created: "December 3rd, 2021",
+    points: 2,
+    completion: completions.reviewing,
+    kind: kinds.unspecified,
+    assignee: "benny",
+    requester: "daisy",
+    priority: priorities.unspecified,
     epic_name: undefined,
     tags: undefined,
   },

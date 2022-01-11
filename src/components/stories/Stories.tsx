@@ -76,6 +76,8 @@ export default class Stories extends Component<StoriesPropsType> {
     const { key: activeSortKey, value: activeSortValue } =
       this.props.activeSort;
 
+    console.log({ numColumns: this.getNumColumns() });
+
     return (
       <Ref innerRef={this.contextRef}>
         <div>
