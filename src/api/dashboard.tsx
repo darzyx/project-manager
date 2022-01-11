@@ -40,11 +40,11 @@ export type DashboardColumnSortsType = Record<
 
 // Order determines the order these are displayed on dashboard
 export const dashboardColumnSorts: DashboardColumnSortsType = {
-  completion: completions,
-  priority: priorities,
-  kind: kinds,
   assignee: assignees,
-  requester: requesters,
+  completion: completions,
   epic: epics,
+  kind: kinds,
   points,
+  priority: priorities,
+  requester: requesters,
 };
