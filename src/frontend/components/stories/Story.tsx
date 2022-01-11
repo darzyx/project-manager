@@ -62,9 +62,9 @@ const Tag = styled.span`
 
 const StyledStorySegment = styled(Segment).attrs({ inverted: true })`
   &&& {
+    cursor: pointer;
     border-left: 2px solid ${(props) => props.priorityColor};
     &:hover {
-      cursor: grab;
       background-color: ${(props) => hexToRGB(props.priorityColor, 0.25)};
     }
   }
