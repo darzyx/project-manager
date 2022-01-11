@@ -74,11 +74,16 @@ const Story = ({ story }: StoryPropsType) => (
   <StyledStorySegment priorityColor={story.priority.color}>
     <div style={{ display: "grid", gridTemplateColumns: "1fr auto" }}>
       <div>
-        {story.epic.name !== "unspecified" && (
-          <Header as="h6" style={{ color: "#F374ed", margin: "0 0 3px 0" }}>
-            {story.epic.name.toUpperCase()}
-          </Header>
-        )}
+        <Header
+          as="h6"
+          style={{
+            color: "#F374ed",
+            margin: "0 0 3px 0",
+            ...(story.epic.name === "unspecified" && { visibility: "hidden" }),
+          }}
+        >
+          {story.epic.name.toUpperCase()}
+        </Header>
         <List.Header
           as="h4"
           style={{ color: "#C9D1D9", margin: "0 10px 3px 0" }}
