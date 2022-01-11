@@ -6,9 +6,10 @@ const logoImg = require("media/logo.png");
 const menuItemNames = [
   "home",
   "dashboard",
-  "calendar",
+  "roadmap",
   "backlog",
   "archive",
+  "calendar",
   "stats",
   "settings",
 ];
