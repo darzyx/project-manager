@@ -431,6 +431,20 @@ const stories: StoriesType = {
     epic: epics.sitewide_improvements,
     tags: ["design", "frontend", "UX"],
   },
+  "HAE-0017": {
+    uuid: "HAE-0017",
+    name: "Integrate with Discord deployments channel",
+    description: "Integrate with Discord deployments channel",
+    date_created: "February 6th, 2022",
+    points: 5,
+    completion: completions.scheduled,
+    kind: kinds.task,
+    assignee: assignees.carlos,
+    requester: requesters.carlos,
+    priority: priorities.medium,
+    epic: epics.fun_ideas,
+    tags: ["backend", "integrations", "discord"],
+  },
 };
 
 export default stories;
