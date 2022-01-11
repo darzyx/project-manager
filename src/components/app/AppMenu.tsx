@@ -11,6 +11,7 @@ const menuItemNames = [
   "archive",
   "calendar",
   "stats",
+  "help",
   "settings",
 ];
 
