@@ -92,7 +92,14 @@ const Story = ({ story }: StoryPropsType) => (
         </List.Header>
       </div>
       <div>
-        <Button color="teal" basic floated="right" compact size="mini">
+        <Button
+          style={{ marginBottom: "10px" }}
+          color="teal"
+          basic
+          floated="right"
+          compact
+          size="mini"
+        >
           Confirm
         </Button>
       </div>
