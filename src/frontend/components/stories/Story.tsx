@@ -79,7 +79,7 @@ const Story = ({ story }: StoryPropsType) => (
           style={{
             color: "#F374ed",
             margin: "0 0 3px 0",
-            ...(story.epic.name === "unspecified" && { visibility: "hidden" }),
+            ...(story.epic.name === "unspecified" && { display: "none" }),
           }}
         >
           {story.epic.name.toUpperCase()}
