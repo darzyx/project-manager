@@ -1,4 +1,4 @@
-export type UserNameType = "aaron" | "benny" | "carlos" | "daisy"; // Test names
+type UserNameType = "aaron" | "benny" | "carlos" | "daisy"; // Test names
 
 type UserType = {
   uuid: string;

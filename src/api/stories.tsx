@@ -1,7 +1,5 @@
 import { type SemanticICONS } from "semantic-ui-react";
 
-import { UserNameType } from "api/users";
-
 type StoryPointsType = 1 | 2 | 3 | 5 | 8; // Fibonacci sequence
 
 export type StoryCompletionNameType =
