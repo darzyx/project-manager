@@ -8,17 +8,17 @@ import { StorySortableValueType, StoryType } from "api/stories";
 import Story from "./Story";
 
 const StoryColumnHeader = ({
-  headerData,
+  activeSortableValue,
 }: {
-  headerData: StorySortableValueType;
+  activeSortableValue: StorySortableValueType;
 }) => (
   <Segment
     inverted
     style={{ borderRadius: "0", borderBottom: "1px solid #30363d" }}
   >
-    {headerData.icon && (
+    {activeSortableValue.icon && (
       <>
-        <Icon name={headerData.icon} />{" "}
+        <Icon name={activeSortableValue.icon} />{" "}
       </>
     )}
     <Header
@@ -26,7 +26,7 @@ const StoryColumnHeader = ({
       style={{ margin: "0", display: "inline-block" }}
       textAlign="left"
     >
-      {headerData.name
+      {activeSortableValue.name
         .split(" ")
         .map(
           (word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
@@ -50,17 +50,17 @@ const StoryColumnContainer = styled.div`
 type StoryColumnPropsType = {
   activeMenuItemKey: DashboardMenuKeyType;
   index: number;
-  headerData: StorySortableValueType;
+  activeSortableValue: StorySortableValueType;
   storiesData: StoryType[];
 };
 const StoryColumn = ({
   activeMenuItemKey,
   index,
-  headerData,
+  activeSortableValue,
   storiesData,
 }: StoryColumnPropsType) => (
   <StoryColumnContainer>
-    <StoryColumnHeader headerData={headerData} />
+    <StoryColumnHeader activeSortableValue={activeSortableValue} />
     <Droppable droppableId={`${activeMenuItemKey}-${index}`}>
       {(provided) => (
         <StoryColumnList ref={provided.innerRef} {...provided.droppableProps}>

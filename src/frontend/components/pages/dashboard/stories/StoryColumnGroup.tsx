@@ -20,26 +20,29 @@ type StoryColumnGroupPropsType = {
 const StoryColumnGroup = ({
   activeMenuItem,
   stories,
-}: StoryColumnGroupPropsType) => (
-  <DragDropContext onDragEnd={(val) => console.log("Drag Ended", { val })}>
-    <StoryColumnGroupContainer>
-      {Object.values(activeMenuItem.value).map((headerData, index) => {
-        const storiesData: StoryType[] = Object.values(stories).filter(
-          (story) => story[activeMenuItem.key].name === headerData.name
-        );
-
-        return (
-          <StoryColumn
-            key={index}
-            activeMenuItemKey={activeMenuItem.key}
-            index={index}
-            headerData={headerData}
-            storiesData={storiesData}
-          />
-        );
-      })}
-    </StoryColumnGroupContainer>
-  </DragDropContext>
-);
+}: StoryColumnGroupPropsType) => {
+  const activeSortableValues = Object.values(activeMenuItem.value);
+  return (
+    <DragDropContext onDragEnd={(val) => console.log("Drag Ended", { val })}>
+      <StoryColumnGroupContainer>
+        {activeSortableValues.map((activeSortableValue, index) => {
+          const storiesData: StoryType[] = Object.values(stories).filter(
+            (story) =>
+              story[activeMenuItem.key].name === activeSortableValue.name
+          );
+          return (
+            <StoryColumn
+              key={index}
+              activeMenuItemKey={activeMenuItem.key}
+              index={index}
+              activeSortableValue={activeSortableValue}
+              storiesData={storiesData}
+            />
+          );
+        })}
+      </StoryColumnGroupContainer>
+    </DragDropContext>
+  );
+};
 
 export default StoryColumnGroup;
