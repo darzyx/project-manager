@@ -9,13 +9,15 @@ import {
   SemanticWIDTHS,
   SemanticWIDTHSNUMBER,
 } from "semantic-ui-react";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
 
+import { StorySortableValueType } from "api/stories";
 import {
   DashboardColumnSortsKeyType,
   DashboardColumnSortsValueType,
 } from "api/dashboard";
-import stories, { StorySortableValueType } from "api/stories";
-import Story from "frontend/components/stories/Story";
+
+import StoryList from "frontend/components/stories/StoryList";
 
 const ColumnHeader = ({
   activeSortValueItem,
@@ -50,14 +52,14 @@ const ColumnHeader = ({
   </Sticky>
 );
 
-type StoriesPropsType = {
+type StoriesPagePropsType = {
   activeSort: {
     key: DashboardColumnSortsKeyType;
     value: DashboardColumnSortsValueType;
   };
 };
 // This is a class just so we can make use of createRef
-export default class Stories extends Component<StoriesPropsType> {
+export default class StoriesPage extends Component<StoriesPagePropsType> {
   contextRef = createRef<HTMLDivElement>();
 
   isOfTypeSemanticWIDTHSNUMBER = (
@@ -95,15 +97,20 @@ export default class Stories extends Component<StoriesPropsType> {
                       activeSortValueItem={activeSortValueItem}
                       context={this.contextRef}
                     />
-                    {Object.values(stories)
-                      .sort(() => 0.5 - Math.random())
-                      .filter(
-                        (story) =>
-                          story[activeSortKey].name === activeSortValueItem.name
-                      )
-                      .map((story, index) => (
-                        <Story key={index} story={story} />
-                      ))}
+                    <DragDropContext
+                      onDragStart={() => console.log("drag started")}
+                      onDragUpdate={() => console.log("drag updated")}
+                      onDragEnd={() => console.log("drag ended")}
+                    >
+                      <Droppable droppableId="stories-column-droppable">
+                        {(provided) => (
+                          <StoryList
+                            activeSortKey={activeSortKey}
+                            activeSortValueItem={activeSortValueItem}
+                          />
+                        )}
+                      </Droppable>
+                    </DragDropContext>
                   </Grid.Column>
                 )
               )}

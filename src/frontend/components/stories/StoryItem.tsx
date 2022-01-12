@@ -70,7 +70,7 @@ const StyledStorySegment = styled(Segment).attrs({ inverted: true })`
   }
 `;
 
-const Story = ({ story }: StoryPropsType) => (
+const StoryItem = ({ story }: StoryPropsType) => (
   <StyledStorySegment priorityColor={story.priority.color}>
     <div style={{ display: "grid", gridTemplateColumns: "1fr auto" }}>
       <div>
@@ -168,4 +168,4 @@ const Story = ({ story }: StoryPropsType) => (
   </StyledStorySegment>
 );
 
-export default Story;
+export default StoryItem;
