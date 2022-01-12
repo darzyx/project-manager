@@ -1,5 +1,5 @@
 import { DragDropContext } from "react-beautiful-dnd";
-import { SemanticWIDTHS, SemanticWIDTHSNUMBER } from "semantic-ui-react";
+import { SemanticWIDTHSNUMBER } from "semantic-ui-react";
 import styled from "styled-components";
 
 import { StoriesType, StoryType } from "api/stories";
@@ -34,7 +34,7 @@ const StoryColumnGroup = ({
 }: StoryColumnGroupPropsType) => {
   const activeSortableValues = Object.values(activeMenuItem.value);
 
-  let numColumns: SemanticWIDTHS = 1;
+  let numColumns: SemanticWIDTHSNUMBER = 1;
   const isOfTypeSemanticWIDTHSNUMBER = (
     arrayLen: number
   ): arrayLen is SemanticWIDTHSNUMBER => {
