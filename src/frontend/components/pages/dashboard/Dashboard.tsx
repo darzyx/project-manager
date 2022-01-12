@@ -16,7 +16,7 @@ const Dashboard = () => {
 
   return (
     <div>
-      <Header as="h2" inverted>
+      <Header as="h1" inverted>
         Dashboard
         <Header.Subheader>March 6th, 2022</Header.Subheader>
       </Header>
