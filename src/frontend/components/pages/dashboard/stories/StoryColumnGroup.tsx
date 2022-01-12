@@ -30,12 +30,19 @@ const testData = [
       { id: "h", val: "do another dumbo" },
     ],
   },
+  {
+    id: "cocaco",
+    tasks: [
+      { id: "i", val: "do a dumb thing" },
+      { id: "j", val: "do another dumbo" },
+    ],
+  },
 ];
 
 const StoryContainer = styled.div`
   border: 1px solid green;
-  margin: 10px;
-  padding: 10px;
+  margin: 0;
+  padding: 0;
 `;
 type StoryPropsType = { task: { id: string; val: string }; index: number };
 const Story = ({ task, index }: StoryPropsType) => (
@@ -54,22 +61,23 @@ const Story = ({ task, index }: StoryPropsType) => (
 
 const StoryListHeader = styled.h2``;
 const StoryList = styled.div`
-  border: 1px solid blue;
-  margin: 10px;
-  padding: 10px;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-gap: 10px;
+  margin: 0;
+  padding: 0;
 `;
 const StoryColumnContainer = styled.div`
-  border: 1px solid red;
-  margin: 10px;
-  padding: 10px;
+  margin: 0;
+  padding: 0;
 `;
 type StoryColumnPropsType = {
   column: { id: string; tasks: { id: string; val: string }[] };
   index: number;
 };
 const StoryColumn = ({ column, index }: StoryColumnPropsType) => (
-  <StoryColumnContainer style={{ ...(index !== 0 && { marginLeft: "10px" }) }}>
-    <StoryListHeader>Column Header</StoryListHeader>
+  <StoryColumnContainer>
+    <StoryListHeader>List Header</StoryListHeader>
     <Droppable droppableId={column.id}>
       {(provided) => (
         <StoryList ref={provided.innerRef} {...provided.droppableProps}>
@@ -85,10 +93,10 @@ const StoryColumn = ({ column, index }: StoryColumnPropsType) => (
 
 const StoryColumnGroupContainer = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  padding: 10px;
-  margin: 10px;
-  border: 1px solid skyblue;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 25px;
+  margin: 0;
+  padding: 0;
 `;
 const StoryColumnGroup = () => (
   <DragDropContext onDragEnd={(val) => console.log("Drag Ended", { val })}>

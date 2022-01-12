@@ -3,10 +3,10 @@ import { Header, Divider } from "semantic-ui-react";
 
 import { dashboardColumnSorts } from "api/dashboard";
 
-import DashboardColumnSortsMenu from "frontend/components/dashboard/DashboardColumnSortsMenu";
+import DashboardColumnSortsMenu from "frontend/components/pages/dashboard/DashboardColumnSortsMenu";
 import Stories from "frontend/components/stories/Stories";
 import { getKeys } from "frontend/utils";
-import TestComponent from "./TestComponent";
+import StoryColumnGroup from "./stories/StoryColumnGroup";
 
 const Dashboard = () => {
   const [activeSort, setActiveSort] = useState({
@@ -27,7 +27,7 @@ const Dashboard = () => {
         dashboardColumnSorts={dashboardColumnSorts}
       />
       <Divider hidden />
-      <TestComponent />
+      <StoryColumnGroup />
       <Divider hidden />
       <Stories activeSort={activeSort} />
     </div>
