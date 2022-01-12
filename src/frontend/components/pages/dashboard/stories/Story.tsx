@@ -78,7 +78,7 @@ const StoryContainer = styled.div`
 `;
 type StoryPropsType = { storyData: StoryType; index: number };
 const Story = ({ storyData: story, index }: StoryPropsType) => (
-  <Draggable draggableId={story.uuid} index={index}>
+  <Draggable key={story.uuid} draggableId={story.uuid} index={index}>
     {(provided) => (
       <StoryContainer
         {...provided.draggableProps}
