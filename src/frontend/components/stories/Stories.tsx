@@ -10,14 +10,15 @@ import {
   SemanticWIDTHSNUMBER,
 } from "semantic-ui-react";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import styled from "styled-components";
 
-import { StorySortableValueType } from "api/stories";
+import stories, { StorySortableValueType } from "api/stories";
 import {
   DashboardColumnSortsKeyType,
   DashboardColumnSortsValueType,
 } from "api/dashboard";
 
-import StoryList from "frontend/components/stories/StoryList";
+import StoryItem from "frontend/components/stories/StoryItem";
 
 const ColumnHeader = ({
   activeSortValueItem,
@@ -52,6 +53,10 @@ const ColumnHeader = ({
   </Sticky>
 );
 
+const StoryList = styled.div`
+  background-color: gray;
+`;
+
 type StoriesPagePropsType = {
   activeSort: {
     key: DashboardColumnSortsKeyType;
@@ -83,8 +88,6 @@ export default class StoriesPage extends Component<StoriesPagePropsType> {
     const { key: activeSortKey, value: activeSortValue } =
       this.props.activeSort;
 
-    console.log({ numColumns: this.getNumColumns() });
-
     return (
       <Ref innerRef={this.contextRef}>
         <div>
@@ -102,12 +105,30 @@ export default class StoriesPage extends Component<StoriesPagePropsType> {
                       onDragUpdate={() => console.log("drag updated")}
                       onDragEnd={() => console.log("drag ended")}
                     >
-                      <Droppable droppableId="stories-column-droppable">
+                      <Droppable
+                        droppableId={`story-column-droppable-${index}`}
+                      >
                         {(provided) => (
                           <StoryList
-                            activeSortKey={activeSortKey}
-                            activeSortValueItem={activeSortValueItem}
-                          />
+                            ref={provided.innerRef}
+                            {...provided.droppableProps}
+                          >
+                            {Object.values(stories)
+                              .sort(() => 0.5 - Math.random())
+                              .filter(
+                                (story) =>
+                                  story[activeSortKey].name ===
+                                  activeSortValueItem.name
+                              )
+                              .map((story, index) => (
+                                <StoryItem
+                                  key={index}
+                                  index={index}
+                                  story={story}
+                                />
+                              ))}
+                            {provided.placeholder}
+                          </StoryList>
                         )}
                       </Droppable>
                     </DragDropContext>
