@@ -1,4 +1,5 @@
-import { Header, Icon, Segment } from "semantic-ui-react";
+import { Component, createRef, RefObject } from "react";
+import { Header, Icon, Segment, Sticky, Ref } from "semantic-ui-react";
 import { Droppable } from "react-beautiful-dnd";
 import styled from "styled-components";
 
@@ -9,31 +10,35 @@ import Story from "./Story";
 
 const StoryColumnHeader = ({
   activeSortableValue,
+  context,
 }: {
   activeSortableValue: StorySortableValueType;
+  context: RefObject<HTMLDivElement>;
 }) => (
-  <Segment
-    inverted
-    style={{ borderRadius: "0", borderBottom: "1px solid #30363d" }}
-  >
-    {activeSortableValue.icon && (
-      <>
-        <Icon name={activeSortableValue.icon} />{" "}
-      </>
-    )}
-    <Header
-      as="h4"
-      style={{ margin: "0", display: "inline-block" }}
-      textAlign="left"
+  <Sticky context={context}>
+    <Segment
+      inverted
+      style={{ borderRadius: "0", borderBottom: "1px solid #30363d" }}
     >
-      {activeSortableValue.name
-        .split(" ")
-        .map(
-          (word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
-        )
-        .join(" ")}
-    </Header>
-  </Segment>
+      {activeSortableValue.icon && (
+        <>
+          <Icon name={activeSortableValue.icon} />{" "}
+        </>
+      )}
+      <Header
+        as="h4"
+        style={{ margin: "0", display: "inline-block" }}
+        textAlign="left"
+      >
+        {activeSortableValue.name
+          .split(" ")
+          .map(
+            (word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+          )
+          .join(" ")}
+      </Header>
+    </Segment>
+  </Sticky>
 );
 
 const StoryColumnList = styled.div`
@@ -53,25 +58,37 @@ type StoryColumnPropsType = {
   activeSortableValue: StorySortableValueType;
   storiesData: StoryType[];
 };
-const StoryColumn = ({
-  activeMenuItemKey,
-  index,
-  activeSortableValue,
-  storiesData,
-}: StoryColumnPropsType) => (
-  <StoryColumnContainer>
-    <StoryColumnHeader activeSortableValue={activeSortableValue} />
-    <Droppable droppableId={`${activeMenuItemKey}-${index}`}>
-      {(provided) => (
-        <StoryColumnList ref={provided.innerRef} {...provided.droppableProps}>
-          {storiesData.map((storyData, index) => (
-            <Story key={index} index={index} storyData={storyData} />
-          ))}
-          {provided.placeholder}
-        </StoryColumnList>
-      )}
-    </Droppable>
-  </StoryColumnContainer>
-);
+// This must be a class so we can make use of createRef:
+class StoryColumn extends Component<StoryColumnPropsType> {
+  contextRef = createRef<HTMLDivElement>();
+
+  render() {
+    const { activeMenuItemKey, index, activeSortableValue, storiesData } =
+      this.props;
+    return (
+      <Ref innerRef={this.contextRef}>
+        <StoryColumnContainer>
+          <StoryColumnHeader
+            activeSortableValue={activeSortableValue}
+            context={this.contextRef}
+          />
+          <Droppable droppableId={`${activeMenuItemKey}-${index}`}>
+            {(provided) => (
+              <StoryColumnList
+                ref={provided.innerRef}
+                {...provided.droppableProps}
+              >
+                {storiesData.map((storyData, index) => (
+                  <Story key={index} index={index} storyData={storyData} />
+                ))}
+                {provided.placeholder}
+              </StoryColumnList>
+            )}
+          </Droppable>
+        </StoryColumnContainer>
+      </Ref>
+    );
+  }
+}
 
 export default StoryColumn;
