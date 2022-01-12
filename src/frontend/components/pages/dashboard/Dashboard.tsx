@@ -9,7 +9,6 @@ import {
 } from "api/dashboard";
 
 import DashboardMenu from "frontend/components/pages/dashboard/DashboardMenu";
-import Stories from "frontend/components/stories/Stories";
 import { getKeys } from "frontend/utils";
 import StoryColumnGroup from "./stories/StoryColumnGroup";
 
@@ -43,7 +42,6 @@ const Dashboard = () => {
       <Divider hidden />
       <StoryColumnGroup activeMenuItem={activeMenuItem} stories={stories} />
       <Divider hidden />
-      <Stories activeSort={activeMenuItem} />
     </div>
   );
 };
