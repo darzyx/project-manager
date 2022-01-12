@@ -3,7 +3,7 @@ import { Header, Divider } from "semantic-ui-react";
 
 import { dashboardColumnSorts } from "api/dashboard";
 
-import DashboardColumnSortsMenu from "frontend/components/pages/dashboard/DashboardColumnSortsMenu";
+import DashboardMenu from "frontend/components/pages/dashboard/DashboardMenu";
 import Stories from "frontend/components/stories/Stories";
 import { getKeys } from "frontend/utils";
 import StoryColumnGroup from "./stories/StoryColumnGroup";
@@ -21,7 +21,7 @@ const Dashboard = () => {
         <Header.Subheader>March 6th, 2022</Header.Subheader>
       </Header>
       <Divider hidden />
-      <DashboardColumnSortsMenu
+      <DashboardMenu
         activeSort={activeSort}
         setActiveSort={setActiveSort}
         dashboardColumnSorts={dashboardColumnSorts}

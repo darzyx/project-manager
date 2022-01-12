@@ -13,10 +13,7 @@ import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import styled from "styled-components";
 
 import stories, { StorySortableValueType } from "api/stories";
-import {
-  DashboardColumnSortsKeyType,
-  DashboardColumnSortsValueType,
-} from "api/dashboard";
+import { DashboardMenuKeyType, DashboardMenuValueType } from "api/dashboard";
 
 import StoryItem from "frontend/components/stories/StoryItem";
 
@@ -59,8 +56,8 @@ const StoryList = styled.div`
 
 type StoriesPagePropsType = {
   activeSort: {
-    key: DashboardColumnSortsKeyType;
-    value: DashboardColumnSortsValueType;
+    key: DashboardMenuKeyType;
+    value: DashboardMenuValueType;
   };
 };
 // This is a class just so we can make use of createRef

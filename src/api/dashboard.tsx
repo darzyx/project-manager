@@ -15,7 +15,7 @@ import {
   StoryPointsType,
 } from "api/stories";
 
-export type DashboardColumnSortsKeyType =
+export type DashboardMenuKeyType =
   | "completion"
   | "priority"
   | "kind"
@@ -24,7 +24,7 @@ export type DashboardColumnSortsKeyType =
   | "epic"
   | "points";
 
-export type DashboardColumnSortsValueType =
+export type DashboardMenuValueType =
   | StoryCompletionsType
   | StoryPrioritiesType
   | StoryKindsType
@@ -33,13 +33,13 @@ export type DashboardColumnSortsValueType =
   | StoryEpicsType
   | StoryPointsType;
 
-export type DashboardColumnSortsType = Record<
-  DashboardColumnSortsKeyType,
-  DashboardColumnSortsValueType
+export type DashboardMenuType = Record<
+  DashboardMenuKeyType,
+  DashboardMenuValueType
 >;
 
 // Order determines the order these are displayed on dashboard
-export const dashboardColumnSorts: DashboardColumnSortsType = {
+export const dashboardColumnSorts: DashboardMenuType = {
   assignee: assignees,
   completion: completions,
   epic: epics,

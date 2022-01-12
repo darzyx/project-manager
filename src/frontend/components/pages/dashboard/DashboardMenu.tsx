@@ -1,29 +1,29 @@
 import { Menu, Input } from "semantic-ui-react";
 
 import {
-  DashboardColumnSortsKeyType,
-  DashboardColumnSortsType,
-  DashboardColumnSortsValueType,
+  DashboardMenuKeyType,
+  DashboardMenuType,
+  DashboardMenuValueType,
 } from "api/dashboard";
 import { getKeys } from "frontend/utils";
 
-type DashboardColumnSortsMenuPropsType = {
+type DashboardMenuPropsType = {
   activeSort: {
-    key: DashboardColumnSortsKeyType;
-    value: DashboardColumnSortsValueType;
+    key: DashboardMenuKeyType;
+    value: DashboardMenuValueType;
   };
   setActiveSort: (arg: {
-    key: DashboardColumnSortsKeyType;
-    value: DashboardColumnSortsValueType;
+    key: DashboardMenuKeyType;
+    value: DashboardMenuValueType;
   }) => void;
-  dashboardColumnSorts: DashboardColumnSortsType;
+  dashboardColumnSorts: DashboardMenuType;
 };
 
-const DashboardColumnSortsMenu = ({
+const DashboardMenu = ({
   activeSort: { key: activeSortKey, value: activeSortValue },
   setActiveSort,
   dashboardColumnSorts,
-}: DashboardColumnSortsMenuPropsType) => {
+}: DashboardMenuPropsType) => {
   return (
     <Menu inverted pointing secondary>
       {Object.keys(dashboardColumnSorts).map((sortName, index) => (
@@ -48,4 +48,4 @@ const DashboardColumnSortsMenu = ({
   );
 };
 
-export default DashboardColumnSortsMenu;
+export default DashboardMenu;
