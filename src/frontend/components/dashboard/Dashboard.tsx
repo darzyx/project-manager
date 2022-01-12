@@ -21,13 +21,13 @@ const Dashboard = () => {
         <Header.Subheader>March 6th, 2022</Header.Subheader>
       </Header>
       <Divider hidden />
-      <TestComponent />
-      <Divider hidden />
       <DashboardColumnSortsMenu
         activeSort={activeSort}
         setActiveSort={setActiveSort}
         dashboardColumnSorts={dashboardColumnSorts}
       />
+      <Divider hidden />
+      <TestComponent />
       <Divider hidden />
       <Stories activeSort={activeSort} />
     </div>

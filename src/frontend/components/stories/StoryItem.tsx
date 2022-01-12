@@ -63,9 +63,9 @@ const Tag = styled.span`
 const StyledStorySegment = styled(Segment).attrs({ inverted: true })`
   &&& {
     cursor: pointer;
-    border-left: 2px solid ${(props) => props.priorityColor};
+    border-left: 2px solid ${(props) => props.prioritycolor};
     &:hover {
-      background-color: ${(props) => hexToRGB(props.priorityColor, 0.25)};
+      background-color: ${(props) => hexToRGB(props.prioritycolor, 0.25)};
     }
   }
 `;
@@ -82,7 +82,7 @@ const StoryItem = ({ story, index }: StoryItemPropsType) => (
         {...provided.dragHandleProps}
         ref={provided.innerRef}
       >
-        <StyledStorySegment priorityColor={story.priority.color}>
+        <StyledStorySegment prioritycolor={story.priority.color}>
           <div style={{ display: "grid", gridTemplateColumns: "1fr auto" }}>
             <div>
               <Header
