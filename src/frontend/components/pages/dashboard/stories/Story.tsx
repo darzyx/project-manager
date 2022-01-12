@@ -65,7 +65,8 @@ const StyledStorySegment = styled(Segment).attrs({ inverted: true })`
   &&& {
     cursor: pointer;
     border-left: 2px solid ${(props) => props.prioritycolor};
-    &:hover {
+    &:hover,
+    &:active {
       background-color: ${(props) => hexToRGB(props.prioritycolor, 0.25)};
     }
   }
