@@ -1,5 +1,5 @@
 import { Component, createRef, RefObject } from "react";
-import { Header, Icon, Segment, Sticky, Ref } from "semantic-ui-react";
+import { Header, Icon, Segment, Sticky, Ref, Divider } from "semantic-ui-react";
 import { Droppable } from "react-beautiful-dnd";
 import styled from "styled-components";
 
@@ -18,7 +18,7 @@ const StoryColumnHeader = ({
   <Sticky context={context}>
     <Segment
       inverted
-      style={{ borderRadius: "0", borderBottom: "1px solid #30363d" }}
+      style={{ borderRadius: "0", border: "1px solid #30363d" }}
     >
       {activeSortableValue.icon && (
         <>
@@ -72,6 +72,7 @@ class StoryColumn extends Component<StoryColumnPropsType> {
             activeSortableValue={activeSortableValue}
             context={this.contextRef}
           />
+          <Divider hidden />
           <Droppable droppableId={`${activeMenuItemKey}-${index}`}>
             {(provided) => (
               <StoryColumnList
