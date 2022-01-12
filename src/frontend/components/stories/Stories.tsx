@@ -78,7 +78,6 @@ export default class StoriesPage extends Component<StoriesPagePropsType> {
     let numColumns: SemanticWIDTHS = 1;
     const arrayLength: number = Object.keys(activeSortValue).length;
     if (this.isOfTypeSemanticWIDTHSNUMBER(arrayLength)) {
-      console.log("Hooray!");
       numColumns = arrayLength;
     }
     return numColumns;
