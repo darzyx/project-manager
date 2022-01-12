@@ -1,12 +1,42 @@
+import { Header, Icon, Segment } from "semantic-ui-react";
 import { Droppable } from "react-beautiful-dnd";
 import styled from "styled-components";
 
-import Story from "./Story";
 import { DashboardMenuKeyType } from "api/dashboard";
 import { StorySortableValueType, StoryType } from "api/stories";
 
-const StoryListHeader = styled.h2``;
-const StoryList = styled.div`
+import Story from "./Story";
+
+const StoryColumnHeader = ({
+  headerData,
+}: {
+  headerData: StorySortableValueType;
+}) => (
+  <Segment
+    inverted
+    style={{ borderRadius: "0", borderBottom: "1px solid #30363d" }}
+  >
+    {headerData.icon && (
+      <>
+        <Icon name={headerData.icon} />{" "}
+      </>
+    )}
+    <Header
+      as="h4"
+      style={{ margin: "0", display: "inline-block" }}
+      textAlign="left"
+    >
+      {headerData.name
+        .split(" ")
+        .map(
+          (word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+        )
+        .join(" ")}
+    </Header>
+  </Segment>
+);
+
+const StoryColumnList = styled.div`
   display: grid;
   grid-template-rows: 1fr 1fr;
   grid-gap: 10px;
@@ -30,15 +60,15 @@ const StoryColumn = ({
   storiesData,
 }: StoryColumnPropsType) => (
   <StoryColumnContainer>
-    <StoryListHeader>{headerData.name}</StoryListHeader>
+    <StoryColumnHeader headerData={headerData} />
     <Droppable droppableId={`${activeMenuItemKey}-${index}`}>
       {(provided) => (
-        <StoryList ref={provided.innerRef} {...provided.droppableProps}>
+        <StoryColumnList ref={provided.innerRef} {...provided.droppableProps}>
           {storiesData.map((storyData, index) => (
             <Story key={index} index={index} storyData={storyData} />
           ))}
           {provided.placeholder}
-        </StoryList>
+        </StoryColumnList>
       )}
     </Droppable>
   </StoryColumnContainer>
