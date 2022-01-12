@@ -18,7 +18,7 @@ const StoryColumnHeader = ({
   <Sticky context={context}>
     <Segment
       inverted
-      style={{ borderRadius: "0", border: "1px solid #30363d" }}
+      style={{ borderRadius: "0", border: "2px solid #30363d" }}
     >
       {activeSortableValue.icon && (
         <>
