@@ -8,11 +8,11 @@ import {
 import { getKeys } from "frontend/utils";
 
 type DashboardMenuPropsType = {
-  activeSort: {
+  activeMenuItem: {
     key: DashboardMenuKeyType;
     value: DashboardMenuValueType;
   };
-  setActiveSort: (arg: {
+  setActiveMenuItem: (arg: {
     key: DashboardMenuKeyType;
     value: DashboardMenuValueType;
   }) => void;
@@ -20,8 +20,8 @@ type DashboardMenuPropsType = {
 };
 
 const DashboardMenu = ({
-  activeSort: { key: activeSortKey, value: activeSortValue },
-  setActiveSort,
+  activeMenuItem: { key: activeSortKey, value: activeSortValue },
+  setActiveMenuItem,
   dashboardMenu,
 }: DashboardMenuPropsType) => {
   return (
@@ -32,7 +32,7 @@ const DashboardMenu = ({
           name={sortName}
           active={activeSortKey === sortName}
           onClick={() =>
-            setActiveSort({
+            setActiveMenuItem({
               key: getKeys(dashboardMenu)[index],
               value: Object.values(dashboardMenu)[index],
             })

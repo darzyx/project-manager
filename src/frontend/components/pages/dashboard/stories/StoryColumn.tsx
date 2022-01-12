@@ -2,6 +2,8 @@ import { Droppable } from "react-beautiful-dnd";
 import styled from "styled-components";
 
 import Story from "./Story";
+import { DashboardMenuKeyType } from "api/dashboard";
+import { StorySortableValueType, StoryType } from "api/stories";
 
 const StoryListHeader = styled.h2``;
 const StoryList = styled.div`
@@ -16,16 +18,24 @@ const StoryColumnContainer = styled.div`
   padding: 0;
 `;
 type StoryColumnPropsType = {
-  column: { id: string; tasks: { id: string; val: string }[] };
+  activeMenuItemKey: DashboardMenuKeyType;
+  index: number;
+  headerData: StorySortableValueType;
+  storiesData: StoryType[];
 };
-const StoryColumn = ({ column }: StoryColumnPropsType) => (
+const StoryColumn = ({
+  activeMenuItemKey,
+  index,
+  headerData,
+  storiesData,
+}: StoryColumnPropsType) => (
   <StoryColumnContainer>
-    <StoryListHeader>List Header</StoryListHeader>
-    <Droppable droppableId={column.id}>
+    <StoryListHeader>{headerData.name}</StoryListHeader>
+    <Droppable droppableId={`${activeMenuItemKey}-${index}`}>
       {(provided) => (
         <StoryList ref={provided.innerRef} {...provided.droppableProps}>
-          {column.tasks.map((task, index) => (
-            <Story key={index} index={index} task={task} />
+          {storiesData.map((storyData, index) => (
+            <Story key={index} index={index} storyData={storyData} />
           ))}
           {provided.placeholder}
         </StoryList>

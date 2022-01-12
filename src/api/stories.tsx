@@ -212,8 +212,8 @@ export type StoryType = {
   epic: StorySortableValueType;
   tags?: string[];
 };
-
-const stories: { [uuid: string]: StoryType } = {
+export type StoriesType = { [uuid: string]: StoryType };
+const stories: StoriesType = {
   "HAE-0001": {
     uuid: "HAE-0001",
     name: "Send Quarterly Emails",

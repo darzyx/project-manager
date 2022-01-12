@@ -1,45 +1,10 @@
 import { DragDropContext } from "react-beautiful-dnd";
 import styled from "styled-components";
 
-import StoryColumn from "./StoryColumn";
+import { StoriesType, StoryType } from "api/stories";
 
-const testData = [
-  {
-    id: "potato",
-    tasks: [
-      { id: "a", val: "do a smart thing" },
-      { id: "b", val: "do another smarto" },
-    ],
-  },
-  {
-    id: "tomato",
-    tasks: [
-      { id: "c", val: "do a dumb thing" },
-      { id: "d", val: "do another dumbo" },
-    ],
-  },
-  {
-    id: "totato",
-    tasks: [
-      { id: "e", val: "do a dumb thing" },
-      { id: "f", val: "do another dumbo" },
-    ],
-  },
-  {
-    id: "popapo",
-    tasks: [
-      { id: "g", val: "do a dumb thing" },
-      { id: "h", val: "do another dumbo" },
-    ],
-  },
-  {
-    id: "cocaco",
-    tasks: [
-      { id: "i", val: "do a dumb thing" },
-      { id: "j", val: "do another dumbo" },
-    ],
-  },
-];
+import StoryColumn from "./StoryColumn";
+import { ActiveSortStateType } from "../Dashboard";
 
 const StoryColumnGroupContainer = styled.div`
   display: grid;
@@ -48,12 +13,31 @@ const StoryColumnGroupContainer = styled.div`
   margin: 0;
   padding: 0;
 `;
-const StoryColumnGroup = () => (
+type StoryColumnGroupPropsType = {
+  activeMenuItem: ActiveSortStateType;
+  stories: StoriesType;
+};
+const StoryColumnGroup = ({
+  activeMenuItem,
+  stories,
+}: StoryColumnGroupPropsType) => (
   <DragDropContext onDragEnd={(val) => console.log("Drag Ended", { val })}>
     <StoryColumnGroupContainer>
-      {testData.map((column, index) => (
-        <StoryColumn key={index} column={column} />
-      ))}
+      {Object.values(activeMenuItem.value).map((headerData, index) => {
+        const storiesData: StoryType[] = Object.values(stories).filter(
+          (story) => story[activeMenuItem.key].name === headerData.name
+        );
+
+        return (
+          <StoryColumn
+            key={index}
+            activeMenuItemKey={activeMenuItem.key}
+            index={index}
+            headerData={headerData}
+            storiesData={storiesData}
+          />
+        );
+      })}
     </StoryColumnGroupContainer>
   </DragDropContext>
 );

@@ -1,15 +1,29 @@
 import { useState } from "react";
 import { Header, Divider } from "semantic-ui-react";
 
-import { dashboardMenu } from "api/dashboard";
+import stories from "api/stories";
+import {
+  dashboardMenu,
+  DashboardMenuKeyType,
+  DashboardMenuValueType,
+} from "api/dashboard";
 
 import DashboardMenu from "frontend/components/pages/dashboard/DashboardMenu";
 import Stories from "frontend/components/stories/Stories";
 import { getKeys } from "frontend/utils";
 import StoryColumnGroup from "./stories/StoryColumnGroup";
 
+export type ActiveSortStateType = {
+  key: DashboardMenuKeyType;
+  value: DashboardMenuValueType;
+};
+type SetActiveSortStateType = (arg: ActiveSortStateType) => void;
+
 const Dashboard = () => {
-  const [activeSort, setActiveSort] = useState({
+  const [activeMenuItem, setActiveMenuItem]: [
+    ActiveSortStateType,
+    SetActiveSortStateType
+  ] = useState({
     key: getKeys(dashboardMenu)[0],
     value: Object.values(dashboardMenu)[0],
   });
@@ -22,14 +36,14 @@ const Dashboard = () => {
       </Header>
       <Divider hidden />
       <DashboardMenu
-        activeSort={activeSort}
-        setActiveSort={setActiveSort}
+        activeMenuItem={activeMenuItem}
+        setActiveMenuItem={setActiveMenuItem}
         dashboardMenu={dashboardMenu}
       />
       <Divider hidden />
-      <StoryColumnGroup />
+      <StoryColumnGroup activeMenuItem={activeMenuItem} stories={stories} />
       <Divider hidden />
-      <Stories activeSort={activeSort} />
+      <Stories activeSort={activeMenuItem} />
     </div>
   );
 };
