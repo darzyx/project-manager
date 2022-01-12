@@ -77,126 +77,122 @@ const StoryContainer = styled.div`
   padding: 0;
 `;
 type StoryPropsType = { storyData: StoryType; index: number };
-const Story = ({ storyData: story, index }: StoryPropsType) => {
-  console.log({ story, index });
-
-  return (
-    <Draggable draggableId={story.uuid} index={index}>
-      {(provided) => (
-        <StoryContainer
-          {...provided.draggableProps}
-          {...provided.dragHandleProps}
-          ref={provided.innerRef}
-        >
-          <StyledStorySegment prioritycolor={story.priority.color}>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr auto" }}>
-              <div>
-                <Header
-                  as="h6"
-                  style={{
-                    color: "#F374ed",
-                    margin: "0 0 3px 0",
-                    ...(story.epic.name === "unspecified" && {
-                      display: "none",
-                    }),
-                  }}
-                >
-                  {story.epic.name.toUpperCase()}
-                </Header>
-                <List.Header
-                  as="h4"
-                  style={{ color: "#C9D1D9", margin: "0 10px 3px 0" }}
-                >
-                  {story.name}
-                </List.Header>
-              </div>
-              <div>
-                <Button
-                  style={{ marginBottom: "10px" }}
-                  color="teal"
-                  basic
-                  floated="right"
-                  compact
-                  size="mini"
-                >
-                  Start
-                </Button>
-              </div>
-            </div>
-            <BranchNameLink story={story} />
-            {Array.isArray(story.tags) && story.tags.length > 0 && (
-              <div style={{ margin: "0 0 8px 0" }}>
-                {story.tags?.map((tag, index) => (
-                  <span key={index}>
-                    <Tag>{tag}</Tag>
-                    {Array.isArray(story.tags) &&
-                      index !== story.tags.length - 1 &&
-                      ", "}
-                  </span>
-                ))}
-              </div>
-            )}
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "24px 24px 20px 24px 1fr",
-                gridGap: "10px",
-              }}
-            >
-              <Icon
-                name={story.priority.icon}
+const Story = ({ storyData: story, index }: StoryPropsType) => (
+  <Draggable draggableId={story.uuid} index={index}>
+    {(provided) => (
+      <StoryContainer
+        {...provided.draggableProps}
+        {...provided.dragHandleProps}
+        ref={provided.innerRef}
+      >
+        <StyledStorySegment prioritycolor={story.priority.color}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr auto" }}>
+            <div>
+              <Header
+                as="h6"
                 style={{
-                  alignSelf: "end",
-                  cursor: "pointer",
-                  color: story.priority.color,
-                }}
-              />
-              <Icon
-                name={story.kind.icon}
-                style={{
-                  alignSelf: "end",
-                  cursor: "pointer",
-                  color: "#8B949E",
-                }}
-              />
-              <span
-                style={{
-                  fontWeight: "bold",
-                  fontSize: "14px",
-                  color: "#8B949E",
-                  alignSelf: "end",
-                  cursor: "pointer",
-                  lineHeight: "10px",
-                  userSelect: "none",
+                  color: "#F374ed",
+                  margin: "0 0 3px 0",
+                  ...(story.epic.name === "unspecified" && {
+                    display: "none",
+                  }),
                 }}
               >
-                {story.points.value}
-              </span>
-              <Icon
-                name={story.completion.icon}
-                style={{
-                  alignSelf: "end",
-                  cursor: "pointer",
-                  color: "#8B949E",
-                }}
-              />
-              <Image
-                floated="right"
-                src={exampleUserImg}
-                avatar
-                style={{
-                  alignSelf: "end",
-                  justifySelf: "end",
-                  cursor: "pointer",
-                  userSelect: "none",
-                }}
-              />
+                {story.epic.name.toUpperCase()}
+              </Header>
+              <List.Header
+                as="h4"
+                style={{ color: "#C9D1D9", margin: "0 10px 3px 0" }}
+              >
+                {story.name}
+              </List.Header>
             </div>
-          </StyledStorySegment>
-        </StoryContainer>
-      )}
-    </Draggable>
-  );
-};
+            <div>
+              <Button
+                style={{ marginBottom: "10px" }}
+                color="teal"
+                basic
+                floated="right"
+                compact
+                size="mini"
+              >
+                Start
+              </Button>
+            </div>
+          </div>
+          <BranchNameLink story={story} />
+          {Array.isArray(story.tags) && story.tags.length > 0 && (
+            <div style={{ margin: "0 0 8px 0" }}>
+              {story.tags?.map((tag, index) => (
+                <span key={index}>
+                  <Tag>{tag}</Tag>
+                  {Array.isArray(story.tags) &&
+                    index !== story.tags.length - 1 &&
+                    ", "}
+                </span>
+              ))}
+            </div>
+          )}
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "24px 24px 20px 24px 1fr",
+              gridGap: "10px",
+            }}
+          >
+            <Icon
+              name={story.priority.icon}
+              style={{
+                alignSelf: "end",
+                cursor: "pointer",
+                color: story.priority.color,
+              }}
+            />
+            <Icon
+              name={story.kind.icon}
+              style={{
+                alignSelf: "end",
+                cursor: "pointer",
+                color: "#8B949E",
+              }}
+            />
+            <span
+              style={{
+                fontWeight: "bold",
+                fontSize: "14px",
+                color: "#8B949E",
+                alignSelf: "end",
+                cursor: "pointer",
+                lineHeight: "10px",
+                userSelect: "none",
+              }}
+            >
+              {story.points.value}
+            </span>
+            <Icon
+              name={story.completion.icon}
+              style={{
+                alignSelf: "end",
+                cursor: "pointer",
+                color: "#8B949E",
+              }}
+            />
+            <Image
+              floated="right"
+              src={exampleUserImg}
+              avatar
+              style={{
+                alignSelf: "end",
+                justifySelf: "end",
+                cursor: "pointer",
+                userSelect: "none",
+              }}
+            />
+          </div>
+        </StyledStorySegment>
+      </StoryContainer>
+    )}
+  </Draggable>
+);
 
 export default Story;
