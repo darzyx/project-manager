@@ -6,6 +6,7 @@ import { dashboardColumnSorts } from "api/dashboard";
 import DashboardColumnSortsMenu from "frontend/components/dashboard/DashboardColumnSortsMenu";
 import Stories from "frontend/components/stories/Stories";
 import { getKeys } from "frontend/utils";
+import TestComponent from "./TestComponent";
 
 const Dashboard = () => {
   const [activeSort, setActiveSort] = useState({
@@ -19,6 +20,8 @@ const Dashboard = () => {
         Dashboard
         <Header.Subheader>March 6th, 2022</Header.Subheader>
       </Header>
+      <Divider hidden />
+      <TestComponent />
       <Divider hidden />
       <DashboardColumnSortsMenu
         activeSort={activeSort}

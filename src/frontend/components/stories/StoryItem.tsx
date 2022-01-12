@@ -79,7 +79,7 @@ const StoryItem = ({ story, index }: StoryItemPropsType) => (
     {(provided) => (
       <StoryItemContainer
         {...provided.draggableProps}
-        {...provided.draggableProps}
+        {...provided.dragHandleProps}
         ref={provided.innerRef}
       >
         <StyledStorySegment priorityColor={story.priority.color}>
