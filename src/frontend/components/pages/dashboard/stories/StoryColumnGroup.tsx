@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { StoriesType, StoryType } from "api/stories";
 
 import StoryColumn from "./StoryColumn";
-import { ActiveSortStateType } from "../Dashboard";
+import { ActiveSortStateType } from "frontend/components/pages/dashboard/Dashboard";
 
 const cssRepeat = (widths: number) => {
   return "repeat(" + widths.toString() + ", 1fr)";
