@@ -16,25 +16,25 @@ type DashboardMenuPropsType = {
     key: DashboardMenuKeyType;
     value: DashboardMenuValueType;
   }) => void;
-  dashboardColumnSorts: DashboardMenuType;
+  dashboardMenu: DashboardMenuType;
 };
 
 const DashboardMenu = ({
   activeSort: { key: activeSortKey, value: activeSortValue },
   setActiveSort,
-  dashboardColumnSorts,
+  dashboardMenu,
 }: DashboardMenuPropsType) => {
   return (
     <Menu inverted pointing secondary>
-      {Object.keys(dashboardColumnSorts).map((sortName, index) => (
+      {Object.keys(dashboardMenu).map((sortName, index) => (
         <Menu.Item
           key={index}
           name={sortName}
           active={activeSortKey === sortName}
           onClick={() =>
             setActiveSort({
-              key: getKeys(dashboardColumnSorts)[index],
-              value: Object.values(dashboardColumnSorts)[index],
+              key: getKeys(dashboardMenu)[index],
+              value: Object.values(dashboardMenu)[index],
             })
           }
         />

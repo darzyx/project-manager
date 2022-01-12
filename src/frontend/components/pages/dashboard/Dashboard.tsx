@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Header, Divider } from "semantic-ui-react";
 
-import { dashboardColumnSorts } from "api/dashboard";
+import { dashboardMenu } from "api/dashboard";
 
 import DashboardMenu from "frontend/components/pages/dashboard/DashboardMenu";
 import Stories from "frontend/components/stories/Stories";
@@ -10,8 +10,8 @@ import StoryColumnGroup from "./stories/StoryColumnGroup";
 
 const Dashboard = () => {
   const [activeSort, setActiveSort] = useState({
-    key: getKeys(dashboardColumnSorts)[0],
-    value: Object.values(dashboardColumnSorts)[0],
+    key: getKeys(dashboardMenu)[0],
+    value: Object.values(dashboardMenu)[0],
   });
 
   return (
@@ -24,7 +24,7 @@ const Dashboard = () => {
       <DashboardMenu
         activeSort={activeSort}
         setActiveSort={setActiveSort}
-        dashboardColumnSorts={dashboardColumnSorts}
+        dashboardMenu={dashboardMenu}
       />
       <Divider hidden />
       <StoryColumnGroup />

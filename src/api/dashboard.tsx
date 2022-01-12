@@ -39,7 +39,7 @@ export type DashboardMenuType = Record<
 >;
 
 // Order determines the order these are displayed on dashboard
-export const dashboardColumnSorts: DashboardMenuType = {
+export const dashboardMenu: DashboardMenuType = {
   assignee: assignees,
   completion: completions,
   epic: epics,
