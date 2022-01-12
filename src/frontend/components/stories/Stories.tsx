@@ -94,8 +94,8 @@ export default class StoriesPage extends Component<StoriesPagePropsType> {
           <Grid columns={this.getNumColumns()} divided stackable>
             <Grid.Row>
               {Object.values(activeSortValue).map(
-                (activeSortValueItem, index) => (
-                  <Grid.Column key={index}>
+                (activeSortValueItem, asviIndex) => (
+                  <Grid.Column key={asviIndex}>
                     <ColumnHeader
                       activeSortValueItem={activeSortValueItem}
                       context={this.contextRef}
@@ -106,7 +106,7 @@ export default class StoriesPage extends Component<StoriesPagePropsType> {
                       onDragEnd={() => console.log("drag ended")}
                     >
                       <Droppable
-                        droppableId={`story-column-droppable-${index}`}
+                        droppableId={`story-column-droppable-${asviIndex}`}
                       >
                         {(provided) => (
                           <StoryList
@@ -120,10 +120,10 @@ export default class StoriesPage extends Component<StoriesPagePropsType> {
                                   story[activeSortKey].name ===
                                   activeSortValueItem.name
                               )
-                              .map((story, index) => (
+                              .map((story, sIndex) => (
                                 <StoryItem
-                                  key={index}
-                                  index={index}
+                                  key={sIndex}
+                                  index={sIndex}
                                   story={story}
                                 />
                               ))}
