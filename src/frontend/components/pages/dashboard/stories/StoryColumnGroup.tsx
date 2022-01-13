@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 import { SemanticWIDTHSNUMBER } from "semantic-ui-react";
 import styled from "styled-components";
@@ -29,12 +30,28 @@ type StoryColumnGroupPropsType = {
   stories: StoriesType;
   priorities: StoryPrioritiesType;
 };
-
+type onDragEndResultType = {
+  draggableId: string;
+  type: string;
+  reason: string;
+  source: {
+    droppableId: string;
+    index: number;
+  };
+  destination?: {
+    droppableId: string;
+    index: number;
+  };
+};
 const StoryColumnGroup = ({
   activeMenuItem,
   stories,
   priorities,
 }: StoryColumnGroupPropsType) => {
+  const [storiesState, setStoriesState]: [
+    StoriesType,
+    (arg: StoriesType) => void
+  ] = useState(stories);
   const activeSortableValues = Object.values(activeMenuItem.value);
 
   let numColumns: SemanticWIDTHSNUMBER = 1;
@@ -47,8 +64,25 @@ const StoryColumnGroup = ({
     numColumns = activeSortableValues.length;
   }
 
+  const onDragEnd = (result: onDragEndResultType) => {
+    console.log({ result });
+    const { destination, source, draggableId } = result;
+    // If dropped outside of droppable area:
+    if (!destination) return;
+    // If dropped in starting location:
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    ) {
+      return;
+    }
+
+    const { [draggableId]: thisStory, ...otherStoriesState } = storiesState;
+    console.log({ thisStory, otherStoriesState, storiesState });
+  };
+
   return (
-    <DragDropContext onDragEnd={(val) => console.log("Drag Ended", { val })}>
+    <DragDropContext onDragEnd={onDragEnd}>
       <StoryColumnGroupContainer numcolumns={numColumns}>
         {activeSortableValues.map((activeSortableValue, index) => {
           const storiesValues: StoryType[] = Object.values(stories).filter(
