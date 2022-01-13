@@ -189,6 +189,15 @@ const Story = ({ storyData: story, index }: StoryPropsType) => (
               }}
             />
           </div>
+          <div
+            style={{
+              margin: "10px 0 0 0",
+              color: "#777e86",
+              fontSize: "12px",
+            }}
+          >
+            {`Due: ${story.date_due}`}
+          </div>
         </StyledStorySegment>
       </StoryContainer>
     )}
