@@ -91,22 +91,17 @@ class StoryColumn extends Component<StoryColumnPropsType> {
               >
                 {storiesValues
                   .sort((a, b) => {
-                    const x = a.priority.name;
-                    const y = b.priority.name;
-                    console.log({ a, b, x, y });
-
                     for (let i = 0; i < prioritiesKeys.length; i++) {
-                      if (x === prioritiesKeys[i]) {
-                        if (y === prioritiesKeys[i]) {
+                      if (a.priority.name === prioritiesKeys[i]) {
+                        if (b.priority.name === prioritiesKeys[i]) {
                           return 0;
                         } else {
                           return -1;
                         }
-                      } else if (y === prioritiesKeys[i]) {
+                      } else if (b.priority.name === prioritiesKeys[i]) {
                         return 1;
                       }
                     }
-
                     return 0;
                   })
                   .map((storyData, index) => (
