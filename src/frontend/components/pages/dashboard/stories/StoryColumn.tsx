@@ -58,20 +58,14 @@ type StoryColumnPropsType = {
   index: number;
   activeSortableValue: StorySortableValueType;
   storiesValues: StoryType[];
-  prioritiesKeys: (keyof StoryPrioritiesType)[];
 };
 // This must be a class so we can make use of createRef for <Sticky />:
 class StoryColumn extends Component<StoryColumnPropsType> {
   contextRef = createRef<HTMLDivElement>();
 
   render() {
-    const {
-      activeMenuItemKey,
-      index,
-      activeSortableValue,
-      storiesValues,
-      prioritiesKeys,
-    } = this.props;
+    const { activeMenuItemKey, index, activeSortableValue, storiesValues } =
+      this.props;
     return (
       <Ref innerRef={this.contextRef}>
         <StoryColumnContainer>
@@ -86,24 +80,9 @@ class StoryColumn extends Component<StoryColumnPropsType> {
                 ref={provided.innerRef}
                 {...provided.droppableProps}
               >
-                {storiesValues
-                  .sort((a, b) => {
-                    for (let i = 0; i < prioritiesKeys.length; i++) {
-                      if (a.priority.name === prioritiesKeys[i]) {
-                        if (b.priority.name === prioritiesKeys[i]) {
-                          return 0;
-                        } else {
-                          return -1;
-                        }
-                      } else if (b.priority.name === prioritiesKeys[i]) {
-                        return 1;
-                      }
-                    }
-                    return 0;
-                  })
-                  .map((storyData, index) => (
-                    <Story key={index} index={index} storyData={storyData} />
-                  ))}
+                {storiesValues.map((storyData, index) => (
+                  <Story key={index} index={index} storyData={storyData} />
+                ))}
                 {provided.placeholder}
               </StoryColumnList>
             )}

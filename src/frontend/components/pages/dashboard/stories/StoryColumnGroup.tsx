@@ -85,11 +85,26 @@ const StoryColumnGroup = ({
     <DragDropContext onDragEnd={onDragEnd}>
       <StoryColumnGroupContainer numcolumns={numColumns}>
         {activeSortableValues.map((activeSortableValue, index) => {
-          const storiesValues: StoryType[] = Object.values(stories).filter(
-            (story) =>
-              story[activeMenuItem.key].name === activeSortableValue.name
-          );
           const prioritiesKeys = getKeys(priorities);
+          const storiesValues: StoryType[] = Object.values(stories)
+            .filter(
+              (story) =>
+                story[activeMenuItem.key].name === activeSortableValue.name
+            )
+            .sort((a, b) => {
+              for (let i = 0; i < prioritiesKeys.length; i++) {
+                if (a.priority.name === prioritiesKeys[i]) {
+                  if (b.priority.name === prioritiesKeys[i]) {
+                    return 0;
+                  } else {
+                    return -1;
+                  }
+                } else if (b.priority.name === prioritiesKeys[i]) {
+                  return 1;
+                }
+              }
+              return 0;
+            });
           return (
             <StoryColumn
               key={index}
@@ -97,7 +112,6 @@ const StoryColumnGroup = ({
               index={index}
               activeSortableValue={activeSortableValue}
               storiesValues={storiesValues}
-              prioritiesKeys={prioritiesKeys}
             />
           );
         })}
