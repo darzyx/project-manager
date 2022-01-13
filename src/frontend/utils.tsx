@@ -16,3 +16,8 @@ export const hexToRGB = (hex: string, alpha: number) => {
 export const getKeys = Object.keys as <T extends object>(
   obj: T
 ) => Array<keyof T>;
+
+// CSS repeat() with custom values that works inside of Styled Components
+export const cssRepeat = (num: number, width: string = "1fr") => {
+  return "repeat(" + num.toString() + ", " + width + ")";
+};

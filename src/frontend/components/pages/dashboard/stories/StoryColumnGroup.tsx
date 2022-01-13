@@ -8,11 +8,13 @@ import { StoriesType, StoryPrioritiesType, StoryType } from "api/stories";
 
 import StoryColumn from "./StoryColumn";
 import { ActiveSortStateType } from "frontend/components/pages/dashboard/Dashboard";
-import { getKeys } from "frontend/utils";
+import {
+  getStoryColumnGroup,
+  isOfTypeSemanticWIDTHSNUMBER,
+} from "frontend/components/pages/dashboard/stories/utils";
+import { cssRepeat } from "frontend/utils";
 
-const cssRepeat = (widths: number) => {
-  return "repeat(" + widths.toString() + ", 1fr)";
-};
+type StoryColumnGroupStateType = { [sortableValueName: string]: StoryType[] };
 
 const StoryColumnGroupContainer = styled.div`
   display: grid;
@@ -20,7 +22,7 @@ const StoryColumnGroupContainer = styled.div`
     numcolumns,
   }: {
     numcolumns: SemanticWIDTHSNUMBER;
-  }) => cssRepeat(numcolumns)};
+  }) => cssRepeat(numcolumns, "1fr")};
   grid-gap: 25px;
   margin: 0;
   padding: 0;
@@ -37,46 +39,13 @@ const StoryColumnGroup = ({
   priorities,
 }: StoryColumnGroupPropsType) => {
   const activeSortableValues = Object.values(activeMenuItem.value);
-  const prioritiesKeys = getKeys(priorities);
-  const storiesValues = Object.values(stories);
 
-  const sortByPriority = (a: StoryType, b: StoryType) => {
-    for (let i = 0; i < prioritiesKeys.length; i++) {
-      if (a.priority.name === prioritiesKeys[i]) {
-        if (b.priority.name === prioritiesKeys[i]) {
-          return 0;
-        } else {
-          return -1;
-        }
-      } else if (b.priority.name === prioritiesKeys[i]) {
-        return 1;
-      }
-    }
-    return 0;
-  };
-
-  type StoryColumnGroupStateType = { [sortableValueName: string]: StoryType[] };
-  const initStories: StoryColumnGroupStateType = {};
-  for (let i = 0; i < activeSortableValues.length; i++) {
-    const activeSortableValue = activeSortableValues[i];
-    const result: StoryType[] = storiesValues
-      .filter(
-        (story) => story[activeMenuItem.key].name === activeSortableValue.name
-      )
-      .sort(sortByPriority);
-    initStories[activeSortableValue.name] = result;
-  }
   const [storyColumnGroup, setStoryColumnGroup]: [
     StoryColumnGroupStateType,
     (arg: StoryColumnGroupStateType) => void
-  ] = useState(initStories);
+  ] = useState(getStoryColumnGroup(stories, priorities, activeMenuItem));
 
   let numColumns: SemanticWIDTHSNUMBER = 1;
-  const isOfTypeSemanticWIDTHSNUMBER = (
-    arrayLen: number
-  ): arrayLen is SemanticWIDTHSNUMBER => {
-    return Array.from({ length: 16 }, (_, i) => i + 1).includes(arrayLen);
-  };
   if (isOfTypeSemanticWIDTHSNUMBER(activeSortableValues.length)) {
     numColumns = activeSortableValues.length;
   }
@@ -85,14 +54,8 @@ const StoryColumnGroup = ({
     draggableId: string;
     type: string;
     reason: string;
-    source: {
-      droppableId: string;
-      index: number;
-    };
-    destination?: {
-      droppableId: string;
-      index: number;
-    };
+    source: { droppableId: string; index: number };
+    destination?: { droppableId: string; index: number };
   };
   const onDragEnd = (result: onDragEndResultType) => {
     const { destination, source } = result;
