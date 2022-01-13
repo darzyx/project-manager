@@ -73,7 +73,8 @@ const StyledStorySegment = styled(Segment).attrs({ inverted: true })`
 `;
 
 const StoryContainer = styled.div`
-  margin: 0;
+  background-color: #0d1117;
+  margin: 0 0 10px 0;
   padding: 0;
 `;
 type StoryPropsType = { storyData: StoryType; index: number };
