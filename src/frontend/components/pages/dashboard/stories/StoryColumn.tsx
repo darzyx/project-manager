@@ -79,7 +79,7 @@ class StoryColumn extends Component<StoryColumnPropsType> {
             activeSortableValue={activeSortableValue}
             context={this.contextRef}
           />
-          <Divider hidden />
+          <Divider hidden fitted style={{ margin: "5px 0" }} />
           <Droppable droppableId={`${activeMenuItemKey}-${index}`}>
             {(provided) => (
               <StoryColumnList
