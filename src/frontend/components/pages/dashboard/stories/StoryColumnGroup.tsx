@@ -30,29 +30,45 @@ type StoryColumnGroupPropsType = {
   stories: StoriesType;
   priorities: StoryPrioritiesType;
 };
-type onDragEndResultType = {
-  draggableId: string;
-  type: string;
-  reason: string;
-  source: {
-    droppableId: string;
-    index: number;
-  };
-  destination?: {
-    droppableId: string;
-    index: number;
-  };
-};
 const StoryColumnGroup = ({
   activeMenuItem,
   stories,
   priorities,
 }: StoryColumnGroupPropsType) => {
-  const [storiesState, setStoriesState]: [
-    StoriesType,
-    (arg: StoriesType) => void
-  ] = useState(stories);
   const activeSortableValues = Object.values(activeMenuItem.value);
+  const prioritiesKeys = getKeys(priorities);
+  const storiesValues = Object.values(stories);
+
+  const sortByPriority = (a: StoryType, b: StoryType) => {
+    for (let i = 0; i < prioritiesKeys.length; i++) {
+      if (a.priority.name === prioritiesKeys[i]) {
+        if (b.priority.name === prioritiesKeys[i]) {
+          return 0;
+        } else {
+          return -1;
+        }
+      } else if (b.priority.name === prioritiesKeys[i]) {
+        return 1;
+      }
+    }
+    return 0;
+  };
+
+  type StoryColumnGroupStateType = { [sortableValueName: string]: StoryType[] };
+  const initStories: StoryColumnGroupStateType = {};
+  for (let i = 0; i < activeSortableValues.length; i++) {
+    const activeSortableValue = activeSortableValues[i];
+    const result: StoryType[] = storiesValues
+      .filter(
+        (story) => story[activeMenuItem.key].name === activeSortableValue.name
+      )
+      .sort(sortByPriority);
+    initStories[activeSortableValue.name] = result;
+  }
+  const [storyColumnGroup, setStoryColumnGroup]: [
+    StoryColumnGroupStateType,
+    (arg: StoryColumnGroupStateType) => void
+  ] = useState(initStories);
 
   let numColumns: SemanticWIDTHSNUMBER = 1;
   const isOfTypeSemanticWIDTHSNUMBER = (
@@ -64,8 +80,20 @@ const StoryColumnGroup = ({
     numColumns = activeSortableValues.length;
   }
 
+  type onDragEndResultType = {
+    draggableId: string;
+    type: string;
+    reason: string;
+    source: {
+      droppableId: string;
+      index: number;
+    };
+    destination?: {
+      droppableId: string;
+      index: number;
+    };
+  };
   const onDragEnd = (result: onDragEndResultType) => {
-    console.log({ result });
     const { destination, source, draggableId } = result;
     // If dropped outside of droppable area:
     if (!destination) return;
@@ -77,39 +105,25 @@ const StoryColumnGroup = ({
       return;
     }
 
-    const { [draggableId]: thisStory, ...otherStoriesState } = storiesState;
-    console.log({ thisStory, otherStoriesState, storiesState });
+    const newStoryColumnGroup = { ...storyColumnGroup };
+    const temp = newStoryColumnGroup[source.droppableId][source.index];
+    newStoryColumnGroup[source.droppableId][source.index] =
+      newStoryColumnGroup[destination.droppableId][destination.index];
+    newStoryColumnGroup[destination.droppableId][destination.index] = temp;
+    setStoryColumnGroup(newStoryColumnGroup);
   };
+
+  console.log({ storyColumnGroup });
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <StoryColumnGroupContainer numcolumns={numColumns}>
         {activeSortableValues.map((activeSortableValue, index) => {
-          const prioritiesKeys = getKeys(priorities);
-          const storiesValues: StoryType[] = Object.values(stories)
-            .filter(
-              (story) =>
-                story[activeMenuItem.key].name === activeSortableValue.name
-            )
-            .sort((a, b) => {
-              for (let i = 0; i < prioritiesKeys.length; i++) {
-                if (a.priority.name === prioritiesKeys[i]) {
-                  if (b.priority.name === prioritiesKeys[i]) {
-                    return 0;
-                  } else {
-                    return -1;
-                  }
-                } else if (b.priority.name === prioritiesKeys[i]) {
-                  return 1;
-                }
-              }
-              return 0;
-            });
           return (
             <StoryColumn
               key={index}
               activeSortableValue={activeSortableValue}
-              storiesValues={storiesValues}
+              storyColumn={storyColumnGroup[activeSortableValue.name]}
             />
           );
         })}

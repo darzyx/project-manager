@@ -3,7 +3,6 @@ import { Header, Icon, Segment, Sticky, Ref, Divider } from "semantic-ui-react";
 import { Droppable } from "react-beautiful-dnd";
 import styled from "styled-components";
 
-import { DashboardMenuKeyType } from "api/dashboard";
 import { StorySortableValueType, StoryType } from "api/stories";
 
 import Story from "./Story";
@@ -51,14 +50,15 @@ const StoryColumnContainer = styled.div`
 `;
 type StoryColumnPropsType = {
   activeSortableValue: StorySortableValueType;
-  storiesValues: StoryType[];
+  storyColumn: StoryType[];
 };
 // This must be a class so we can make use of createRef for <Sticky />:
 class StoryColumn extends Component<StoryColumnPropsType> {
   contextRef = createRef<HTMLDivElement>();
 
   render() {
-    const { activeSortableValue, storiesValues } = this.props;
+    const { activeSortableValue, storyColumn } = this.props;
+    console.log({ storyColumn });
     return (
       <Ref innerRef={this.contextRef}>
         <StoryColumnContainer>
@@ -73,8 +73,8 @@ class StoryColumn extends Component<StoryColumnPropsType> {
                 ref={provided.innerRef}
                 {...provided.droppableProps}
               >
-                {storiesValues.map((storyData, index) => (
-                  <Story key={index} index={index} storyData={storyData} />
+                {storyColumn.map((story, index) => (
+                  <Story key={index} index={index} story={story} />
                 ))}
                 {provided.placeholder}
               </StoryColumnList>
