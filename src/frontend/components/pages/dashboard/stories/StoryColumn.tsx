@@ -58,7 +58,6 @@ class StoryColumn extends Component<StoryColumnPropsType> {
 
   render() {
     const { activeSortableValue, storyColumn } = this.props;
-    console.log({ storyColumn });
     return (
       <Ref innerRef={this.contextRef}>
         <StoryColumnContainer>

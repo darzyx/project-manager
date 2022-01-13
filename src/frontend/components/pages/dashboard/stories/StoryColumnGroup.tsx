@@ -105,7 +105,6 @@ const StoryColumnGroup = ({
     ) {
       return;
     }
-
     const newStoryColumnGroup = _.cloneDeep(storyColumnGroup);
     const sourceColumn = newStoryColumnGroup[source.droppableId];
     const destinationColumn = newStoryColumnGroup[destination.droppableId];
@@ -114,8 +113,6 @@ const StoryColumnGroup = ({
     destinationColumn.splice(destination.index, 0, draggedStory);
     setStoryColumnGroup(newStoryColumnGroup);
   };
-
-  console.log({ storyColumnGroup });
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
