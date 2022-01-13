@@ -2,10 +2,11 @@ import { DragDropContext } from "react-beautiful-dnd";
 import { SemanticWIDTHSNUMBER } from "semantic-ui-react";
 import styled from "styled-components";
 
-import { StoriesType, StoryType } from "api/stories";
+import { StoriesType, StoryPrioritiesType, StoryType } from "api/stories";
 
 import StoryColumn from "./StoryColumn";
 import { ActiveSortStateType } from "frontend/components/pages/dashboard/Dashboard";
+import { getKeys } from "frontend/utils";
 
 const cssRepeat = (widths: number) => {
   return "repeat(" + widths.toString() + ", 1fr)";
@@ -26,11 +27,13 @@ const StoryColumnGroupContainer = styled.div`
 type StoryColumnGroupPropsType = {
   activeMenuItem: ActiveSortStateType;
   stories: StoriesType;
+  priorities: StoryPrioritiesType;
 };
 
 const StoryColumnGroup = ({
   activeMenuItem,
   stories,
+  priorities,
 }: StoryColumnGroupPropsType) => {
   const activeSortableValues = Object.values(activeMenuItem.value);
 
@@ -48,17 +51,19 @@ const StoryColumnGroup = ({
     <DragDropContext onDragEnd={(val) => console.log("Drag Ended", { val })}>
       <StoryColumnGroupContainer numcolumns={numColumns}>
         {activeSortableValues.map((activeSortableValue, index) => {
-          const storiesData: StoryType[] = Object.values(stories).filter(
+          const storiesValues: StoryType[] = Object.values(stories).filter(
             (story) =>
               story[activeMenuItem.key].name === activeSortableValue.name
           );
+          const prioritiesKeys = getKeys(priorities);
           return (
             <StoryColumn
               key={index}
               activeMenuItemKey={activeMenuItem.key}
               index={index}
               activeSortableValue={activeSortableValue}
-              storiesData={storiesData}
+              storiesValues={storiesValues}
+              prioritiesKeys={prioritiesKeys}
             />
           );
         })}

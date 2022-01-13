@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Header, Divider } from "semantic-ui-react";
 
-import stories from "api/stories";
+import stories, { priorities } from "api/stories";
 import {
   dashboardMenu,
   DashboardMenuKeyType,
@@ -40,7 +40,11 @@ const Dashboard = () => {
         dashboardMenu={dashboardMenu}
       />
       <Divider hidden />
-      <StoryColumnGroup activeMenuItem={activeMenuItem} stories={stories} />
+      <StoryColumnGroup
+        activeMenuItem={activeMenuItem}
+        stories={stories}
+        priorities={priorities}
+      />
       <Divider hidden />
     </div>
   );

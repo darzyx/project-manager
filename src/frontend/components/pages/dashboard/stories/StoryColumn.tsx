@@ -4,7 +4,11 @@ import { Droppable } from "react-beautiful-dnd";
 import styled from "styled-components";
 
 import { DashboardMenuKeyType } from "api/dashboard";
-import { StorySortableValueType, StoryType } from "api/stories";
+import {
+  StoryPrioritiesType,
+  StorySortableValueType,
+  StoryType,
+} from "api/stories";
 
 import Story from "./Story";
 
@@ -56,15 +60,21 @@ type StoryColumnPropsType = {
   activeMenuItemKey: DashboardMenuKeyType;
   index: number;
   activeSortableValue: StorySortableValueType;
-  storiesData: StoryType[];
+  storiesValues: StoryType[];
+  prioritiesKeys: (keyof StoryPrioritiesType)[];
 };
-// This must be a class so we can make use of createRef:
+// This must be a class so we can make use of createRef for <Sticky />:
 class StoryColumn extends Component<StoryColumnPropsType> {
   contextRef = createRef<HTMLDivElement>();
 
   render() {
-    const { activeMenuItemKey, index, activeSortableValue, storiesData } =
-      this.props;
+    const {
+      activeMenuItemKey,
+      index,
+      activeSortableValue,
+      storiesValues,
+      prioritiesKeys,
+    } = this.props;
     return (
       <Ref innerRef={this.contextRef}>
         <StoryColumnContainer>
@@ -79,27 +89,20 @@ class StoryColumn extends Component<StoryColumnPropsType> {
                 ref={provided.innerRef}
                 {...provided.droppableProps}
               >
-                {storiesData
+                {storiesValues
                   .sort((a, b) => {
-                    const priorityNames = [
-                      "critical",
-                      "high",
-                      "medium",
-                      "low",
-                      "unspecified",
-                    ];
                     const x = a.priority.name;
                     const y = b.priority.name;
                     console.log({ a, b, x, y });
 
-                    for (let i = 0; i < priorityNames.length; i++) {
-                      if (x === priorityNames[i]) {
-                        if (y === priorityNames[i]) {
+                    for (let i = 0; i < prioritiesKeys.length; i++) {
+                      if (x === prioritiesKeys[i]) {
+                        if (y === prioritiesKeys[i]) {
                           return 0;
                         } else {
                           return -1;
                         }
-                      } else if (y === priorityNames[i]) {
+                      } else if (y === prioritiesKeys[i]) {
                         return 1;
                       }
                     }
