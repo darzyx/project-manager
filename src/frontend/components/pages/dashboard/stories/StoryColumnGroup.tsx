@@ -106,11 +106,20 @@ const StoryColumnGroup = ({
     }
 
     const newStoryColumnGroup = { ...storyColumnGroup };
-    const temp = newStoryColumnGroup[source.droppableId][source.index];
-    newStoryColumnGroup[source.droppableId][source.index] =
-      newStoryColumnGroup[destination.droppableId][destination.index];
-    newStoryColumnGroup[destination.droppableId][destination.index] = temp;
-    setStoryColumnGroup(newStoryColumnGroup);
+
+    // const temp = newStoryColumnGroup[source.droppableId][source.index];
+    // newStoryColumnGroup[source.droppableId][source.index] =
+    //   newStoryColumnGroup[destination.droppableId][destination.index];
+    // newStoryColumnGroup[destination.droppableId][destination.index] = temp;
+    // setStoryColumnGroup(newStoryColumnGroup);
+
+    // const copy1 = newStoryColumnGroup[source.droppableId].slice();
+    // const copy2 = newStoryColumnGroup[destination.droppableId].slice();
+    // const temp = copy1[source.index];
+    // copy.splice(source.index, 1);
+    // newStoryColumnGroup[destination.droppableId]
+    //   .slice()
+    //   .splice(source.index, 0, temp);
   };
 
   console.log({ storyColumnGroup });
