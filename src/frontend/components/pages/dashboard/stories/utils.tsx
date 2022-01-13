@@ -7,10 +7,19 @@ import { getKeys } from "frontend/utils";
 
 type StoryColumnGroupStateType = { [sortableValueName: string]: StoryType[] };
 
-export const isOfTypeSemanticWIDTHSNUMBER = (
+const isOfTypeSemanticWIDTHSNUMBER = (
   arrayLen: number
 ): arrayLen is SemanticWIDTHSNUMBER => {
   return Array.from({ length: 16 }, (_, i) => i + 1).includes(arrayLen);
+};
+
+export const getNumColumns = (activeMenuItem: ActiveSortStateType) => {
+  const activeSortableValues = Object.values(activeMenuItem.value);
+  let numColumns: SemanticWIDTHSNUMBER = 1;
+  if (isOfTypeSemanticWIDTHSNUMBER(activeSortableValues.length)) {
+    numColumns = activeSortableValues.length;
+  }
+  return numColumns;
 };
 
 const sortByPriority = (

@@ -10,7 +10,7 @@ import StoryColumn from "./StoryColumn";
 import { ActiveSortStateType } from "frontend/components/pages/dashboard/Dashboard";
 import {
   getStoryColumnGroup,
-  isOfTypeSemanticWIDTHSNUMBER,
+  getNumColumns,
 } from "frontend/components/pages/dashboard/stories/utils";
 import { cssRepeat } from "frontend/utils";
 
@@ -28,6 +28,13 @@ const StoryColumnGroupContainer = styled.div`
   padding: 0;
 `;
 
+type onDragEndResultType = {
+  draggableId: string;
+  type: string;
+  reason: string;
+  source: { droppableId: string; index: number };
+  destination?: { droppableId: string; index: number };
+};
 type StoryColumnGroupPropsType = {
   activeMenuItem: ActiveSortStateType;
   stories: StoriesType;
@@ -38,25 +45,11 @@ const StoryColumnGroup = ({
   stories,
   priorities,
 }: StoryColumnGroupPropsType) => {
-  const activeSortableValues = Object.values(activeMenuItem.value);
-
   const [storyColumnGroup, setStoryColumnGroup]: [
     StoryColumnGroupStateType,
     (arg: StoryColumnGroupStateType) => void
   ] = useState(getStoryColumnGroup(stories, priorities, activeMenuItem));
 
-  let numColumns: SemanticWIDTHSNUMBER = 1;
-  if (isOfTypeSemanticWIDTHSNUMBER(activeSortableValues.length)) {
-    numColumns = activeSortableValues.length;
-  }
-
-  type onDragEndResultType = {
-    draggableId: string;
-    type: string;
-    reason: string;
-    source: { droppableId: string; index: number };
-    destination?: { droppableId: string; index: number };
-  };
   const onDragEnd = (result: onDragEndResultType) => {
     const { destination, source } = result;
     // If dropped outside of droppable area:
@@ -68,6 +61,10 @@ const StoryColumnGroup = ({
     ) {
       return;
     }
+
+    // Create a deep clone of storyColumn group to preserve immutable state,
+    // move the draggedStory to the new location, and setStoryColumnGroup to
+    // this newStoryColumnGroup
     const newStoryColumnGroup = _.cloneDeep(storyColumnGroup);
     const sourceColumn = newStoryColumnGroup[source.droppableId];
     const destinationColumn = newStoryColumnGroup[destination.droppableId];
@@ -79,16 +76,18 @@ const StoryColumnGroup = ({
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <StoryColumnGroupContainer numcolumns={numColumns}>
-        {activeSortableValues.map((activeSortableValue, index) => {
-          return (
-            <StoryColumn
-              key={index}
-              activeSortableValue={activeSortableValue}
-              storyColumn={storyColumnGroup[activeSortableValue.name]}
-            />
-          );
-        })}
+      <StoryColumnGroupContainer numcolumns={getNumColumns(activeMenuItem)}>
+        {Object.values(activeMenuItem.value).map(
+          (activeSortableValue, index) => {
+            return (
+              <StoryColumn
+                key={index}
+                activeSortableValue={activeSortableValue}
+                storyColumn={storyColumnGroup[activeSortableValue.name]}
+              />
+            );
+          }
+        )}
       </StoryColumnGroupContainer>
     </DragDropContext>
   );
