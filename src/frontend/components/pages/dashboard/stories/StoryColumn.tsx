@@ -79,9 +79,36 @@ class StoryColumn extends Component<StoryColumnPropsType> {
                 ref={provided.innerRef}
                 {...provided.droppableProps}
               >
-                {storiesData.map((storyData, index) => (
-                  <Story key={index} index={index} storyData={storyData} />
-                ))}
+                {storiesData
+                  .sort((a, b) => {
+                    const priorityNames = [
+                      "critical",
+                      "high",
+                      "medium",
+                      "low",
+                      "unspecified",
+                    ];
+                    const x = a.priority.name;
+                    const y = b.priority.name;
+                    console.log({ a, b, x, y });
+
+                    for (let i = 0; i < priorityNames.length; i++) {
+                      if (x === priorityNames[i]) {
+                        if (y === priorityNames[i]) {
+                          return 0;
+                        } else {
+                          return -1;
+                        }
+                      } else if (y === priorityNames[i]) {
+                        return 1;
+                      }
+                    }
+
+                    return 0;
+                  })
+                  .map((storyData, index) => (
+                    <Story key={index} index={index} storyData={storyData} />
+                  ))}
                 {provided.placeholder}
               </StoryColumnList>
             )}
