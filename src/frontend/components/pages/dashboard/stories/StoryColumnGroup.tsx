@@ -2,6 +2,7 @@ import { useState } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 import { SemanticWIDTHSNUMBER } from "semantic-ui-react";
 import styled from "styled-components";
+import _ from "lodash";
 
 import { StoriesType, StoryPrioritiesType, StoryType } from "api/stories";
 
@@ -94,7 +95,7 @@ const StoryColumnGroup = ({
     };
   };
   const onDragEnd = (result: onDragEndResultType) => {
-    const { destination, source, draggableId } = result;
+    const { destination, source } = result;
     // If dropped outside of droppable area:
     if (!destination) return;
     // If dropped in starting location:
@@ -105,21 +106,13 @@ const StoryColumnGroup = ({
       return;
     }
 
-    const newStoryColumnGroup = { ...storyColumnGroup };
-
-    // const temp = newStoryColumnGroup[source.droppableId][source.index];
-    // newStoryColumnGroup[source.droppableId][source.index] =
-    //   newStoryColumnGroup[destination.droppableId][destination.index];
-    // newStoryColumnGroup[destination.droppableId][destination.index] = temp;
-    // setStoryColumnGroup(newStoryColumnGroup);
-
-    // const copy1 = newStoryColumnGroup[source.droppableId].slice();
-    // const copy2 = newStoryColumnGroup[destination.droppableId].slice();
-    // const temp = copy1[source.index];
-    // copy.splice(source.index, 1);
-    // newStoryColumnGroup[destination.droppableId]
-    //   .slice()
-    //   .splice(source.index, 0, temp);
+    const newStoryColumnGroup = _.cloneDeep(storyColumnGroup);
+    const sourceColumn = newStoryColumnGroup[source.droppableId];
+    const destinationColumn = newStoryColumnGroup[destination.droppableId];
+    const draggedStory = sourceColumn.slice()[source.index];
+    sourceColumn.splice(source.index, 1);
+    destinationColumn.splice(destination.index, 0, draggedStory);
+    setStoryColumnGroup(newStoryColumnGroup);
   };
 
   console.log({ storyColumnGroup });
