@@ -108,8 +108,6 @@ const StoryColumnGroup = ({
           return (
             <StoryColumn
               key={index}
-              activeMenuItemKey={activeMenuItem.key}
-              index={index}
               activeSortableValue={activeSortableValue}
               storiesValues={storiesValues}
             />

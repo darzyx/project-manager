@@ -50,8 +50,6 @@ const StoryColumnContainer = styled.div`
   padding: 0;
 `;
 type StoryColumnPropsType = {
-  activeMenuItemKey: DashboardMenuKeyType;
-  index: number;
   activeSortableValue: StorySortableValueType;
   storiesValues: StoryType[];
 };
@@ -60,8 +58,7 @@ class StoryColumn extends Component<StoryColumnPropsType> {
   contextRef = createRef<HTMLDivElement>();
 
   render() {
-    const { activeMenuItemKey, index, activeSortableValue, storiesValues } =
-      this.props;
+    const { activeSortableValue, storiesValues } = this.props;
     return (
       <Ref innerRef={this.contextRef}>
         <StoryColumnContainer>
@@ -70,7 +67,7 @@ class StoryColumn extends Component<StoryColumnPropsType> {
             context={this.contextRef}
           />
           <Divider hidden fitted style={{ margin: "5px 0" }} />
-          <Droppable droppableId={`${activeMenuItemKey}-${index}`}>
+          <Droppable droppableId={activeSortableValue.name}>
             {(provided) => (
               <StoryColumnList
                 ref={provided.innerRef}
