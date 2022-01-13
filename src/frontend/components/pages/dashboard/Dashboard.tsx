@@ -26,12 +26,13 @@ const Dashboard = () => {
     key: getKeys(dashboardMenu)[0],
     value: Object.values(dashboardMenu)[0],
   });
+  const todaysDate = new Date().toDateString();
 
   return (
     <div>
       <Header as="h1" inverted>
         Dashboard
-        <Header.Subheader>March 6th, 2022</Header.Subheader>
+        <Header.Subheader>{todaysDate}</Header.Subheader>
       </Header>
       <Divider hidden />
       <DashboardMenu
