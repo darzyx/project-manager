@@ -4,11 +4,7 @@ import { Droppable } from "react-beautiful-dnd";
 import styled from "styled-components";
 
 import { DashboardMenuKeyType } from "api/dashboard";
-import {
-  StoryPrioritiesType,
-  StorySortableValueType,
-  StoryType,
-} from "api/stories";
+import { StorySortableValueType, StoryType } from "api/stories";
 
 import Story from "./Story";
 
