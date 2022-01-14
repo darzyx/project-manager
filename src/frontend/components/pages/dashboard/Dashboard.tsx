@@ -7,10 +7,13 @@ import {
   DashboardMenuKeyType,
   DashboardMenuValueType,
 } from "api/dashboard";
-
 import DashboardMenu from "frontend/components/pages/dashboard/DashboardMenu";
 import { getKeys } from "frontend/utils";
 import StoryColumnGroup from "./stories/StoryColumnGroup";
+import { StoryType } from "api/stories";
+import { getStoryColumnGroup } from "frontend/components/pages/dashboard/stories/utils";
+
+type StoryColumnGroupStateType = { [sortableValueName: string]: StoryType[] };
 
 export type ActiveSortStateType = {
   key: DashboardMenuKeyType;
@@ -26,6 +29,12 @@ const Dashboard = () => {
     key: getKeys(dashboardMenu)[0],
     value: Object.values(dashboardMenu)[0],
   });
+
+  const [storyColumnGroup, setStoryColumnGroup]: [
+    StoryColumnGroupStateType,
+    (arg: StoryColumnGroupStateType) => void
+  ] = useState(getStoryColumnGroup(stories, priorities, activeMenuItem));
+
   const todaysDate = new Date().toDateString();
 
   return (
@@ -43,8 +52,8 @@ const Dashboard = () => {
       <Divider hidden />
       <StoryColumnGroup
         activeMenuItem={activeMenuItem}
-        stories={stories}
-        priorities={priorities}
+        storyColumnGroup={storyColumnGroup}
+        setStoryColumnGroup={setStoryColumnGroup}
       />
       <Divider hidden />
     </div>

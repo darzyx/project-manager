@@ -1,17 +1,12 @@
-import { useState } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 import { SemanticWIDTHSNUMBER } from "semantic-ui-react";
 import styled from "styled-components";
 import _ from "lodash";
 
-import { StoriesType, StoryPrioritiesType, StoryType } from "api/stories";
-
+import { StoryType } from "api/stories";
 import StoryColumn from "./StoryColumn";
 import { ActiveSortStateType } from "frontend/components/pages/dashboard/Dashboard";
-import {
-  getStoryColumnGroup,
-  getNumColumns,
-} from "frontend/components/pages/dashboard/stories/utils";
+import { getNumColumns } from "frontend/components/pages/dashboard/stories/utils";
 import { cssRepeat } from "frontend/utils";
 
 type StoryColumnGroupStateType = { [sortableValueName: string]: StoryType[] };
@@ -37,19 +32,14 @@ type onDragEndResultType = {
 };
 type StoryColumnGroupPropsType = {
   activeMenuItem: ActiveSortStateType;
-  stories: StoriesType;
-  priorities: StoryPrioritiesType;
+  storyColumnGroup: StoryColumnGroupStateType;
+  setStoryColumnGroup: (arg: StoryColumnGroupStateType) => void;
 };
 const StoryColumnGroup = ({
   activeMenuItem,
-  stories,
-  priorities,
+  storyColumnGroup,
+  setStoryColumnGroup,
 }: StoryColumnGroupPropsType) => {
-  const [storyColumnGroup, setStoryColumnGroup]: [
-    StoryColumnGroupStateType,
-    (arg: StoryColumnGroupStateType) => void
-  ] = useState(getStoryColumnGroup(stories, priorities, activeMenuItem));
-
   const onDragEnd = (result: onDragEndResultType) => {
     const { destination, source } = result;
     // If dropped outside of droppable area:
@@ -61,7 +51,6 @@ const StoryColumnGroup = ({
     ) {
       return;
     }
-
     // Create a deep clone of storyColumn group to preserve immutable state,
     // move the draggedStory to the new location, and setStoryColumnGroup to
     // this newStoryColumnGroup
