@@ -41,6 +41,9 @@ const StoryColumnHeader = ({
 );
 
 const StoryColumnList = styled.div`
+  // 100% height enables users to drop items in a column even when they
+  // do so far below the current items on that column
+  height: 100%;
   margin: 0;
   padding: 0;
 `;
