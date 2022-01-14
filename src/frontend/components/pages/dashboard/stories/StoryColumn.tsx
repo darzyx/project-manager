@@ -69,6 +69,7 @@ class StoryColumn extends Component<StoryColumnPropsType> {
             context={this.contextRef}
           />
           <Divider hidden fitted style={{ margin: "5px 0" }} />
+          {/* TODO: Sorting Epics doesn't work with this droppableId */}
           <Droppable droppableId={activeSortableValue.name}>
             {(provided) => (
               <StoryColumnList
