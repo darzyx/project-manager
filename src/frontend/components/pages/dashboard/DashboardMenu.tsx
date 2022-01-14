@@ -12,7 +12,7 @@ type DashboardMenuPropsType = {
     key: DashboardMenuKeyType;
     value: DashboardMenuValueType;
   };
-  setActiveMenuItem: (arg: {
+  onSelectMenuItem: (arg: {
     key: DashboardMenuKeyType;
     value: DashboardMenuValueType;
   }) => void;
@@ -21,7 +21,7 @@ type DashboardMenuPropsType = {
 
 const DashboardMenu = ({
   activeMenuItem: { key: activeSortKey, value: activeSortValue },
-  setActiveMenuItem,
+  onSelectMenuItem,
   dashboardMenu,
 }: DashboardMenuPropsType) => {
   return (
@@ -32,7 +32,7 @@ const DashboardMenu = ({
           name={sortName}
           active={activeSortKey === sortName}
           onClick={() =>
-            setActiveMenuItem({
+            onSelectMenuItem({
               key: getKeys(dashboardMenu)[index],
               value: Object.values(dashboardMenu)[index],
             })

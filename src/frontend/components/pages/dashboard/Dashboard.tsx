@@ -13,6 +13,8 @@ import StoryColumnGroup from "./stories/StoryColumnGroup";
 import { StoryType } from "api/stories";
 import { getStoryColumnGroup } from "frontend/components/pages/dashboard/stories/utils";
 
+const todaysDate = new Date().toDateString();
+
 type StoryColumnGroupStateType = { [sortableValueName: string]: StoryType[] };
 
 export type ActiveMenuItemStateType = {
@@ -35,7 +37,16 @@ const Dashboard = () => {
     (arg: StoryColumnGroupStateType) => void
   ] = useState(getStoryColumnGroup(stories, priorities, activeMenuItem));
 
-  const todaysDate = new Date().toDateString();
+  const onSelectMenuItem = (newActiveMenuItem: ActiveMenuItemStateType) => {
+    // We setStoryColumn group here because storyColumnGroup has trouble
+    // updating inside a useEffect when activeMenuItem changes (deep change).
+    // This is a temporary fix for now until we can figure out how to
+    // detect a deep change in activeMenuItem while remaining type safe
+    setStoryColumnGroup(
+      getStoryColumnGroup(stories, priorities, newActiveMenuItem)
+    );
+    setActiveMenuItem(newActiveMenuItem);
+  };
 
   return (
     <div>
@@ -46,7 +57,7 @@ const Dashboard = () => {
       <Divider hidden />
       <DashboardMenu
         activeMenuItem={activeMenuItem}
-        setActiveMenuItem={setActiveMenuItem}
+        onSelectMenuItem={onSelectMenuItem}
         dashboardMenu={dashboardMenu}
       />
       <Divider hidden />
