@@ -7,7 +7,7 @@ import { StoryType } from "api/stories";
 import StoryColumn from "./StoryColumn";
 import { ActiveMenuItemStateType } from "frontend/components/pages/dashboard/Dashboard";
 import { getNumColumns } from "frontend/components/pages/dashboard/stories/utils";
-import { cssRepeat } from "frontend/utils";
+import { cssRepeat, getKeys } from "frontend/utils";
 
 type StoryColumnGroupStateType = { [sortableValueName: string]: StoryType[] };
 
@@ -58,6 +58,16 @@ const StoryColumnGroup = ({
     const sourceColumn = newStoryColumnGroup[source.droppableId];
     const destinationColumn = newStoryColumnGroup[destination.droppableId];
     const draggedStory = sourceColumn.slice()[source.index];
+    const activeMenuItemValueKeys = getKeys(activeMenuItem.value);
+
+    // Use a loop instead of using result?.destination?.droppableId directly for type safety
+    for (let i = 0; i < activeMenuItemValueKeys.length; i++) {
+      if (activeMenuItemValueKeys[i] === result?.destination?.droppableId) {
+        draggedStory[activeMenuItem.key] =
+          activeMenuItem.value[activeMenuItemValueKeys[i]];
+      }
+    }
+
     sourceColumn.splice(source.index, 1);
     destinationColumn.splice(destination.index, 0, draggedStory);
     setStoryColumnGroup(newStoryColumnGroup);
