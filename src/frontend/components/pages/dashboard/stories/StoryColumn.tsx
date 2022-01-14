@@ -56,7 +56,7 @@ type StoryColumnPropsType = {
   activeSortableValue: StorySortableValueType;
   storyColumn: StoryType[];
 };
-// This must be a class so we can make use of createRef for <Sticky />:
+// This must be a class so we can make use of createRef for <Ref /> and <Sticky />:
 class StoryColumn extends Component<StoryColumnPropsType> {
   contextRef = createRef<HTMLDivElement>();
 
