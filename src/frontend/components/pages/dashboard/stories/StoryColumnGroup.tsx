@@ -66,11 +66,14 @@ const StoryColumnGroup = ({
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <StoryColumnGroupContainer numcolumns={getNumColumns(activeMenuItem)}>
-        {Object.values(activeMenuItem.value).map(
-          (activeSortableValue, index) => {
+        {Object.entries(activeMenuItem.value).map(
+          ([activeSortableKey, activeSortableValue], index) => {
+            // activeSortableKey is left as a generic string type instead of a key so
+            // that it can be fed to droppableId
             return (
               <StoryColumn
                 key={index}
+                activeSortableKey={activeSortableKey}
                 activeSortableValue={activeSortableValue}
                 storyColumn={storyColumnGroup[activeSortableValue.name]}
               />

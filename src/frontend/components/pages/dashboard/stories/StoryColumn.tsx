@@ -52,6 +52,7 @@ const StoryColumnContainer = styled.div`
   padding: 0;
 `;
 type StoryColumnPropsType = {
+  activeSortableKey: string;
   activeSortableValue: StorySortableValueType;
   storyColumn: StoryType[];
 };
@@ -60,7 +61,7 @@ class StoryColumn extends Component<StoryColumnPropsType> {
   contextRef = createRef<HTMLDivElement>();
 
   render() {
-    const { activeSortableValue, storyColumn } = this.props;
+    const { activeSortableKey, activeSortableValue, storyColumn } = this.props;
     return (
       <Ref innerRef={this.contextRef}>
         <StoryColumnContainer>
@@ -70,7 +71,7 @@ class StoryColumn extends Component<StoryColumnPropsType> {
           />
           <Divider hidden fitted style={{ margin: "5px 0" }} />
           {/* TODO: Sorting Epics doesn't work with this droppableId */}
-          <Droppable droppableId={activeSortableValue.name}>
+          <Droppable droppableId={activeSortableKey}>
             {(provided) => (
               <StoryColumnList
                 ref={provided.innerRef}
