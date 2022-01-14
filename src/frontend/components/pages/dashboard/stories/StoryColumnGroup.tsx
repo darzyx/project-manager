@@ -5,7 +5,7 @@ import _ from "lodash";
 
 import { StoryType } from "api/stories";
 import StoryColumn from "./StoryColumn";
-import { ActiveSortStateType } from "frontend/components/pages/dashboard/Dashboard";
+import { ActiveMenuItemStateType } from "frontend/components/pages/dashboard/Dashboard";
 import { getNumColumns } from "frontend/components/pages/dashboard/stories/utils";
 import { cssRepeat } from "frontend/utils";
 
@@ -31,7 +31,7 @@ type onDragEndResultType = {
   destination?: { droppableId: string; index: number };
 };
 type StoryColumnGroupPropsType = {
-  activeMenuItem: ActiveSortStateType;
+  activeMenuItem: ActiveMenuItemStateType;
   storyColumnGroup: StoryColumnGroupStateType;
   setStoryColumnGroup: (arg: StoryColumnGroupStateType) => void;
 };

@@ -2,7 +2,7 @@ import { SemanticWIDTHSNUMBER } from "semantic-ui-react";
 
 import { StoriesType, StoryPrioritiesType, StoryType } from "api/stories";
 
-import { ActiveSortStateType } from "frontend/components/pages/dashboard/Dashboard";
+import { ActiveMenuItemStateType } from "frontend/components/pages/dashboard/Dashboard";
 import { getKeys } from "frontend/utils";
 
 type StoryColumnGroupStateType = { [sortableValueName: string]: StoryType[] };
@@ -13,7 +13,7 @@ const isOfTypeSemanticWIDTHSNUMBER = (
   return Array.from({ length: 16 }, (_, i) => i + 1).includes(arrayLen);
 };
 
-export const getNumColumns = (activeMenuItem: ActiveSortStateType) => {
+export const getNumColumns = (activeMenuItem: ActiveMenuItemStateType) => {
   const activeSortableValues = Object.values(activeMenuItem.value);
   let numColumns: SemanticWIDTHSNUMBER = 1;
   if (isOfTypeSemanticWIDTHSNUMBER(activeSortableValues.length)) {
@@ -44,7 +44,7 @@ const sortByPriority = (
 export const getStoryColumnGroup = (
   stories: StoriesType,
   priorities: StoryPrioritiesType,
-  activeMenuItem: ActiveSortStateType
+  activeMenuItem: ActiveMenuItemStateType
 ) => {
   const storiesValues = Object.values(stories);
   const prioritiesKeys = getKeys(priorities);

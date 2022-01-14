@@ -15,16 +15,16 @@ import { getStoryColumnGroup } from "frontend/components/pages/dashboard/stories
 
 type StoryColumnGroupStateType = { [sortableValueName: string]: StoryType[] };
 
-export type ActiveSortStateType = {
+export type ActiveMenuItemStateType = {
   key: DashboardMenuKeyType;
   value: DashboardMenuValueType;
 };
-type SetActiveSortStateType = (arg: ActiveSortStateType) => void;
+type SetActiveMenuItemStateType = (arg: ActiveMenuItemStateType) => void;
 
 const Dashboard = () => {
   const [activeMenuItem, setActiveMenuItem]: [
-    ActiveSortStateType,
-    SetActiveSortStateType
+    ActiveMenuItemStateType,
+    SetActiveMenuItemStateType
   ] = useState({
     key: getKeys(dashboardMenu)[0],
     value: Object.values(dashboardMenu)[0],
