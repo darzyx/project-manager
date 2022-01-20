@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 import { SemanticWIDTHSNUMBER } from "semantic-ui-react";
 import styled from "styled-components";
@@ -19,7 +18,6 @@ const StoryColumnGroupContainer = styled.div`
   }: {
     numcolumns: SemanticWIDTHSNUMBER;
   }) => cssRepeat(numcolumns, "1fr")};
-  grid-gap: 25px;
   margin: 0;
   padding: 0;
 `;
@@ -41,16 +39,7 @@ const StoryColumnGroup = ({
   storyColumnGroup,
   setStoryColumnGroup,
 }: StoryColumnGroupPropsType) => {
-  const [showDroppableAreasBorders, setShowDroppableAreasBorders] =
-    useState<boolean>(false);
-
-  const onDragStart = () => {
-    setShowDroppableAreasBorders(true);
-  };
-
   const onDragEnd = (result: onDragEndResultType) => {
-    setShowDroppableAreasBorders(false);
-
     const { destination, source } = result;
     // If dropped outside of droppable area:
     if (!destination) return;
@@ -84,7 +73,7 @@ const StoryColumnGroup = ({
   };
 
   return (
-    <DragDropContext onDragStart={onDragStart} onDragEnd={onDragEnd}>
+    <DragDropContext onDragEnd={onDragEnd}>
       <StoryColumnGroupContainer numcolumns={getNumColumns(activeMenuItem)}>
         {Object.entries(activeMenuItem.value).map(
           ([activeSortableKey, activeSortableValue], index) => {
@@ -96,7 +85,6 @@ const StoryColumnGroup = ({
                 activeSortableKey={activeSortableKey}
                 activeSortableValue={activeSortableValue}
                 storyColumn={storyColumnGroup[activeSortableValue.name]}
-                showDroppableAreasBorders={showDroppableAreasBorders}
               />
             );
           }

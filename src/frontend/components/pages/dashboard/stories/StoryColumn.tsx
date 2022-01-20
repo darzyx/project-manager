@@ -49,37 +49,24 @@ const StoryColumnList = styled.div`
 `;
 const StoryColumnContainer = styled.div`
   box-sizing: border-box;
-  border: ${({
-    showDroppableAreasBorders,
-  }: {
-    showDroppableAreasBorders: boolean;
-  }) => (showDroppableAreasBorders ? "1px dashed rgb(48, 54, 61)" : "none")};
   margin: 0;
-  padding: 0;
+  padding: 10px;
 `;
 type StoryColumnPropsType = {
   activeSortableKey: string;
   activeSortableValue: StorySortableValueType;
   storyColumn: StoryType[];
-  showDroppableAreasBorders: boolean;
 };
 // This must be a class so we can make use of refs for <Ref /> and <Sticky />:
 class StoryColumn extends Component<StoryColumnPropsType> {
   contextRef = createRef<HTMLDivElement>();
 
   render() {
-    const {
-      activeSortableKey,
-      activeSortableValue,
-      storyColumn,
-      showDroppableAreasBorders,
-    } = this.props;
+    const { activeSortableKey, activeSortableValue, storyColumn } = this.props;
 
     return (
       <Ref innerRef={this.contextRef}>
-        <StoryColumnContainer
-          showDroppableAreasBorders={showDroppableAreasBorders}
-        >
+        <StoryColumnContainer>
           <StoryColumnHeader
             activeSortableValue={activeSortableValue}
             context={this.contextRef}
