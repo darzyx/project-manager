@@ -41,7 +41,12 @@ const DashboardMenu = ({
       ))}
       <Menu.Menu position="right">
         <Menu.Item>
-          <Input inverted icon="search" placeholder="Search..." />
+          <Input
+            id="search-input"
+            inverted
+            icon="search"
+            placeholder="Search..."
+          />
         </Menu.Item>
       </Menu.Menu>
     </Menu>

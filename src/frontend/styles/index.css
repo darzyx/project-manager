@@ -17,3 +17,12 @@ body {
 .App-content {
   padding: 20px;
 }
+
+#search-input {
+  background-color: #161b22;
+  color: white;
+}
+
+i.search {
+  color: white;
+}
